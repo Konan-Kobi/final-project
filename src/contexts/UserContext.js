@@ -25,6 +25,24 @@ class UserProvider extends React.Component {
     }
   };
 
+  join = async (username, password) => {
+    try {
+      await pmAPI.post('users/register', {
+        username: username,
+        password: password,
+      });
+      alert('회원가입이 완료되었습니다.');
+    } catch (e) {
+      if (e.response) {
+        if (e.response.status >= 500) {
+          alert('서버에 이상이 생겼습니다. 잠시 후에 다시 시도부탁드립니다.');
+        } else if (e.response.status === 400) {
+          alert('아이디가 중복되었습니다. 다시 입력부탁드립니다.');
+        }
+      }
+    }
+  };
+
   login = async (username, password) => {
     this.setState({
       loading: true,
@@ -50,6 +68,7 @@ class UserProvider extends React.Component {
 
   render() {
     const value = {
+      join: this.join,
       login: this.login,
       logout: this.logout,
       username: this.username,
