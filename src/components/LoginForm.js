@@ -1,27 +1,46 @@
-import React from "react";
+import React from 'react';
+import { Helmet } from 'react-helmet';
 
-export default class Login extends React.Component {
-  usernameRef = React.createRef();
-  passwordRef = React.createRef();
-
-  handleLoginClick = async e => {
-    const { onLogin } = this.props;
-    onLogin(this.usernameRef.current.value, this.passwordRef.current.value);
+export default class LoginForm extends React.Component {
+  static defualtProps = {
+    username: '', // 아이디 입력 필드에 표시 될 값
+    password: '', // 비밀번호 입력 필드에 표시될 값
+    onUsernameChange: username => {}, // 아이디 입력 필드에 새로운 입력이 일어날 때 호출되는 함수
+    onPasswordChange: password => {}, // 비밀번호 입력 필드에 새로운 입력이 일어날 때 호출되는 함수
   };
-
   render() {
+    const {
+      username,
+      password,
+      onUsernameChange,
+      onPasswordChange,
+      login,
+    } = this.props;
     return (
       <React.Fragment>
-        <h1>로그인이 필요합니다.</h1>
-        <form>
-          <p>
-            ID : <input type="text" ref={this.usernameRef} required />
-          </p>
-          <p>
-            PW : <input type="password" ref={this.passwordRef} required />
-          </p>
-        </form>
-        <button onClick={this.handleLoginClick}>로그인 하기</button>
+        <h1>Login</h1>
+        <Helmet
+          title="Login"
+          meta={[
+            {
+              property: 'og:title',
+              content: 'login',
+            },
+          ]}
+        />
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          value={username}
+          onChange={e => onUsernameChange(e.target.value)}
+        />
+        <label htmlFor="password">password</label>
+        <input
+          type="password"
+          value={password}
+          onChange={e => onPasswordChange(e.target.value)}
+        />
+        <button onClick={e => login(username, password)}>로그인</button>
       </React.Fragment>
     );
   }

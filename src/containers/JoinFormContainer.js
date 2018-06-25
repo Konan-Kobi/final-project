@@ -1,8 +1,8 @@
-import React from "react";
-import { UserConsumer } from "../contexts/UserContext";
-import JoinForm from "../components/JoinForm";
+import React from 'react';
+import { UserConsumer } from '../contexts/UserContext';
+import JoinForm from '../components/JoinForm';
 
-export default class LoginCC extends React.Component {
+export default class JoinContainer extends React.Component {
   render() {
     return (
       <UserConsumer>

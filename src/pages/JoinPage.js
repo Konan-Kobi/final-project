@@ -1,8 +1,8 @@
-import React from "react";
-import JoinCC from "./../containers/JoinCC";
+import React from 'react';
+import JoinContainer from './../containers/JoinFormContainer';
 
 export default class JoinPage extends React.Component {
   render() {
-    return <JoinCC />;
+    return <JoinContainer />;
   }
 }
