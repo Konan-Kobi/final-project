@@ -4,7 +4,7 @@ const { Provider, Consumer } = React.createContext();
 class UserProvider extends React.Component {
   state = {
     loading: false,
-    id: null,
+    userId: null,
     username: null,
   };
 
@@ -15,7 +15,7 @@ class UserProvider extends React.Component {
     try {
       const res = await pmAPI.get('/me');
       this.setState({
-        id: res.data.id,
+        userId: res.data.id,
         username: res.data.username,
       });
     } finally {
@@ -35,7 +35,7 @@ class UserProvider extends React.Component {
         password: password,
       });
       localStorage.setItem('token', res.data.token);
-      await this.fetchMe();
+      this.fetchMe();
       console.log('로그인됨');
     } finally {
       this.setState({
@@ -52,8 +52,9 @@ class UserProvider extends React.Component {
     const value = {
       login: this.login,
       logout: this.logout,
-      username: this.username,
-      password: this.password,
+      // 이 부분 수정하였습니다.
+      username: this.state.username,
+      userId: this.state.userId,
     };
     return <Provider value={value}>{this.props.children}</Provider>;
   }
