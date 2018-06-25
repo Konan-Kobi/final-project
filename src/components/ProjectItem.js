@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 export default class ProjectItem extends React.Component {
   static defaultProps = {
     title: '',
@@ -15,10 +15,12 @@ export default class ProjectItem extends React.Component {
       issue = `${sortedIssue.done}/${sortedIssue.issues}`;
     }
     return (
-      <div>
-        <div>{title}</div>
-        <div>{issue}</div>
-      </div>
+      <tr>
+        <th>
+          <Link to={`project/${id}`}>{title}</Link>
+        </th>
+        <th>{issue}</th>
+      </tr>
     );
   }
 }

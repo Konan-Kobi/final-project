@@ -8,12 +8,14 @@ export default class ProjectList extends React.Component {
   render() {
     const { projects, sortedIssues } = this.props;
     return projects.map(project => (
-      <ProjectItem
-        key={project.id}
-        title={project.project.title}
-        id={project.projectId}
-        sortedIssues={sortedIssues}
-      />
+      <table>
+        <ProjectItem
+          key={project.id}
+          title={project.project.title}
+          id={project.projectId}
+          sortedIssues={sortedIssues}
+        />
+      </table>
     ));
   }
 }
