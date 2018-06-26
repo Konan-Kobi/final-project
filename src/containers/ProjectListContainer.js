@@ -10,7 +10,7 @@ export default class ProjectListContainer extends React.Component {
             <ProjectList
               projects={projects}
               issues={issues}
-              sortedIssues={issueByProject}
+              issueByProject={issueByProject}
             />
           </table>
         )}

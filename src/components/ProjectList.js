@@ -13,7 +13,7 @@ export default class ProjectList extends React.Component {
           key={project.id}
           title={project.project.title}
           id={project.projectId}
-          sortedIssues={issueByProject}
+          issueByProject={issueByProject}
         />
       </tbody>
     ));

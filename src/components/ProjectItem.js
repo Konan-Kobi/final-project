@@ -8,17 +8,19 @@ export default class ProjectItem extends React.Component {
   };
   render() {
     const { title, issueByProject, id } = this.props;
-    let issue = `0 / 0`;
-    let sortedIssue = issueByProject.find(o => o.projectId === id);
-    if (sortedIssue) {
-      issue = `${issueByProject.done}/${issueByProject.issues}`;
+    let issueCount = '';
+    let issue = issueByProject.find(o => o.projectId === id);
+    if (issue) {
+      issueCount = `${issue.done}/${issue.issues}`;
+    } else {
+      issueCount = `0 / 0`;
     }
     return (
       <tr>
         <th>
           <Link to={`project/${id}`}>{title}</Link>
         </th>
-        <th>{issue}</th>
+        <th>{issueCount}</th>
       </tr>
     );
   }
