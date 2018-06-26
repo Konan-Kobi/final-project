@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@celebryts/react-autocomplete-tags": "^1.0.0",
     "axios": "^0.18.0",
     "eslint-plugin-prettier": "^2.6.1",
     "helmet": "^3.12.1",
