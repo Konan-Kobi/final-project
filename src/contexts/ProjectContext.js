@@ -8,6 +8,7 @@ class ProjectProvider extends React.Component {
     userId: null,
     issues: [],
     sortedIssues: [],
+    countIssue: '',
   };
   // fetchProjects = async () => {
   //   try {
@@ -67,20 +68,24 @@ class ProjectProvider extends React.Component {
         `/projectMembers?userId=${userRes.data.id}&_expand=project`
       );
       const issueRes = await pmAPI.get(`/issues?userId=${userRes.data.id}`);
-      // 프로젝트 별로 이슈 개수와 완료된 이슈 개수
+      console.log(issueRes.data);
+      // 프로젝트 별로 이슈 개수와 완료된 이슈 개수 구하기
       const arr = [];
+      // 개인 별 이슈 카운트
+      let issueCount = 0;
+      let doneCount = 0;
       issueRes.data.forEach(item => {
+        issueCount++;
         let obj = arr.find(o => o.projectId === item.projectId);
         let done = 0;
         if (item.progress === 'done') {
           done++;
+          doneCount++;
         }
         if (obj) {
           obj.issues = obj.issues + 1;
-          if ((item.progress = 'done')) {
+          if (item.progress === 'done') {
             obj.done = obj.done + 1;
-          } else {
-            obj.done = 1;
           }
         } else {
           arr.push({ projectId: item.projectId, issues: 1, done: done });
@@ -91,8 +96,8 @@ class ProjectProvider extends React.Component {
         projects: res.data,
         issues: issueRes.data,
         sortedIssues: arr,
+        countIssue: `${doneCount}/${issueCount}`,
       });
-      console.log(this.state);
     } finally {
       this.setState({
         loading: false,
@@ -102,11 +107,10 @@ class ProjectProvider extends React.Component {
   render() {
     const value = {
       projects: this.state.projects,
-      loading: this.state.loading,
       issues: this.state.issues,
       sortedIssues: this.state.sortedIssues,
+      countIssue: this.state.countIssue,
     };
-    console.log(value);
     return <Provider value={value}>{this.props.children}</Provider>;
   }
 }

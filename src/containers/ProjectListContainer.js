@@ -6,11 +6,13 @@ export default class ProjectListContainer extends React.Component {
     return (
       <ProjectConsumer>
         {({ projects, issues, sortedIssues }) => (
-          <ProjectList
-            projects={projects}
-            issues={issues}
-            sortedIssues={sortedIssues}
-          />
+          <table>
+            <ProjectList
+              projects={projects}
+              issues={issues}
+              sortedIssues={sortedIssues}
+            />
+          </table>
         )}
       </ProjectConsumer>
     );

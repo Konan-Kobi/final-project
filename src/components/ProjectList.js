@@ -6,16 +6,16 @@ export default class ProjectList extends React.Component {
     sortedIssues: [],
   };
   render() {
-    const { projects, sortedIssues } = this.props;
+    const { projects, sortedIssues, conutIssue } = this.props;
     return projects.map(project => (
-      <table>
+      <tbody>
         <ProjectItem
           key={project.id}
           title={project.project.title}
           id={project.projectId}
           sortedIssues={sortedIssues}
         />
-      </table>
+      </tbody>
     ));
   }
 }
