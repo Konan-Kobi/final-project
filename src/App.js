@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LoginPage from './pages/LoginPage';
 import MainPage from './pages/MainPage';
+import IssuePage from './pages/IssuePage';
 import './App.css';
 import { UserProvider } from './contexts/UserContext';
 
@@ -17,7 +18,8 @@ class App extends Component {
             <Route path="/create-project" component={CreateProjectForm} />
             <Route path="/create-issue" component={CreateIssueForm} />
             <Route path="/login" component={LoginPage} />
-            <Route path="/" component={MainPage} />
+            <Route exact path="/" component={MainPage} />
+            <Route path="/issue/:id" component={IssuePage} />
           </Switch>
         </UserProvider>
       </BrowserRouter>
