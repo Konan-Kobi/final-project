@@ -24,10 +24,26 @@ class IssueProvider extends React.Component {
       });
     }
   }
+  patchProgress = async progress => {
+    this.setState({
+      loading: true,
+    });
+    try {
+      const payload = {
+        progress: progress,
+      };
+      await pmAPI.patch(`/issues/${this.props.id}`, payload);
+    } finally {
+      this.setState({
+        loading: false,
+      });
+    }
+  };
   render() {
     const value = {
       issue: this.state.issue,
       loading: this.state.loading,
+      patchProgress: this.patchProgress,
     };
     console.log(value);
     return <Provider value={value}>{this.props.children}</Provider>;

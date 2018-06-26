@@ -4,7 +4,11 @@ import { IssueConsumer } from '../contexts/IssueContext';
 export default class IssueContainer extends React.Component {
   render() {
     return (
-      <IssueConsumer>{({ issue }) => <Issue issue={issue} />}</IssueConsumer>
+      <IssueConsumer>
+        {({ issue, patchProgress }) => (
+          <Issue issue={issue} patchProgress={patchProgress} />
+        )}
+      </IssueConsumer>
     );
   }
 }
