@@ -77,6 +77,7 @@ class ProjectProvider extends React.Component {
       issues: this.state.issues,
       issueByProject: this.state.issueByProject,
       countIssue: this.state.countIssue,
+      loading: this.state.loading,
     };
     return <Provider value={value}>{this.props.children}</Provider>;
   }

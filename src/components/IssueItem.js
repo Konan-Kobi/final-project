@@ -12,11 +12,11 @@ export default class IssueItem extends React.Component {
     return (
       <tr>
         <th>
-          <Link to={`issue/${id}`}>{title}</Link>
+          <Link to={`issue/${id}`}>제목: {title}</Link>
         </th>
-        <th>{deadline}</th>
-        <th>{label}</th>
-        <th>{progress}</th>
+        <th>기한: {deadline}</th>
+        <th>라벨: {label}</th>
+        <th>진척상황: {progress}</th>
       </tr>
     );
   }

@@ -18,9 +18,9 @@ export default class ProjectItem extends React.Component {
     return (
       <tr>
         <th>
-          <Link to={`project/${id}`}>{title}</Link>
+          <Link to={`project/${id}`}>제목: {title}</Link>
         </th>
-        <th>{issueCount}</th>
+        <th>이슈: {issueCount}</th>
       </tr>
     );
   }
