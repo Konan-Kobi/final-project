@@ -5,15 +5,15 @@ class IssueProvider extends React.Component {
   state = {
     issue: [],
     loading: false,
+    comments: [],
   };
-  async componentWillMount() {
+  async componentDidMount() {
     this.setState({
       loading: true,
     });
     try {
       const res = await pmAPI.get(`/issues/${this.props.issueId}?_expand=user`);
-      // console.log(res.data);
-      // this.state.issue.push(res.data);
+      await this.fetchComment();
       this.setState({
         issue: res.data,
       });
@@ -23,6 +23,23 @@ class IssueProvider extends React.Component {
       });
     }
   }
+  fetchComment = async () => {
+    this.setState({
+      loading: true,
+    });
+    try {
+      const commentRes = await pmAPI.get(
+        `/comments?issueId=${this.props.issueId}&_expand=user`
+      );
+      this.setState({
+        comments: commentRes.data,
+      });
+    } finally {
+      this.setState({
+        loading: false,
+      });
+    }
+  };
   patchProgress = async progress => {
     this.setState({
       loading: true,
@@ -41,6 +58,11 @@ class IssueProvider extends React.Component {
   deleteIssue = async e => {
     await pmAPI.delete(`/issues/${this.props.issueId}`);
   };
+  deleteComment = async commentId => {
+    await pmAPI.delete(`/comments/${commentId}`);
+    this.fetchComment();
+  };
+
   render() {
     const value = {
       issue: this.state.issue,
@@ -48,6 +70,8 @@ class IssueProvider extends React.Component {
       patchProgress: this.patchProgress,
       projectId: this.props.projectId,
       deleteIssue: this.deleteIssue,
+      comments: this.state.comments,
+      deleteComment: this.deleteComment,
     };
     return <Provider value={value}>{this.props.children}</Provider>;
   }

@@ -8,15 +8,15 @@ export default class IssueContainer extends React.Component {
       <IssueConsumer>
         {({ issue, patchProgress, projects, projectId }) => (
           <React.Fragment>
-            <Issue
-              issue={issue}
-              patchProgress={patchProgress}
-              projects={projects}
-            />
             <DeleteIssueButtonContainer
               issueId={issue.id}
               userId={this.props.userId}
               projectId={this.props.projectId}
+            />
+            <Issue
+              issue={issue}
+              patchProgress={patchProgress}
+              projects={projects}
             />
           </React.Fragment>
         )}
