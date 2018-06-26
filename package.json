@@ -10,18 +10,21 @@
     "prettier": "^1.13.5",
     "pretty-quick": "^1.6.0",
     "react": "^16.4.1",
+    "react-autocomplete": "^1.8.1",
     "react-dom": "^16.4.1",
     "react-helmet": "^5.2.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "react-tag-autocomplete": "^5.5.1",
+    "react-tag-input": "^5.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "fix": "eslint ./src --fix"
+    "fixed": "eslint ./src --fix"
   },
   "devDependencies": {}
 }

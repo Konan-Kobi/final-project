@@ -5,12 +5,14 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import JoinPage from './pages/JoinPage';
 import LoginPage from './pages/LoginPage';
 import { UserProvider } from './contexts/UserContext';
+import CreateProjectForm from './components/CreateProjectForm';
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <UserProvider>
-          <LoginPage />
+          <CreateProjectForm />
+          {/* <LoginPage /> */}
           {/* <Route path="/login" component={LoginPage} /> */}
         </UserProvider>
       </BrowserRouter>
