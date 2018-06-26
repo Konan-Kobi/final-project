@@ -6,13 +6,14 @@ import { UserProvider } from './contexts/UserContext';
 
 // import LoginPage from "./pages/LoginPage";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import JoinPage from './pages/JoinPage';
+import CreateProjectForm from './components/CreateProjectForm';
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <UserProvider>
           <Switch>
+            <Route path="/create-project" component={CreateProjectForm} />
             <Route path="/login" component={LoginPage} />
             <Route path="/" component={MainPage} />
           </Switch>
