@@ -1,25 +1,25 @@
-import React from "react";
-import pmAPI from "../pmAPI";
-import ReactTags from "react-tag-autocomplete";
+import React from 'react';
+import pmAPI from '../pmAPI';
+import ReactTags from 'react-tag-autocomplete';
 
 export default class CreateProjectForm extends React.Component {
   state = {
     // value: "",
     busy: false,
     tags: [],
-    suggestions: []
+    suggestions: [],
   };
 
   async componentDidMount() {
-    const res = await pmAPI.get("users");
+    const res = await pmAPI.get('users');
     const resdata = {
       id: res.data.map(item => item.id),
-      name: res.data.map(item => item.username)
+      name: res.data.map(item => item.username),
     };
     for (let i = 0; i < resdata.name.length; i++) {
       this.state.suggestions.push({
         id: resdata.id[i],
-        name: resdata.name[i]
+        name: resdata.name[i],
       });
     }
   }
@@ -38,7 +38,7 @@ export default class CreateProjectForm extends React.Component {
       const tags = [].concat(this.state.tags, tag);
       this.setState({ tags });
     } else {
-      alert("중복으로 태깅하셨습니다.");
+      alert('중복으로 태깅하셨습니다.');
       return;
     }
   }
@@ -55,15 +55,15 @@ export default class CreateProjectForm extends React.Component {
   handleWriteClick = async e => {
     const payload = {
       title: this.titleRef.current.value,
-      body: this.bodyRef.current.value
+      body: this.bodyRef.current.value,
     };
     e.preventDefault();
     await pmAPI.post(`projects`, payload);
-    const resPro = await pmAPI.get("projects");
+    const resPro = await pmAPI.get('projects');
     for (let i = 0; i < this.state.tags.length; i++) {
       const projectpayload = {
         userId: this.state.tags[i].id,
-        projectId: resPro.data[resPro.data.length - 1].id
+        projectId: resPro.data[resPro.data.length - 1].id,
       };
       await pmAPI.post(`projectMembers`, projectpayload);
     }
