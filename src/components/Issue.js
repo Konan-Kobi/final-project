@@ -20,7 +20,6 @@ export default class Issue extends React.Component {
       this.state.value !== nextProps.issue.progress &&
       this.state.value === undefined
     ) {
-      console.log(this.state);
       this.setState({
         value: this.props.issue.progress,
       });
@@ -35,8 +34,7 @@ export default class Issue extends React.Component {
   render() {
     const { loading } = this.props;
     const { progress, title, deadline, body, created, user } = this.props.issue;
-    // const username = this.props.issue.user.username;
-    console.log(this.state);
+    // const username = this.props.issue.user.username
     if (loading) {
       return <div>...loading</div>;
     } else {

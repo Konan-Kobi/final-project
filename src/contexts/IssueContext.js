@@ -11,13 +11,12 @@ class IssueProvider extends React.Component {
       loading: true,
     });
     try {
-      const res = await pmAPI.get(`/issues/${this.props.id}?_expand=user`);
+      const res = await pmAPI.get(`/issues/${this.props.issueId}?_expand=user`);
       // console.log(res.data);
       // this.state.issue.push(res.data);
       this.setState({
         issue: res.data,
       });
-      console.log(this.state);
     } finally {
       this.setState({
         loading: false,
@@ -32,20 +31,24 @@ class IssueProvider extends React.Component {
       const payload = {
         progress: progress,
       };
-      await pmAPI.patch(`/issues/${this.props.id}`, payload);
+      await pmAPI.patch(`/issues/${this.props.issueId}`, payload);
     } finally {
       this.setState({
         loading: false,
       });
     }
   };
+  deleteIssue = async e => {
+    await pmAPI.delete(`/issues/${this.props.issueId}`);
+  };
   render() {
     const value = {
       issue: this.state.issue,
       loading: this.state.loading,
       patchProgress: this.patchProgress,
+      projectId: this.props.projectId,
+      deleteIssue: this.deleteIssue,
     };
-    console.log(value);
     return <Provider value={value}>{this.props.children}</Provider>;
   }
 }

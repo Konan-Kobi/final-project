@@ -17,7 +17,10 @@ class App extends Component {
             <Route path="/create-project" component={CreateProjectForm} />
             <Route path="/login" component={LoginPage} />
             <Route exact path="/" component={MainPage} />
-            <Route path="/issue/:id" component={IssuePage} />
+            <Route
+              path="/project/:projectId/issue/:issueId"
+              component={IssuePage}
+            />
           </Switch>
         </UserProvider>
       </BrowserRouter>

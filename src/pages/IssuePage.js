@@ -1,13 +1,14 @@
 import React from 'react';
 import IssueContainer from '../containers/IssueContainer';
 import { IssueProvider } from '../contexts/IssueContext';
+import { UserConsumer } from '../contexts/UserContext';
 export default class IssuePage extends React.Component {
   render() {
-    const id = this.props.match.params.id;
-    console.log(id);
+    const issueId = this.props.match.params.issueId;
+    const projectId = this.props.match.params.projectId;
     return (
-      <IssueProvider id={id}>
-        <IssueContainer />;
+      <IssueProvider issueId={issueId} projectId={projectId}>
+        <IssueContainer projectId={projectId} />
       </IssueProvider>
     );
   }

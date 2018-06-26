@@ -7,13 +7,18 @@ class UserProvider extends React.Component {
     userId: null,
     username: null,
   };
-
+  componentDidMount() {
+    if (localStorage.getItem('token')) {
+      this.fetchMe();
+    }
+  }
   fetchMe = async () => {
     this.setState({
       loading: true,
     });
     try {
       const res = await pmAPI.get('/me');
+      console.log(res.data.id, res.data.username);
       this.setState({
         userId: res.data.id,
         username: res.data.username,

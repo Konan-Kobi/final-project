@@ -9,7 +9,6 @@ export default class IssueList extends React.Component {
   };
   render() {
     const { issues } = this.props;
-    console.log(issues);
     return issues.map(issue => (
       <tbody>
         <IssueItem
@@ -19,6 +18,7 @@ export default class IssueList extends React.Component {
           label={issue.label}
           progress={issue.progress}
           id={issue.id}
+          projectId={issue.projectId}
         />
       </tbody>
     ));
