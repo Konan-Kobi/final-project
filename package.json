@@ -6,7 +6,9 @@
     "axios": "^0.18.0",
     "eslint-plugin-prettier": "^2.6.1",
     "helmet": "^3.12.1",
+    "husky": "^0.14.3",
     "prettier": "^1.13.5",
+    "pretty-quick": "^1.6.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-helmet": "^5.2.0",
@@ -18,6 +20,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+    "eject": "react-scripts eject",
+    "fix": "eslint ./src --fix"
+  },
+  "devDependencies": {}
 }
