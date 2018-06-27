@@ -10,9 +10,8 @@ export default class IssueList extends React.Component {
   render() {
     const { issues } = this.props;
     return issues.map(issue => (
-      <tbody>
+      <tbody key={issue.id}>
         <IssueItem
-          key={issue.id}
           title={issue.title}
           deadline={issue.deadline}
           label={issue.label}
