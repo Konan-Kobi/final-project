@@ -6,6 +6,8 @@ class DetailProjectProvider extends React.Component {
     loading: false,
     issues: [],
     projectMembers: [],
+    projectTitle: '',
+    projectBody: '',
   };
   componentWillMount() {
     this.fetchProjects();
@@ -40,6 +42,8 @@ class DetailProjectProvider extends React.Component {
       );
       this.setState({
         projectMembers: res.data,
+        projectTitle: res.data[0].project.title,
+        projectBody: res.data[0].project.body,
       });
     } finally {
       this.setState({

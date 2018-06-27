@@ -6,9 +6,13 @@ export default class DetailProjectContainer extends React.Component {
   render() {
     return (
       <DetailProjectConsumer>
-        {({ issues, projectMembers }) => (
+        {({ issues, projectMembers, projectTitle, projectBody }) => (
           <React.Fragment>
-            <Project projectMembers={projectMembers} />
+            <Project
+              projectMembers={projectMembers}
+              projectTitle={projectTitle}
+              projectBody={projectBody}
+            />
             <h1>이슈 리스트</h1>
             <DetailProjectList issues={issues} />
           </React.Fragment>
