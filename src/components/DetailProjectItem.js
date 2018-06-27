@@ -1,15 +1,21 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 export default class DetailProjectItem extends React.Component {
   render() {
+    const username = this.props.user.username;
+    const { label, title, deadline, progress, id, projectId } = this.props;
     return (
-      <tr>
-        <td>담당자</td>
-        <td>라벨</td>
-        <td>타이틀</td>
-        <td>기한</td>
-        <td>진척상황</td>
-      </tr>
+      <tbody>
+        <tr>
+          <td>{username}</td>
+          <td>{label}</td>
+          <td>
+            <Link to={`/project/${projectId}/issue/${id}`}>{title}</Link>
+          </td>
+          <td>{deadline}</td>
+          <td>{progress}</td>
+        </tr>
+      </tbody>
     );
   }
 }
