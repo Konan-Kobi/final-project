@@ -3,16 +3,31 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@celebryts/react-autocomplete-tags": "^1.0.0",
     "axios": "^0.18.0",
+    "classnames": "^2.2.6",
+    "eslint-plugin-prettier": "^2.6.1",
+    "helmet": "^3.12.1",
+    "husky": "^0.14.3",
+    "prettier": "^1.13.5",
+    "pretty-quick": "^1.6.0",
     "react": "^16.4.1",
+    "react-autocomplete": "^1.8.1",
     "react-dom": "^16.4.1",
+    "react-helmet": "^5.2.0",
+    "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "react-tag-autocomplete": "^5.5.1",
+    "react-tag-input": "^5.0.2",
+    "sweetalert": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+    "eject": "react-scripts eject",
+    "fixed": "eslint ./src --fix"
+  },
+  "devDependencies": {}
 }
