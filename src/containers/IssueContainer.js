@@ -5,6 +5,10 @@ import { IssueConsumer } from '../contexts/IssueContext';
 import { UserConsumer } from '../contexts/UserContext';
 import EditIssueButtonContainer from '../containers/EditIssueButtonContainer';
 export default class IssueContainer extends React.Component {
+  static defaultProps = {
+    userId: null, // 로그인 한 사용자의 id
+    projectId: null, // 해당 이슈의 프로젝트 아이디 (match)
+  };
   render() {
     return (
       <IssueConsumer>

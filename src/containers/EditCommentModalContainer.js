@@ -2,6 +2,9 @@ import React from 'react';
 import swal from 'sweetalert';
 import { IssueConsumer } from '../contexts/IssueContext';
 export default class EditCommentModalContainer extends React.Component {
+  static defaultProps = {
+    id: null, // 해당 코멘트의 아이디
+  };
   commentBodyRef = React.createRef();
   state = {
     show: false,

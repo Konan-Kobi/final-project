@@ -1,6 +1,9 @@
 import React from 'react';
 
 export default class CommentForm extends React.Component {
+  static defaultProps = {
+    postComment: body => {}, // 코멘트 작성 버튼 클릭 시 호출되는 함수
+  };
   commentBodyRef = React.createRef();
   onPostComment = async e => {
     const { postComment } = this.props;

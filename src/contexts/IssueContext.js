@@ -2,6 +2,11 @@ import React from 'react';
 import pmAPI from '../pmAPI';
 const { Provider, Consumer } = React.createContext();
 class IssueProvider extends React.Component {
+  static defaultProps = {
+    userId: null, // 현재 로그인 한 사용자의 id
+    projectId: null, // 이슈의 프로젝트 아이디(match)
+    issueId: null, // 클릭한 이슈의 id (match)
+  };
   state = {
     issue: [],
     loading: false,

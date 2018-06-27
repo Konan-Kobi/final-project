@@ -6,8 +6,8 @@ import { UserConsumer } from '../contexts/UserContext';
 
 export default class IssuePage extends React.Component {
   render() {
-    const issueId = this.props.match.params.issueId;
-    const projectId = this.props.match.params.projectId;
+    const { issueId, projectId } = this.props.match.params;
+
     return (
       <UserConsumer>
         {({ userId }) => (

@@ -3,8 +3,8 @@ import IssueItem from './IssueItem';
 export default class IssueList extends React.Component {
   static defaultProps = {
     title: '', //issue의 title
-    deadline: '1111', // issue의 기한
-    label: '라벨', // issue의 라벨
+    deadline: '', // issue의 기한
+    label: '', // issue의 라벨
     progress: '', // issue의 진척상황
   };
   render() {

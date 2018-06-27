@@ -18,7 +18,6 @@ class UserProvider extends React.Component {
     });
     try {
       const res = await pmAPI.get('/me');
-      console.log(res.data.id, res.data.username);
       this.setState({
         userId: res.data.id,
         username: res.data.username,

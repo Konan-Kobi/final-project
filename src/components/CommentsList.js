@@ -2,7 +2,9 @@ import React from 'react';
 import CommentItem from '../components/CommentItem';
 export default class CommentList extends React.Component {
   static defaultProps = {
-    comments: [], //해당 이슈에 해당하는 코멘츠 리스트
+    comments: [], //해당 이슈에 해당하는 코멘트 리스트
+    deleteComment: () => {}, // 코멘트 삭제 클릭 시 호출되는 함수
+    userId: null, // 현재 로그인 한 사용자의 id
   };
   render() {
     const { comments, deleteComment, userId } = this.props;

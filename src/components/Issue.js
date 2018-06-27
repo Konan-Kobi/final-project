@@ -2,14 +2,8 @@ import React from 'react';
 
 export default class Issue extends React.Component {
   static defaultProps = {
-    issue: {
-      progress: '',
-      title: '',
-      username: '',
-      deadline: '',
-      body: '',
-      created: '',
-    },
+    issues: {}, //  이슈의 상세 정보 (expand user)
+    loading: false, // 이슈 상세 정보 요청
   };
 
   state = {
@@ -33,7 +27,7 @@ export default class Issue extends React.Component {
   };
   render() {
     const { loading } = this.props;
-    const { progress, title, deadline, body, created, user } = this.props.issue;
+    const { title, deadline, body, created } = this.props.issue;
     // const username = this.props.issue.user.username
     if (loading) {
       return <div>...loading</div>;
