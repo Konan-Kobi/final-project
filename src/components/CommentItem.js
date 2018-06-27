@@ -1,4 +1,5 @@
 import React from 'react';
+import EditCommentModalContainer from '../containers/EditCommentModalContainer';
 export default class CommentItem extends React.Component {
   render() {
     const {
@@ -8,15 +9,20 @@ export default class CommentItem extends React.Component {
       created,
       body,
       deleteComment,
+      id,
     } = this.props;
     return (
-      <React.Fragment>
+      <React.Fragment key={id}>
         <div>
           username: {username} / created: {created}
         </div>
         <div>{body}</div>
         {userId === loggedUser ? (
-          <button onClick={deleteComment}>삭제</button>
+          <div>
+            <button onClick={deleteComment}>삭제</button>
+
+            <EditCommentModalContainer id={id} />
+          </div>
         ) : null}
       </React.Fragment>
     );

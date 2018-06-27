@@ -15,6 +15,7 @@ export default class CommentList extends React.Component {
           username={comment.user.username}
           created={comment.created}
           body={comment.body}
+          issueId={comment.issueId}
           deleteComment={e => {
             deleteComment(comment.id);
           }}

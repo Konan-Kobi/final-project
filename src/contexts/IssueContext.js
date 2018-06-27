@@ -62,7 +62,23 @@ class IssueProvider extends React.Component {
     await pmAPI.delete(`/comments/${commentId}`);
     this.fetchComment();
   };
-
+  postComment = async body => {
+    console.log(this.props.userId);
+    const payload = {
+      body: body,
+      userId: this.props.userId,
+      issueId: this.props.issueId,
+      created: '',
+    };
+    await pmAPI.post(`/comments`, payload);
+    this.fetchComment();
+  };
+  patchComment = async (body, commentId) => {
+    await pmAPI.patch(`/comments/${commentId}`, {
+      body: body,
+    });
+    this.fetchComment();
+  };
   render() {
     const value = {
       issue: this.state.issue,
@@ -72,6 +88,8 @@ class IssueProvider extends React.Component {
       deleteIssue: this.deleteIssue,
       comments: this.state.comments,
       deleteComment: this.deleteComment,
+      postComment: this.postComment,
+      patchComment: this.patchComment,
     };
     return <Provider value={value}>{this.props.children}</Provider>;
   }

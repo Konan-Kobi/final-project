@@ -46,9 +46,8 @@ export default class Issue extends React.Component {
             <option value="done">done</option>
           </select>
           <div>title: {title}</div>
-          <div>progress: {progress}</div>
-
-          {/* <div>{user}</div> */}
+          <div>created: {created}</div>
+          {/* <div>username: {user.username}</div> */}
           <div>deadline: {deadline}</div>
           <div>body: {body}</div>
         </React.Fragment>
