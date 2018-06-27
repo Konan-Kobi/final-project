@@ -1,22 +1,11 @@
 import React from 'react';
 
 export default class Issue extends React.Component {
-  static defaultProps = {
-    issue: {
-      progress: '',
-      title: '',
-      username: '',
-      deadline: '',
-      body: '',
-      created: '',
-    },
-  };
   render() {
-    console.log(this.props);
     const { loading } = this.props;
-    const { progress, title, deadline, body, created, user } = this.props.issue;
-    // const username = this.props.issue.user.username;
-    console.log(user);
+    const { progress, title, deadline, body } = this.props.issue;
+
+    console.log(this.props.issue);
     if (loading) {
       return <div>...loading</div>;
     } else {
@@ -24,8 +13,7 @@ export default class Issue extends React.Component {
         <React.Fragment>
           <button>{progress}</button>
           <div>{title}</div>
-
-          {/* <div>{user}</div> */}
+          {/* <div>{this.props.username}</div> */}
           <div>{deadline}</div>
           <div>{body}</div>
         </React.Fragment>

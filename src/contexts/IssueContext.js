@@ -4,6 +4,7 @@ const { Provider, Consumer } = React.createContext();
 class IssueProvider extends React.Component {
   state = {
     issue: [],
+    username: [],
     loading: false,
   };
   async componentWillMount() {
@@ -12,12 +13,13 @@ class IssueProvider extends React.Component {
     });
     try {
       const res = await pmAPI.get(`/issues/${this.props.id}?_expand=user`);
-      // console.log(res.data);
-      // this.state.issue.push(res.data);
+      this.state.issue.push(res.data);
+      this.state.username.push(res.data.user['username']);
       this.setState({
-        issue: res.data,
+        issue: this.state.issue[0],
+        username: this.state.username[0],
       });
-      console.log(this.state);
+      console.log(this.state.username);
     } finally {
       this.setState({
         loading: false,
@@ -26,10 +28,11 @@ class IssueProvider extends React.Component {
   }
   render() {
     const value = {
+      username: this.state.username,
       issue: this.state.issue,
       loading: this.state.loading,
     };
-    console.log(value);
+    console.log(value.username);
     return <Provider value={value}>{this.props.children}</Provider>;
   }
 }
