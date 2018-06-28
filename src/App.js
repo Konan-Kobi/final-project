@@ -14,21 +14,25 @@ class App extends Component {
       <BrowserRouter>
         <UserProvider>
           <UserConsumer>
-            {({ loading }) => (
-              <Switch>
-                <Route path="/create-project" component={CreateProjectForm} />
-                <Route path="/login" component={LoginPage} />
-                <Route exact path="/" component={MainPage} />
-                <Route
-                  path="/project/:projectId/issue/:issueId"
-                  component={IssuePage}
-                />
-                <Route
-                  path="/project/:projectId"
-                  component={DetailProjectPage}
-                />
-              </Switch>
-            )}
+            {({ loading }) =>
+              loading ? (
+                <div>...loading</div>
+              ) : (
+                <Switch>
+                  <Route path="/create-project" component={CreateProjectForm} />
+                  <Route path="/login" component={LoginPage} />
+                  <Route exact path="/" component={MainPage} />
+                  <Route
+                    path="/project/:projectId/issue/:issueId"
+                    component={IssuePage}
+                  />
+                  <Route
+                    path="/project/:projectId"
+                    component={DetailProjectPage}
+                  />
+                </Switch>
+              )
+            }
           </UserConsumer>
         </UserProvider>
       </BrowserRouter>

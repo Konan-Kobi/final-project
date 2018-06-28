@@ -17,7 +17,7 @@ export default class DeleteIssueButtonContainer extends React.Component {
                 <button
                   onClick={async e => {
                     await deleteIssue();
-                    // BrowserHistory.goBack();
+                    window.history.back(-1);
                   }}
                 >
                   삭제

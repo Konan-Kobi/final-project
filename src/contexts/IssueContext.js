@@ -11,25 +11,32 @@ class IssueProvider extends React.Component {
     issue: {},
     loading: false,
     comments: [], // 해당 이슈의 코멘트
-    username: '', // 이슈를 생성한 사람
+    username: '', // 이슈를 생성한 사용자의 useranme
+    createUser: null, //이슈를 생성한 사용자의 id
   };
   async componentDidMount() {
+    await this.fetchComment();
+    await this.fetchIssue();
+  }
+  fetchIssue = async () => {
     this.setState({
       loading: true,
     });
     try {
       const res = await pmAPI.get(`/issues/${this.props.issueId}?_expand=user`);
-      await this.fetchComment();
       this.setState({
         issue: res.data,
         username: res.data.user.username,
+        userId: this.props.userId,
+        createUser: res.data.user.id,
       });
+      console.log(this.state);
     } finally {
       this.setState({
         loading: false,
       });
     }
-  }
+  };
 
   fetchComment = async () => {
     this.setState({
@@ -57,6 +64,7 @@ class IssueProvider extends React.Component {
         progress: progress,
       };
       await pmAPI.patch(`/issues/${this.props.issueId}`, payload);
+      this.fetchIssue();
     } finally {
       this.setState({
         loading: false,

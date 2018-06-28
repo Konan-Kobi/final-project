@@ -12,30 +12,41 @@ export default class IssueContainer extends React.Component {
   render() {
     return (
       <IssueConsumer>
-        {({ issue, patchProgress, projects, projectId, username }) => (
-          <UserConsumer>
-            {({ userId }) => (
-              <React.Fragment>
-                {userId === issue.userId ? (
-                  <React.Fragment>
-                    <DeleteIssueButtonContainer
-                      issueId={issue.id}
-                      userId={this.props.userId}
-                      projectId={this.props.projectId}
-                    />
-                    <EditIssueButtonContainer />
-                  </React.Fragment>
-                ) : null}
-                <Issue
-                  issue={issue}
-                  patchProgress={patchProgress}
-                  projects={projects}
-                  username={username}
-                />
-              </React.Fragment>
-            )}
-          </UserConsumer>
-        )}
+        {({
+          issue,
+          patchProgress,
+          projects,
+          projectId,
+          username,
+          userId,
+          loading,
+          createUser,
+        }) =>
+          loading ? (
+            <div>...loading</div>
+          ) : (
+            <React.Fragment>
+              {userId === createUser ? (
+                <React.Fragment>
+                  <DeleteIssueButtonContainer
+                    issueId={issue.id}
+                    userId={this.props.userId}
+                    projectId={this.props.projectId}
+                  />
+                  <EditIssueButtonContainer />
+                </React.Fragment>
+              ) : null}
+              <Issue
+                issue={issue}
+                patchProgress={patchProgress}
+                projects={projects}
+                username={username}
+                userId={userId}
+                createUser={createUser}
+              />
+            </React.Fragment>
+          )
+        }
       </IssueConsumer>
     );
   }
