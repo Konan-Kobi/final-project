@@ -8,11 +8,11 @@ export default class IssueItem extends React.Component {
     progress: '', // issue progress
   };
   render() {
-    const { title, deadline, label, progress, id } = this.props;
+    const { title, deadline, label, progress, id, projectId } = this.props;
     return (
       <tr>
         <th>
-          <Link to={`issue/${id}`}>제목: {title}</Link>
+          <Link to={`/project/${projectId}/issue/${id}`}>제목: {title}</Link>
         </th>
         <th>기한: {deadline}</th>
         <th>라벨: {label}</th>

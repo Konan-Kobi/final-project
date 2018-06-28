@@ -18,6 +18,7 @@ export default class CreateIssueForm extends React.Component {
       { id: '긴급', name: '긴급' },
     ],
     created: new Date(),
+    projectStart: new Date(),
     daeadline: new Date(),
   }; // 지금은 날자인데.. 시간까지 입력하고 싶다. -> 조금 더 모듈을 찾아보자!
 
@@ -118,6 +119,7 @@ export default class CreateIssueForm extends React.Component {
         body: this.bodyRef.current.value,
         projectId: 2,
         created: this.state.created,
+        projectStart: this.state.projectStart,
         deadline: this.state.deadline,
         progress: 'todo',
         label: this.state.label[0].name,
@@ -130,7 +132,7 @@ export default class CreateIssueForm extends React.Component {
   // DatePicker에 입력된 값을 state에 저장해주는 함수 - created
   onChangeCreated = date =>
     this.setState({
-      created: date,
+      projectStart: date,
     });
 
   // DatePicker에 입력된 값을 state에 저장해주는 함수 - deadline
@@ -181,11 +183,14 @@ export default class CreateIssueForm extends React.Component {
             기한 설정 :
             <DateTimePicker
               onChange={this.onChangeCreated}
-              value={this.state.created}
+              value={this.state.projectStart}
+              required={true}
+              isClockOpen={true}
             />부터
             <DateTimePicker
               onChange={this.onChangeDeadline}
               value={this.state.deadline}
+              required={true}
             />까지
           </div>
           <div>

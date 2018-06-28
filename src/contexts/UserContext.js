@@ -7,7 +7,11 @@ class UserProvider extends React.Component {
     userId: null,
     username: null,
   };
-
+  componentDidMount() {
+    if (localStorage.getItem('token')) {
+      this.fetchMe();
+    }
+  }
   fetchMe = async () => {
     this.setState({
       loading: true,
