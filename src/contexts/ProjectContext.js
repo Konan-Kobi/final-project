@@ -48,7 +48,7 @@ class ProjectProvider extends React.Component {
     });
     try {
       // prop으로 받아오기 안되서 다시 요청 보냄
-      // const { userId } = this.props;
+      // const userId = this.props.userId;
       const userRes = await pmAPI.get('/me');
       const res = await pmAPI.get(
         `/projectMembers?userId=${userRes.data.id}&_expand=project`
