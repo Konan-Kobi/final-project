@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LoginPage from './pages/LoginPage';
 import MainPage from './pages/MainPage';
 import IssuePage from './pages/IssuePage';
-import { UserProvider } from './contexts/UserContext';
+import { UserProvider, UserConsumer } from './contexts/UserContext';
 import DetailProjectPage from './pages/DetailProjectPage';
 import './App.css';
 // import LoginPage from "./pages/LoginPage";
@@ -13,16 +13,23 @@ class App extends Component {
     return (
       <BrowserRouter>
         <UserProvider>
-          <Switch>
-            <Route path="/create-project" component={CreateProjectForm} />
-            <Route path="/login" component={LoginPage} />
-            <Route exact path="/" component={MainPage} />
-            <Route
-              path="/project/:projectId/issue/:issueId"
-              component={IssuePage}
-            />
-            <Route path="/project/:projectId" component={DetailProjectPage} />
-          </Switch>
+          <UserConsumer>
+            {({ loading }) => (
+              <Switch>
+                <Route path="/create-project" component={CreateProjectForm} />
+                <Route path="/login" component={LoginPage} />
+                <Route exact path="/" component={MainPage} />
+                <Route
+                  path="/project/:projectId/issue/:issueId"
+                  component={IssuePage}
+                />
+                <Route
+                  path="/project/:projectId"
+                  component={DetailProjectPage}
+                />
+              </Switch>
+            )}
+          </UserConsumer>
         </UserProvider>
       </BrowserRouter>
     );

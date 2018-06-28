@@ -8,9 +8,10 @@ class IssueProvider extends React.Component {
     issueId: null, // 클릭한 이슈의 id (match)
   };
   state = {
-    issue: [],
+    issue: {},
     loading: false,
-    comments: [],
+    comments: [], // 해당 이슈의 코멘트
+    username: '', // 이슈를 생성한 사람
   };
   async componentDidMount() {
     this.setState({
@@ -21,6 +22,7 @@ class IssueProvider extends React.Component {
       await this.fetchComment();
       this.setState({
         issue: res.data,
+        username: res.data.user.username,
       });
     } finally {
       this.setState({
@@ -28,6 +30,7 @@ class IssueProvider extends React.Component {
       });
     }
   }
+
   fetchComment = async () => {
     this.setState({
       loading: true,
@@ -86,12 +89,10 @@ class IssueProvider extends React.Component {
   };
   render() {
     const value = {
-      issue: this.state.issue,
-      loading: this.state.loading,
+      ...this.state,
       patchProgress: this.patchProgress,
       projectId: this.props.projectId,
       deleteIssue: this.deleteIssue,
-      comments: this.state.comments,
       deleteComment: this.deleteComment,
       postComment: this.postComment,
       patchComment: this.patchComment,

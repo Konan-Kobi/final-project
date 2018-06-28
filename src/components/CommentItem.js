@@ -31,6 +31,7 @@ export default class CommentItem extends React.Component {
             </div>
 
             {this.state.show ? (
+              // 나중에 분리할 것
               // <EditCommentModalContainer id={id} />
               <div>
                 <input

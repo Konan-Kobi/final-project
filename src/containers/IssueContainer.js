@@ -12,7 +12,7 @@ export default class IssueContainer extends React.Component {
   render() {
     return (
       <IssueConsumer>
-        {({ issue, patchProgress, projects, projectId }) => (
+        {({ issue, patchProgress, projects, projectId, username }) => (
           <UserConsumer>
             {({ userId }) => (
               <React.Fragment>
@@ -30,6 +30,7 @@ export default class IssueContainer extends React.Component {
                   issue={issue}
                   patchProgress={patchProgress}
                   projects={projects}
+                  username={username}
                 />
               </React.Fragment>
             )}
