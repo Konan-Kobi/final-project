@@ -1,19 +1,29 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import LoginPage from './pages/LoginPage';
+import MainPage from './pages/MainPage';
+import IssuePage from './pages/IssuePage';
 import './App.css';
+import { UserProvider } from './contexts/UserContext';
 
+// import LoginPage from "./pages/LoginPage";
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import CreateProjectForm from './components/CreateProjectForm';
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <BrowserRouter>
+        <UserProvider>
+          <Switch>
+            <Route path="/create-project" component={CreateProjectForm} />
+            <Route path="/login" component={LoginPage} />
+            <Route exact path="/" component={MainPage} />
+            <Route
+              path="/project/:projectId/issue/:issueId"
+              component={IssuePage}
+            />
+          </Switch>
+        </UserProvider>
+      </BrowserRouter>
     );
   }
 }
