@@ -9,6 +9,7 @@ class IssueProvider extends React.Component {
   };
   state = {
     issue: [],
+    username: [],
     loading: false,
     comments: [],
   };
@@ -20,7 +21,8 @@ class IssueProvider extends React.Component {
       const res = await pmAPI.get(`/issues/${this.props.issueId}?_expand=user`);
       await this.fetchComment();
       this.setState({
-        issue: res.data,
+        issue: this.state.issue[0],
+        username: this.state.username[0],
       });
     } finally {
       this.setState({
@@ -86,6 +88,7 @@ class IssueProvider extends React.Component {
   };
   render() {
     const value = {
+      username: this.state.username,
       issue: this.state.issue,
       loading: this.state.loading,
       patchProgress: this.patchProgress,
