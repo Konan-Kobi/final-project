@@ -9,7 +9,7 @@ class DetailProjectProvider extends React.Component {
     projectTitle: '',
     projectBody: '',
   };
-  componentWillMount() {
+  componentDidMount() {
     this.fetchProjects();
     this.fetchProjectMember();
   }

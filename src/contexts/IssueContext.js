@@ -82,7 +82,7 @@ class IssueProvider extends React.Component {
     await pmAPI.patch(`/comments/${commentId}`, {
       body: body,
     });
-    this.fetchComment();
+    // this.fetchComment();
   };
   render() {
     const value = {
@@ -95,6 +95,7 @@ class IssueProvider extends React.Component {
       deleteComment: this.deleteComment,
       postComment: this.postComment,
       patchComment: this.patchComment,
+      fetchComment: this.fetchComment,
     };
     return <Provider value={value}>{this.props.children}</Provider>;
   }
