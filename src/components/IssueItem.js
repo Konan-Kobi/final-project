@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Table } from 'semantic-ui-react';
 export default class IssueItem extends React.Component {
   static defaultProps = {
     title: '', // issue title
@@ -8,16 +9,25 @@ export default class IssueItem extends React.Component {
     progress: '', // issue progress
   };
   render() {
-    const { title, deadline, label, progress, id, projectId } = this.props;
+    const {
+      title,
+      deadline,
+      label,
+      progress,
+      id,
+      projectId,
+      created,
+    } = this.props;
     return (
-      <tr>
-        <th>
-          <Link to={`/project/${projectId}/issue/${id}`}>제목: {title}</Link>
-        </th>
-        <th>기한: {deadline}</th>
-        <th>라벨: {label}</th>
-        <th>진척상황: {progress}</th>
-      </tr>
+      <Table.Row>
+        <Table.Cell>{label}</Table.Cell>
+        <Table.Cell>
+          <Link to={`/project/${projectId}/issue/${id}`}>{title}</Link>
+        </Table.Cell>
+        <Table.Cell>{progress}</Table.Cell>
+        <Table.Cell>{created}</Table.Cell>
+        <Table.Cell>{deadline}</Table.Cell>
+      </Table.Row>
     );
   }
 }

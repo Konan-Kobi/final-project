@@ -3,19 +3,19 @@ import pmAPI from '../pmAPI';
 const { Provider, Consumer } = React.createContext();
 class DetailProjectProvider extends React.Component {
   state = {
-    loading: false,
+    loading: true,
     issues: [],
     projectMembers: [],
     projectTitle: '',
     projectBody: '',
   };
-  componentDidMount() {
+  async componentDidMount() {
     this.setState({
       loading: true,
     });
     try {
-      this.fetchIssueByProject();
-      this.fetchProjectMember();
+      await this.fetchIssueByProject();
+      await this.fetchProjectMember();
     } finally {
       this.setState({
         loading: false,
@@ -33,10 +33,11 @@ class DetailProjectProvider extends React.Component {
   };
   fetchProjectMember = async () => {
     const { projectId } = this.props;
-
+    console.log(projectId);
     const res = await pmAPI.get(
       `/projectMembers?projectId=${projectId}&_expand=user&_expand=project`
     );
+    console.log(res.data);
     this.setState({
       projectMembers: res.data,
       projectTitle: res.data[0].project.title,

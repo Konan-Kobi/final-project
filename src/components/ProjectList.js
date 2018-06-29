@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectItem from '../components/ProjectItem';
+import { Grid } from 'semantic-ui-react';
 export default class ProjectList extends React.Component {
   static defaultProps = {
     projects: [], //접속한 사용자가 맡은 프로젝트 리스트
@@ -8,13 +9,12 @@ export default class ProjectList extends React.Component {
   render() {
     const { projects, issueByProject } = this.props;
     return projects.map(project => (
-      <tbody key={project.id}>
-        <ProjectItem
-          title={project.project.title}
-          id={project.projectId}
-          issueByProject={issueByProject}
-        />
-      </tbody>
+      <ProjectItem
+        key={project.id}
+        title={project.project.title}
+        id={project.projectId}
+        issueByProject={issueByProject}
+      />
     ));
   }
 }
