@@ -25,10 +25,8 @@ export default class Issue extends React.Component {
     const { title, deadline, body, created } = this.props.issue;
 
     const value =
-      // this.state.value !== this.props.issue.progress &&
       this.state.value === null ? this.props.issue.progress : this.state.value;
-    console.log(this.state);
-    // const username = this.props.issue.user.username
+
     return (
       <React.Fragment>
         {createUser === userId ? (

@@ -15,61 +15,42 @@ class IssueProvider extends React.Component {
     createUser: null, //이슈를 생성한 사용자의 id
   };
   async componentDidMount() {
-    await this.fetchComment();
-    await this.fetchIssue();
-  }
-  fetchIssue = async () => {
+    // 한 번 화면을 그려주고, 이슈와 코멘트를 수정할 때는 화면 전체를 로딩하지 않는다. 화면 전체 로딩인디케이터가 아닌, 로딩인디케이터를 부분으로만 써주기 위해 여기서만 loading써줌
     this.setState({
       loading: true,
     });
-    try {
-      const res = await pmAPI.get(`/issues/${this.props.issueId}?_expand=user`);
-      this.setState({
-        issue: res.data,
-        username: res.data.user.username,
-        userId: this.props.userId,
-        createUser: res.data.user.id,
-      });
-      console.log(this.state);
-    } finally {
-      this.setState({
-        loading: false,
-      });
-    }
+    await this.fetchComment();
+    await this.fetchIssue();
+    this.setState({
+      loading: false,
+    });
+  }
+
+  fetchIssue = async () => {
+    const res = await pmAPI.get(`/issues/${this.props.issueId}?_expand=user`);
+    this.setState({
+      issue: res.data,
+      username: res.data.user.username,
+      userId: this.props.userId,
+      createUser: res.data.user.id,
+    });
   };
 
   fetchComment = async () => {
+    const commentRes = await pmAPI.get(
+      `/comments?issueId=${this.props.issueId}&_expand=user`
+    );
     this.setState({
-      loading: true,
+      comments: commentRes.data,
     });
-    try {
-      const commentRes = await pmAPI.get(
-        `/comments?issueId=${this.props.issueId}&_expand=user`
-      );
-      this.setState({
-        comments: commentRes.data,
-      });
-    } finally {
-      this.setState({
-        loading: false,
-      });
-    }
   };
+
   patchProgress = async progress => {
-    this.setState({
-      loading: true,
-    });
-    try {
-      const payload = {
-        progress: progress,
-      };
-      await pmAPI.patch(`/issues/${this.props.issueId}`, payload);
-      this.fetchIssue();
-    } finally {
-      this.setState({
-        loading: false,
-      });
-    }
+    const payload = {
+      progress: progress,
+    };
+    await pmAPI.patch(`/issues/${this.props.issueId}`, payload);
+    this.fetchIssue();
   };
   deleteIssue = async e => {
     await pmAPI.delete(`/issues/${this.props.issueId}`);
