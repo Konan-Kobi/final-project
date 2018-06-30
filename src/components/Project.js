@@ -1,5 +1,5 @@
 import React from 'react';
-import { Label } from 'semantic-ui-react';
+import { Label, Header } from 'semantic-ui-react';
 export default class Project extends React.Component {
   render() {
     const colors = [
@@ -20,10 +20,9 @@ export default class Project extends React.Component {
     const { projectMembers, projectTitle, projectBody } = this.props;
     return (
       <React.Fragment>
-        <h1>Project</h1>
-        <div>title: {projectTitle}</div>
-        <div>body: {projectBody}</div>
-        <h1>담당자</h1>
+        <Header as="h1">{projectTitle}</Header>
+        <Header as="h2">{projectBody}</Header>
+        <Header as="h3">Project Members</Header>
         {projectMembers.map((member, index) => (
           <Label key={member.id} color={colors[index]}>
             {member.user.username}

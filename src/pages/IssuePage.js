@@ -3,6 +3,7 @@ import IssueContainer from '../containers/IssueContainer';
 import { IssueProvider, IssueConsumer } from '../contexts/IssueContext';
 import CommentContainer from '../containers/CommentContainer';
 import { UserConsumer } from '../contexts/UserContext';
+import { Dimmer, Loader, Segment } from 'semantic-ui-react';
 
 export default class IssuePage extends React.Component {
   render() {
@@ -19,14 +20,15 @@ export default class IssuePage extends React.Component {
             <IssueConsumer>
               {({ loading }) =>
                 loading ? (
-                  <div>...loading</div>
+                  <Dimmer active inverted>
+                    <Loader size="large">Loading</Loader>
+                  </Dimmer>
                 ) : (
-                  <div>
-                    <h1>issue</h1>
+                  <React.Fragment>
                     <IssueContainer projectId={projectId} />
-                    <h1>comments</h1>
+
                     <CommentContainer />
-                  </div>
+                  </React.Fragment>
                 )
               }
             </IssueConsumer>

@@ -3,7 +3,7 @@ import ProjectListContainer from '../containers/ProjectListContainer';
 import { UserConsumer } from '../contexts/UserContext';
 import { ProjectProvider, ProjectConsumer } from '../contexts/ProjectContext';
 import IssueListContainer from '../containers/IssueListContainer';
-import { Segment, Grid, Container } from 'semantic-ui-react';
+import { Segment, Grid, Loader, Dimmer } from 'semantic-ui-react';
 import IssueChart from '../components/IssueChart';
 export default class MainPage extends React.Component {
   render() {
@@ -14,7 +14,9 @@ export default class MainPage extends React.Component {
             <ProjectConsumer>
               {({ loading, countIssue }) =>
                 loading ? (
-                  <div>....loading</div>
+                  <Dimmer active inverted>
+                    <Loader size="large">Loading</Loader>
+                  </Dimmer>
                 ) : (
                   <Grid columns={2}>
                     <Grid.Row>

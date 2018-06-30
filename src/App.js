@@ -8,7 +8,7 @@ import './App.css';
 // import LoginPage from "./pages/LoginPage";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CreateProjectForm from './components/CreateProjectForm';
-import { Container } from 'semantic-ui-react';
+import { Container, Dimmer, Loader } from 'semantic-ui-react';
 class App extends Component {
   render() {
     return (
@@ -17,7 +17,9 @@ class App extends Component {
           <UserConsumer>
             {({ loading }) =>
               loading ? (
-                <div>...loading</div>
+                <Dimmer active inverted>
+                  <Loader size="large">Loading</Loader>
+                </Dimmer>
               ) : (
                 <Container style={{ padding: '5em 0em' }}>
                   <Switch>
