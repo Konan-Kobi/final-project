@@ -27,6 +27,8 @@ export default class CreateProjectForm extends React.Component {
   }
 
   handleInputChange(input) {
+    const { suggestions } = this.props;
+    console.log(suggestions);
     if (!this.state.busy) {
       this.setState({ busy: true });
       return fetch(`query=${input}`).then(result => {

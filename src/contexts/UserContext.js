@@ -1,6 +1,6 @@
 import React from 'react';
 import pmAPI from '../pmAPI';
-import { Redirect } from 'react-router-dom';
+
 const { Provider, Consumer } = React.createContext();
 
 class UserProvider extends React.Component {
@@ -36,7 +36,7 @@ class UserProvider extends React.Component {
       loading: true,
     });
     try {
-      const res = await pmAPI.post('users/register', {
+      await pmAPI.post('users/register', {
         username: username,
         password: password,
       });

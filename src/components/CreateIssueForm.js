@@ -1,46 +1,18 @@
 import React from 'react';
-import pmAPI from '../pmAPI';
 import ReactTags from 'react-tag-autocomplete';
 import DateTimePicker from 'react-datetime-picker';
 
 export default class CreateIssueForm extends React.Component {
   state = {
-    // value: "",
     busy: false,
     tags: [],
-    suggestions: [],
     label: [],
-    labelSuggestions: [
-      { id: '에러수정필요', name: '에러수정필요' },
-      { id: '추가작업필요', name: '추가작업필요' },
-      { id: '협업요청', name: '협업요청' },
-      { id: '최적화작업필요', name: '최적화작업필요' },
-      { id: '긴급', name: '긴급' },
-    ],
-    created: new Date(),
     projectStart: new Date(),
-    daeadline: new Date(),
-  }; // 지금은 날자인데.. 시간까지 입력하고 싶다. -> 조금 더 모듈을 찾아보자!
+    deadline: '',
+  };
 
   titleRef = React.createRef();
   bodyRef = React.createRef();
-
-  // 처음 화면이 렌더될 때 필요한 정보들을 가져오기 위한 것들 -> 추후 component 분리시 분리예정
-  async componentDidMount() {
-    // const res = await pmAPI.get(`projects/${id}/projectMembers?_expand=user`); issue page에서 id 인자로 받아서 넘겨주기 - match.params.id 사용 X
-    // fixture Get
-    const res = await pmAPI.get(`projects/2/projectMembers?_expand=user`);
-    const resdata = {
-      id: res.data.map(item => item.id),
-      name: res.data.map(item => item.user.username),
-    };
-    for (let i = 0; i < resdata.name.length; i++) {
-      this.state.suggestions.push({
-        id: resdata.id[i],
-        name: resdata.name[i],
-      });
-    }
-  }
 
   // Tag, Autocomplete 관련 함수
   // 태그 삭제
@@ -90,7 +62,6 @@ export default class CreateIssueForm extends React.Component {
 
   // input에 입력한 값과와 일치하는 글자만 출력되게 하는 함수
   handleInputChange(input) {
-    console.log(input);
     if (!this.state.busy) {
       this.setState({ busy: true });
       return fetch(`query=${input}`).then(result => {
@@ -109,27 +80,6 @@ export default class CreateIssueForm extends React.Component {
     }
   }
 
-  // 작성완료라는 버튼을 누르면 Json-server로 전송하는 함수 -> 추후에 Context로 분리예정
-  handleWriteClick = async e => {
-    e.preventDefault();
-    await pmAPI.get('projects');
-    for (let i = 0; i < this.state.tags.length; i++) {
-      const issuePayload = {
-        title: this.titleRef.current.value,
-        body: this.bodyRef.current.value,
-        projectId: 2,
-        created: this.state.created.getTime(),
-        projectStart: this.state.projectStart.getTime(),
-        deadline: this.state.deadline.getTime(),
-        // progress가 0은 todo, 1은 doing, 2는 done
-        progress: 0,
-        label: this.state.label[0].name,
-        userId: this.state.tags[i].id,
-      }; // 지금 2라고 해놓은 것은 테스트임!! 반드시 id 인자로 받게되면 projectId의 값 바꿔줘야한다
-      await pmAPI.post(`issues`, issuePayload);
-    }
-  };
-
   // DatePicker에 입력된 값을 state에 저장해주는 함수 - created
   onChangeCreated = date =>
     this.setState({
@@ -142,7 +92,22 @@ export default class CreateIssueForm extends React.Component {
       deadline: date,
     });
 
+  handleClick = async e => {
+    e.preventDefault();
+    const postIssue = {
+      title: this.titleRef.current.value,
+      body: this.bodyRef.current.value,
+      tags: this.state.tags,
+      label: this.state.label,
+      projectStart: this.state.projectStart,
+      deadline: this.state.deadline,
+    };
+    const { handleWriteClick } = this.props;
+    handleWriteClick(postIssue);
+  };
+
   render() {
+    const { suggestions, labelSuggestions } = this.props;
     return (
       <React.Fragment>
         <h1>Create Issue Page</h1>
@@ -153,7 +118,7 @@ export default class CreateIssueForm extends React.Component {
               placeholder="이슈를 할당받을 담당자를 추가해주세요"
               tags={this.state.tags}
               minQueryLength={1}
-              suggestions={this.state.suggestions}
+              suggestions={suggestions}
               handleInputChange={this.handleInputChange.bind(this)}
               handleDelete={this.handleDelete.bind(this)}
               handleAddition={this.handleAddition.bind(this)}
@@ -203,14 +168,14 @@ export default class CreateIssueForm extends React.Component {
               placeholder="라벨을 추가해주세요"
               tags={this.state.label}
               minQueryLength={1}
-              suggestions={this.state.labelSuggestions}
+              suggestions={labelSuggestions}
               handleInputChange={this.handleLabelInputChange.bind(this)}
               handleDelete={this.handleLabelDelete.bind(this)}
               handleAddition={this.handleLabelAddition.bind(this)}
               autofocus={false}
             />
           </div>
-          <button onClick={this.handleWriteClick}>작성하기</button>
+          <button onClick={this.handleClick}>작성하기</button>
         </form>
       </React.Fragment>
     );

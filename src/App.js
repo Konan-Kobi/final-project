@@ -9,7 +9,7 @@ import './App.css';
 // import LoginPage from "./pages/LoginPage";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CreateProjectPage from './pages/CreateProjectPage';
-import CreateIssueForm from './components/CreateIssueForm';
+import CreateIssuePage from './pages/CreateIssuePage';
 class App extends Component {
   render() {
     return (
@@ -17,7 +17,7 @@ class App extends Component {
         <UserProvider>
           <Switch>
             <Route path="/create-project" component={CreateProjectPage} />
-            <Route path="/create-issue" component={CreateIssueForm} />
+            <Route path="/create-issue" component={CreateIssuePage} />
             <Route path="/login" component={LoginPage} />
             <Route path="/join" component={JoinPage} />
 
