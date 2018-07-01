@@ -23,6 +23,8 @@
     "react-scripts": "1.1.4",
     "react-tag-autocomplete": "^5.5.1",
     "react-tag-input": "^5.0.2",
+    "semantic-ui-css": "^2.3.2",
+    "semantic-ui-react": "^0.81.3",
     "sweetalert": "^2.1.0"
   },
   "scripts": {

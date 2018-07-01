@@ -1,28 +1,11 @@
 import React from 'react';
-import pmAPI from '../pmAPI';
 import ReactTags from 'react-tag-autocomplete';
 
 export default class CreateProjectForm extends React.Component {
   state = {
-    // value: "",
     busy: false,
     tags: [],
-    suggestions: [],
   };
-
-  async componentDidMount() {
-    const res = await pmAPI.get('users');
-    const resdata = {
-      id: res.data.map(item => item.id),
-      name: res.data.map(item => item.username),
-    };
-    for (let i = 0; i < resdata.name.length; i++) {
-      this.state.suggestions.push({
-        id: resdata.id[i],
-        name: resdata.name[i],
-      });
-    }
-  }
 
   titleRef = React.createRef();
   bodyRef = React.createRef();
@@ -52,24 +35,19 @@ export default class CreateProjectForm extends React.Component {
     }
   }
 
-  handleWriteClick = async e => {
-    const payload = {
+  handleClick = async e => {
+    e.preventDefault();
+    const { handleWriteClick } = this.props;
+    const postProject = {
       title: this.titleRef.current.value,
       body: this.bodyRef.current.value,
+      tags: this.state.tags,
     };
-    e.preventDefault();
-    await pmAPI.post(`projects`, payload);
-    const resPro = await pmAPI.get('projects');
-    for (let i = 0; i < this.state.tags.length; i++) {
-      const projectpayload = {
-        userId: this.state.tags[i].id,
-        projectId: resPro.data[resPro.data.length - 1].id,
-      };
-      await pmAPI.post(`projectMembers`, projectpayload);
-    }
+    handleWriteClick(postProject);
   };
 
   render() {
+    const { suggestions } = this.props;
     return (
       <React.Fragment>
         <h1>프로젝트 생성하는 페이지</h1>
@@ -90,7 +68,7 @@ export default class CreateProjectForm extends React.Component {
               placeholder="담당자를 추가해주세요"
               tags={this.state.tags}
               minQueryLength={1}
-              suggestions={this.state.suggestions}
+              suggestions={suggestions}
               handleInputChange={this.handleInputChange.bind(this)}
               handleDelete={this.handleDelete.bind(this)}
               handleAddition={this.handleAddition.bind(this)}
@@ -107,7 +85,7 @@ export default class CreateProjectForm extends React.Component {
               required
             />
           </div>
-          <button onClick={this.handleWriteClick}>작성하기</button>
+          <button onClick={this.handleClick}>작성하기</button>
         </form>
       </React.Fragment>
     );

@@ -1,6 +1,8 @@
 import React from 'react';
 import pmAPI from '../pmAPI';
+import { Redirect } from 'react-router-dom';
 const { Provider, Consumer } = React.createContext();
+
 class UserProvider extends React.Component {
   state = {
     loading: false,
@@ -30,12 +32,15 @@ class UserProvider extends React.Component {
   };
 
   join = async (username, password) => {
+    this.setState({
+      loading: true,
+    });
     try {
-      await pmAPI.post('users/register', {
+      const res = await pmAPI.post('users/register', {
         username: username,
         password: password,
       });
-      alert('회원가입이 완료되었습니다.');
+      alert('회원가입을 축하드립니다.');
     } catch (e) {
       if (e.response) {
         if (e.response.status >= 500) {
@@ -44,6 +49,10 @@ class UserProvider extends React.Component {
           alert('아이디가 중복되었습니다. 다시 입력부탁드립니다.');
         }
       }
+    } finally {
+      this.setState({
+        loading: false,
+      });
     }
   };
 
@@ -58,7 +67,7 @@ class UserProvider extends React.Component {
       });
       localStorage.setItem('token', res.data.token);
       this.fetchMe();
-      console.log('로그인됨');
+      alert(`${username}님 환영합니다.`);
     } finally {
       this.setState({
         loading: false,
