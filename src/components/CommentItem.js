@@ -1,7 +1,6 @@
 import React from 'react';
-import EditCommentContainer from '../containers/EditCommentContainer';
 import { IssueConsumer } from '../contexts/IssueContext';
-import CommentActions, { Comment, Button, Form } from 'semantic-ui-react';
+import { Comment, Button, Form } from 'semantic-ui-react';
 export default class CommentItem extends React.Component {
   state = {
     show: false,

@@ -3,7 +3,7 @@ import IssueContainer from '../containers/IssueContainer';
 import { IssueProvider, IssueConsumer } from '../contexts/IssueContext';
 import CommentContainer from '../containers/CommentContainer';
 import { UserConsumer } from '../contexts/UserContext';
-import { Dimmer, Loader, Segment } from 'semantic-ui-react';
+import { Dimmer, Loader } from 'semantic-ui-react';
 
 export default class IssuePage extends React.Component {
   render() {

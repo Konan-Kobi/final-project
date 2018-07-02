@@ -1,6 +1,5 @@
 import React from 'react';
 import ProjectItem from '../components/ProjectItem';
-import { Grid } from 'semantic-ui-react';
 export default class ProjectList extends React.Component {
   static defaultProps = {
     projects: [], //접속한 사용자가 맡은 프로젝트 리스트

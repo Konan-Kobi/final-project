@@ -5,7 +5,7 @@ import {
   DetailProjectConsumer,
 } from '../contexts/DetailProjectContext';
 import { Dimmer, Loader } from 'semantic-ui-react';
-export default class DetailProjectPage extends Rweact.Component {
+export default class DetailProjectPage extends React.Component {
   render() {
     const { projectId } = this.props.match.params;
     return (
