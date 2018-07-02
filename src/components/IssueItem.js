@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Table } from 'semantic-ui-react';
-
+import { getRemainingHours } from '../DateAPI';
 export default class IssueItem extends React.Component {
   static defaultProps = {
-    title: '', // issue title
-    deadline: '', // issue deadline
-    label: '', // issue label
-    progress: '', // issue progress
+    title: '', // issue 의 제목
+    deadline: '', // issue 의 마감일
+    label: '', // issue 의 라벨
+    progress: '', // issue 의 진척상황
+    id: null, // issue의 id
+    projectStart: null, // issue의 시작일
   };
   render() {
     const {
@@ -17,8 +19,7 @@ export default class IssueItem extends React.Component {
       progress,
       id,
       projectId,
-      created,
-      ProjectStart,
+      projectStart,
     } = this.props;
     return (
       <Table.Row>
@@ -27,8 +28,9 @@ export default class IssueItem extends React.Component {
           <Link to={`/project/${projectId}/issue/${id}`}>{title}</Link>
         </Table.Cell>
         <Table.Cell>{progress}</Table.Cell>
-        <Table.Cell>{ProjectStart}</Table.Cell>
+        <Table.Cell>{projectStart}</Table.Cell>
         <Table.Cell>{deadline}</Table.Cell>
+        <Table.Cell>{getRemainingHours(deadline)}</Table.Cell>
       </Table.Row>
     );
   }

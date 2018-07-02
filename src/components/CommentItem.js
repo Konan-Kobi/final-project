@@ -1,6 +1,7 @@
 import React from 'react';
 import { IssueConsumer } from '../contexts/IssueContext';
 import { Comment, Button, Form } from 'semantic-ui-react';
+import { timeConverter } from '../DateAPI';
 export default class CommentItem extends React.Component {
   state = {
     show: false,
@@ -21,6 +22,7 @@ export default class CommentItem extends React.Component {
       body,
       deleteComment,
       id,
+      updated,
     } = this.props;
     return (
       <IssueConsumer>
@@ -30,7 +32,11 @@ export default class CommentItem extends React.Component {
             <Comment.Content>
               <Comment.Author>{username}</Comment.Author>
               <Comment.Metadata>
-                <div>{created}</div>
+                {updated ? (
+                  <div>{timeConverter(updated)}</div>
+                ) : (
+                  <div>{timeConverter(created)}</div>
+                )}
               </Comment.Metadata>
               {this.state.show ? (
                 // 나중에 분리할 것

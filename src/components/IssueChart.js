@@ -2,6 +2,9 @@ import React from 'react';
 import { Pie } from 'react-chartjs-2';
 
 export default class IssueChart extends React.Component {
+  static defaultProps = {
+    countIssue: [], // 현재 로그인 한 사용자가 맡은 이슈의 개수 [todo, doing, done] 순으로 정렬되어있음
+  };
   state = {
     Data: {},
   };

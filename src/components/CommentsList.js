@@ -1,6 +1,7 @@
 import React from 'react';
 import CommentItem from '../components/CommentItem';
 import { Comment, Header } from 'semantic-ui-react';
+
 export default class CommentList extends React.Component {
   static defaultProps = {
     comments: [], //해당 이슈에 해당하는 코멘트 리스트
@@ -28,6 +29,7 @@ export default class CommentList extends React.Component {
                 created={comment.created}
                 body={comment.body}
                 issueId={comment.issueId}
+                updated={comment.updated}
                 deleteComment={e => {
                   deleteComment(comment.id);
                 }}

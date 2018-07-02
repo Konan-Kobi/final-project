@@ -73,6 +73,7 @@ class IssueProvider extends React.Component {
   patchComment = async (body, commentId) => {
     await pmAPI.patch(`/comments/${commentId}`, {
       body: body,
+      updated: Math.round(new Date().getTime() / 1000.0),
     });
     // this.fetchComment();
   };
