@@ -8,59 +8,51 @@ class IssueProvider extends React.Component {
     issueId: null, // 클릭한 이슈의 id (match)
   };
   state = {
-    issue: [],
-    username: [],
+
+    issue: {},
+
     loading: false,
-    comments: [],
+    comments: [], // 해당 이슈의 코멘트
+    username: '', // 이슈를 생성한 사용자의 useranme
+    createUser: null, //이슈를 생성한 사용자의 id
   };
   async componentDidMount() {
+    // 한 번 화면을 그려주고, 이슈와 코멘트를 수정할 때는 화면 전체를 로딩하지 않는다. 화면 전체 로딩인디케이터가 아닌, 로딩인디케이터를 부분으로만 써주기 위해 여기서만 loading써줌
     this.setState({
       loading: true,
     });
-    try {
-      const res = await pmAPI.get(`/issues/${this.props.issueId}?_expand=user`);
-      await this.fetchComment();
-      this.setState({
-        issue: this.state.issue[0],
-        username: this.state.username[0],
-      });
-    } finally {
-      this.setState({
-        loading: false,
-      });
-    }
+    await this.fetchComment();
+    await this.fetchIssue();
+    this.setState({
+      loading: false,
+    });
   }
-  fetchComment = async () => {
+
+  fetchIssue = async () => {
+    const res = await pmAPI.get(`/issues/${this.props.issueId}?_expand=user`);
     this.setState({
-      loading: true,
+      issue: res.data,
+      username: res.data.user.username,
+      userId: this.props.userId,
+      createUser: res.data.user.id,
     });
-    try {
-      const commentRes = await pmAPI.get(
-        `/comments?issueId=${this.props.issueId}&_expand=user`
-      );
-      this.setState({
-        comments: commentRes.data,
-      });
-    } finally {
-      this.setState({
-        loading: false,
-      });
-    }
   };
-  patchProgress = async progress => {
+
+  fetchComment = async () => {
+    const commentRes = await pmAPI.get(
+      `/comments?issueId=${this.props.issueId}&_expand=user`
+    );
     this.setState({
-      loading: true,
+      comments: commentRes.data,
     });
-    try {
-      const payload = {
-        progress: progress,
-      };
-      await pmAPI.patch(`/issues/${this.props.issueId}`, payload);
-    } finally {
-      this.setState({
-        loading: false,
-      });
-    }
+  };
+
+  patchProgress = async progress => {
+    const payload = {
+      progress: progress,
+    };
+    await pmAPI.patch(`/issues/${this.props.issueId}`, payload);
+    this.fetchIssue();
   };
   deleteIssue = async e => {
     await pmAPI.delete(`/issues/${this.props.issueId}`);
@@ -88,13 +80,12 @@ class IssueProvider extends React.Component {
   };
   render() {
     const value = {
-      username: this.state.username,
-      issue: this.state.issue,
-      loading: this.state.loading,
+
+      ...this.state,
+
       patchProgress: this.patchProgress,
       projectId: this.props.projectId,
       deleteIssue: this.deleteIssue,
-      comments: this.state.comments,
       deleteComment: this.deleteComment,
       postComment: this.postComment,
       patchComment: this.patchComment,

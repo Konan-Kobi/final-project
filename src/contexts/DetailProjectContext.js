@@ -10,46 +10,38 @@ class DetailProjectProvider extends React.Component {
     projectBody: '',
   };
   componentDidMount() {
-    this.fetchProjects();
-    this.fetchProjectMember();
-  }
-  fetchProjects = async () => {
     this.setState({
       loading: true,
     });
-    const { projectId } = this.props;
     try {
-      const res = await pmAPI.get(
-        `/issues?projectId=${projectId}&_expand=user`
-      );
-      this.setState({
-        issues: res.data,
-      });
+      this.fetchIssueByProject();
+      this.fetchProjectMember();
     } finally {
       this.setState({
         loading: false,
       });
     }
+  }
+  fetchIssueByProject = async () => {
+    const { projectId } = this.props;
+
+    const res = await pmAPI.get(`/issues?projectId=${projectId}&_expand=user`);
+
+    this.setState({
+      issues: res.data,
+    });
   };
   fetchProjectMember = async () => {
     const { projectId } = this.props;
+
+    const res = await pmAPI.get(
+      `/projectMembers?projectId=${projectId}&_expand=user&_expand=project`
+    );
     this.setState({
-      loading: true,
+      projectMembers: res.data,
+      projectTitle: res.data[0].project.title,
+      projectBody: res.data[0].project.body,
     });
-    try {
-      const res = await pmAPI.get(
-        `/projectMembers?projectId=${projectId}&_expand=user&_expand=project`
-      );
-      this.setState({
-        projectMembers: res.data,
-        projectTitle: res.data[0].project.title,
-        projectBody: res.data[0].project.body,
-      });
-    } finally {
-      this.setState({
-        loading: false,
-      });
-    }
   };
   render() {
     const value = {

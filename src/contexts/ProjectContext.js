@@ -4,7 +4,7 @@ const { Provider, Consumer } = React.createContext();
 class ProjectProvider extends React.Component {
   state = {
     projects: [],
-    loading: false,
+    loading: true,
     userId: null,
     issues: [],
     issueByProject: [],
@@ -48,12 +48,14 @@ class ProjectProvider extends React.Component {
     });
     try {
       // prop으로 받아오기 안되서 다시 요청 보냄
-      // const userId = this.props.userId;
-      const userRes = await pmAPI.get('/me');
+      const userId = this.props.userId;
+      // const userRes = await pmAPI.get('/me');
       const res = await pmAPI.get(
-        `/projectMembers?userId=${userRes.data.id}&_expand=project`
+        `/projectMembers?userId=${userId}&_expand=project`
       );
-      const issueRes = await pmAPI.get(`/issues?userId=${userRes.data.id}`);
+      const issueRes = await pmAPI.get(
+        `/issues?userId=${userId}&_expand=project&_expand=user`
+      );
       const sortedIssue = this.sortedIssue(issueRes);
       console.log(sortedIssue.issueByProject);
 
