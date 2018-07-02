@@ -8,13 +8,12 @@ export default class ProjectList extends React.Component {
   render() {
     const { projects, issueByProject } = this.props;
     return projects.map(project => (
-      <tbody key={project.id}>
-        <ProjectItem
-          title={project.project.title}
-          id={project.projectId}
-          issueByProject={issueByProject}
-        />
-      </tbody>
+      <ProjectItem
+        key={project.id}
+        title={project.project.title}
+        id={project.projectId}
+        issueByProject={issueByProject}
+      />
     ));
   }
 }

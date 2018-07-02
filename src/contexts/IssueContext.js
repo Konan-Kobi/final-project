@@ -17,7 +17,6 @@ class IssueProvider extends React.Component {
     createUser: null, //이슈를 생성한 사용자의 id
   };
   async componentDidMount() {
-    // 한 번 화면을 그려주고, 이슈와 코멘트를 수정할 때는 화면 전체를 로딩하지 않는다. 화면 전체 로딩인디케이터가 아닌, 로딩인디케이터를 부분으로만 써주기 위해 여기서만 loading써줌
     this.setState({
       loading: true,
     });
@@ -46,7 +45,8 @@ class IssueProvider extends React.Component {
       comments: commentRes.data,
     });
   };
-
+  // issue를 작성한 username을 사용하고 있어서 한 번에 통신을 할 수가 없다.
+  // comments?issueId=1&_expnad=user&_expand=issue
   patchProgress = async progress => {
     const payload = {
       progress: progress,
