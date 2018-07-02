@@ -1,6 +1,8 @@
 import React from 'react';
 import IssueItem from './IssueItem';
 import { Table } from 'semantic-ui-react';
+import timeConverter from '../DateAPI';
+
 export default class IssueList extends React.Component {
   static defaultProps = {
     title: '', //issue의 title
@@ -14,12 +16,13 @@ export default class IssueList extends React.Component {
       <Table.Body key={issue.id}>
         <IssueItem
           title={issue.title}
-          deadline={issue.deadline}
+          deadline={timeConverter(issue.deadline)}
           label={issue.label}
           progress={issue.progress}
           id={issue.id}
           projectId={issue.projectId}
-          created={issue.created}
+          created={timeConverter(issue.created)}
+          projectStart={timeConverter(issue.projectStart)}
         />
       </Table.Body>
     ));
