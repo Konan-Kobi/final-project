@@ -8,7 +8,6 @@ class IssueProvider extends React.Component {
     issueId: null, // 클릭한 이슈의 id (match)
   };
   state = {
-
     issue: {},
 
     loading: false,
@@ -80,7 +79,6 @@ class IssueProvider extends React.Component {
   };
   render() {
     const value = {
-
       ...this.state,
 
       patchProgress: this.patchProgress,
