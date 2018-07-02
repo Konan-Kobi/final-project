@@ -89,6 +89,7 @@ export default class CreateProjectForm extends React.Component {
             <ReactTags
               placeholder="담당자를 추가해주세요"
               tags={this.state.tags}
+              minQueryLength={1}
               suggestions={this.state.suggestions}
               handleInputChange={this.handleInputChange.bind(this)}
               handleDelete={this.handleDelete.bind(this)}

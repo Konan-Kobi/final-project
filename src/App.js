@@ -8,7 +8,9 @@ import './App.css';
 // import LoginPage from "./pages/LoginPage";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CreateProjectForm from './components/CreateProjectForm';
+
 import { Container, Dimmer, Loader } from 'semantic-ui-react';
+
 class App extends Component {
   render() {
     return (
