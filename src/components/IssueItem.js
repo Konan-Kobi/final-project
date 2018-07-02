@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Table } from 'semantic-ui-react';
+
 export default class IssueItem extends React.Component {
   static defaultProps = {
     title: '', // issue title
@@ -17,6 +18,7 @@ export default class IssueItem extends React.Component {
       id,
       projectId,
       created,
+      ProjectStart,
     } = this.props;
     return (
       <Table.Row>
@@ -25,7 +27,7 @@ export default class IssueItem extends React.Component {
           <Link to={`/project/${projectId}/issue/${id}`}>{title}</Link>
         </Table.Cell>
         <Table.Cell>{progress}</Table.Cell>
-        <Table.Cell>{created}</Table.Cell>
+        <Table.Cell>{ProjectStart}</Table.Cell>
         <Table.Cell>{deadline}</Table.Cell>
       </Table.Row>
     );

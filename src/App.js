@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import LoginPage from './pages/LoginPage';
 import JoinPage from './pages/JoinPage';
 import MainPage from './pages/MainPage';
+import MyPage from './pages/MyPage';
 import IssuePage from './pages/IssuePage';
+
 import { UserProvider, UserConsumer } from './contexts/UserContext';
 import DetailProjectPage from './pages/DetailProjectPage';
 import './App.css';
@@ -39,6 +41,7 @@ class App extends Component {
                     <Route path="/join" component={JoinPage} />
                     <Route path="/login" component={LoginPage} />
                     <Route exact path="/" component={MainPage} />
+                    <Route path="/myPage" component={MyPage} />
                     <Route
                       path="/project/:projectId/issue/:issueId"
                       component={IssuePage}
