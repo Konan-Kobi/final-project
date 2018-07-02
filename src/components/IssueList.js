@@ -1,5 +1,6 @@
 import React from 'react';
 import IssueItem from './IssueItem';
+import { Table } from 'semantic-ui-react';
 export default class IssueList extends React.Component {
   static defaultProps = {
     title: '', //issue의 title
@@ -10,7 +11,7 @@ export default class IssueList extends React.Component {
   render() {
     const { issues } = this.props;
     return issues.map(issue => (
-      <tbody key={issue.id}>
+      <Table.Body key={issue.id}>
         <IssueItem
           title={issue.title}
           deadline={issue.deadline}
@@ -18,8 +19,9 @@ export default class IssueList extends React.Component {
           progress={issue.progress}
           id={issue.id}
           projectId={issue.projectId}
+          created={issue.created}
         />
-      </tbody>
+      </Table.Body>
     ));
   }
 }

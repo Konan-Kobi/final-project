@@ -5,7 +5,7 @@ const { Provider, Consumer } = React.createContext();
 
 class UserProvider extends React.Component {
   state = {
-    loading: false,
+    loading: true,
     userId: null,
     username: null,
   };
@@ -87,6 +87,7 @@ class UserProvider extends React.Component {
       // 이 부분 수정하였습니다.
       username: this.state.username,
       userId: this.state.userId,
+      loading: this.state.loading,
     };
     return <Provider value={value}>{this.props.children}</Provider>;
   }

@@ -19,7 +19,7 @@ export default class CreateProjectForm extends React.Component {
   }
 
   handleAddition(tag) {
-    if (this.state.tags.indexOf(tag) == -1) {
+    if (this.state.tags.indexOf(tag) === -1) {
       const tags = [].concat(this.state.tags, tag);
       this.setState({ tags });
     } else {

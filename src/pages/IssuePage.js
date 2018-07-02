@@ -1,8 +1,9 @@
 import React from 'react';
 import IssueContainer from '../containers/IssueContainer';
-import { IssueProvider } from '../contexts/IssueContext';
+import { IssueProvider, IssueConsumer } from '../contexts/IssueContext';
 import CommentContainer from '../containers/CommentContainer';
 import { UserConsumer } from '../contexts/UserContext';
+import { Dimmer, Loader } from 'semantic-ui-react';
 
 export default class IssuePage extends React.Component {
   render() {
@@ -16,10 +17,21 @@ export default class IssuePage extends React.Component {
             projectId={projectId}
             userId={userId}
           >
-            <h1>issue</h1>
-            <IssueContainer projectId={projectId} />
-            <h1>comments</h1>
-            <CommentContainer />
+            <IssueConsumer>
+              {({ loading }) =>
+                loading ? (
+                  <Dimmer active inverted>
+                    <Loader size="large">Loading</Loader>
+                  </Dimmer>
+                ) : (
+                  <React.Fragment>
+                    <IssueContainer projectId={projectId} />
+
+                    <CommentContainer />
+                  </React.Fragment>
+                )
+              }
+            </IssueConsumer>
           </IssueProvider>
         )}
       </UserConsumer>
