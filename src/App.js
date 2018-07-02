@@ -23,6 +23,7 @@ class App extends Component {
           <Switch>
             <Route path="/join" component={JoinPage} />
             <Route path="/login" component={LoginPage} />
+            <Route exact path="/" component={MainPage} />
           </Switch>
           {localStorage.getItem('token') ? (
             <UserConsumer>
@@ -55,7 +56,7 @@ class App extends Component {
               }
             </UserConsumer>
           ) : (
-            <Redirect to="/login" />
+            <Redirect to="/" />
           )}
         </UserProvider>
       </BrowserRouter>

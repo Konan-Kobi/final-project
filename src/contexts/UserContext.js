@@ -1,6 +1,5 @@
 import React from 'react';
 import pmAPI from '../pmAPI';
-import { Redirect } from 'react-router';
 
 const { Provider, Consumer } = React.createContext();
 

@@ -1,15 +1,29 @@
 import React from 'react';
 import ReactTags from 'react-tag-autocomplete';
-import DateTimePicker from 'react-datetime-picker';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+import 'react-datepicker/dist/react-datepicker.css';
+
+import { Input, Form, Grid, Segment } from 'semantic-ui-react';
 
 export default class CreateIssueForm extends React.Component {
   state = {
     busy: false,
     tags: [],
     label: [],
-    projectStart: new Date(),
-    deadline: '',
+    projectStart: moment(),
+    deadline: moment(),
   };
+
+  componentWillMount() {
+    const a = moment().format();
+    console.log(new Date(a).getTime());
+    document.body.classList.add('CreateIssueForm__Layout');
+  }
+
+  componentWillUnmount() {
+    document.body.classList.remove('CreateIssueForm__Layout');
+  }
 
   titleRef = React.createRef();
   bodyRef = React.createRef();
@@ -80,17 +94,25 @@ export default class CreateIssueForm extends React.Component {
     }
   }
 
-  // DatePicker에 입력된 값을 state에 저장해주는 함수 - created
-  onChangeCreated = date =>
-    this.setState({
-      projectStart: date,
-    });
+  // // DatePicker에 입력된 값을 state에 저장해주는 함수 - created
+  // onChangeCreated = date =>
+  //   this.setState({
+  //     projectStart: date,
+  //   });
 
-  // DatePicker에 입력된 값을 state에 저장해주는 함수 - deadline
-  onChangeDeadline = date =>
-    this.setState({
-      deadline: date,
-    });
+  // // DatePicker에 입력된 값을 state에 저장해주는 함수 - deadline
+  // onChangeDeadline = date =>
+  //   this.setState({
+  //     deadline: date,
+  //   });
+
+  handleStartChange = date => {
+    this.setState({ projectStart: date });
+  };
+
+  handleDeadChange = date => {
+    this.setState({ deadline: date });
+  };
 
   handleClick = async e => {
     e.preventDefault();
@@ -99,8 +121,8 @@ export default class CreateIssueForm extends React.Component {
       body: this.bodyRef.current.value,
       tags: this.state.tags,
       label: this.state.label,
-      projectStart: this.state.projectStart,
-      deadline: this.state.deadline,
+      projectStart: this.state.projectStart.format(),
+      deadline: this.state.deadline.format(),
     };
     const { handleWriteClick } = this.props;
     handleWriteClick(postIssue);
@@ -109,75 +131,104 @@ export default class CreateIssueForm extends React.Component {
   render() {
     const { suggestions, labelSuggestions } = this.props;
     return (
-      <React.Fragment>
-        <h1>Create Issue Page</h1>
-        <form>
-          <div>
-            할당자 선택 :
-            <ReactTags
-              placeholder="이슈를 할당받을 담당자를 추가해주세요"
-              tags={this.state.tags}
-              minQueryLength={1}
-              suggestions={suggestions}
-              handleInputChange={this.handleInputChange.bind(this)}
-              handleDelete={this.handleDelete.bind(this)}
-              handleAddition={this.handleAddition.bind(this)}
-              autofocus={false}
-            />
-          </div>
-          <div>
-            제목 :
-            <input
-              type="text"
-              ref={this.titleRef}
-              placeholder="제목을 입력해주세요"
-              size="100"
-              required
-            />
-          </div>
-          <div>
-            내용 :
-            <textarea
-              cols="100"
-              rows="10"
-              placeholder="내용을 입력해주세요"
-              ref={this.bodyRef}
-              required
-            />
-          </div>
-          <div>
-            기한 설정 :
-            <DateTimePicker
-              onChange={this.onChangeCreated}
-              value={this.state.projectStart}
-              required={true}
-              showLeadingZeros={true}
-              locale="en-us"
-            />부터
-            <DateTimePicker
-              onChange={this.onChangeDeadline}
-              value={this.state.deadline}
-              required={true}
-              showLeadingZeros={true}
-              locale="en-us"
-            />까지
-          </div>
-          <div>
-            라벨 :
-            <ReactTags
-              placeholder="라벨을 추가해주세요"
-              tags={this.state.label}
-              minQueryLength={1}
-              suggestions={labelSuggestions}
-              handleInputChange={this.handleLabelInputChange.bind(this)}
-              handleDelete={this.handleLabelDelete.bind(this)}
-              handleAddition={this.handleLabelAddition.bind(this)}
-              autofocus={false}
-            />
-          </div>
-          <button onClick={this.handleClick}>작성하기</button>
-        </form>
-      </React.Fragment>
+      <Grid columns="equal">
+        <Grid.Column />
+        <Grid.Column width={8}>
+          <Segment className="container" color="blue" textAlign="center">
+            <h2 className="ui white image header">
+              <div className="content header">이슈 등록하기</div>
+            </h2>
+          </Segment>
+          <Segment className="container" color="blue" textAlign="left">
+            <Form>
+              <Form.Field>
+                <h5 className="ui white image header">
+                  <div className="content">이슈 시작일</div>
+                </h5>
+                <DatePicker
+                  selected={this.state.projectStart}
+                  onChange={this.handleStartChange}
+                  showTimeSelect
+                  dateFormat="LLL"
+                />
+                <h5 className="ui white image header">
+                  <div className="content">이슈 마감일</div>
+                </h5>
+                <DatePicker
+                  selected={this.state.deadline}
+                  onChange={this.handleDeadChange}
+                  showTimeSelect
+                  dateFormat="LLL"
+                />
+              </Form.Field>
+              <Form.Field>
+                <h5 className="ui white image header">
+                  <div className="content">이슈 제목 설정</div>
+                </h5>
+                <Input
+                  fluid
+                  type="text"
+                  ref={this.titleRef}
+                  placeholder="제목을 입력해주세요"
+                  required
+                />
+              </Form.Field>
+              <Form.Field>
+                <h5 className="ui white image header">
+                  <div className="content">이슈 할당자 설정</div>
+                </h5>
+                <ReactTags
+                  placeholder="이슈를 할당받을 담당자를 추가해주세요"
+                  tags={this.state.tags}
+                  minQueryLength={1}
+                  autoresize={false}
+                  suggestions={suggestions}
+                  handleInputChange={this.handleInputChange.bind(this)}
+                  handleDelete={this.handleDelete.bind(this)}
+                  handleAddition={this.handleAddition.bind(this)}
+                  autofocus={false}
+                />
+              </Form.Field>
+              <Form.Field>
+                <h5 className="ui white image header">
+                  <div className="content">이슈 라벨 설정</div>
+                </h5>
+                <ReactTags
+                  placeholder="라벨을 추가해주세요"
+                  tags={this.state.label}
+                  minQueryLength={1}
+                  autoresize={false}
+                  suggestions={labelSuggestions}
+                  handleInputChange={this.handleLabelInputChange.bind(this)}
+                  handleDelete={this.handleLabelDelete.bind(this)}
+                  handleAddition={this.handleLabelAddition.bind(this)}
+                  autofocus={false}
+                />
+              </Form.Field>
+              <Form.Field>
+                <h5 className="ui white image header">
+                  <div className="content">이슈 내용</div>
+                </h5>
+                <textarea
+                  id="CreateIssueForm__Textarea"
+                  cols="100"
+                  rows="10"
+                  placeholder="내용을 입력해주세요"
+                  ref={this.bodyRef}
+                  required
+                />
+              </Form.Field>
+              <button
+                className="ui fluid large blue submit button"
+                onClick={this.handleClick}
+              >
+                작성하기
+              </button>
+            </Form>
+          </Segment>
+        </Grid.Column>
+        <Grid.Column />
+      </Grid>
     );
   }
 }

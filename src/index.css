@@ -17,14 +17,49 @@ body {
 
 .JoinForm__background {
   background-image: url('https://images.unsplash.com/photo-1496389395181-e5fdd5c0315e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=49bd31ab070ce144fe11d9df225d1d4c&auto=format&fit=crop&w=2092&q=80');
-  padding-top: 17em;
+  padding-top: 14%;
   background-size: 100%;
   text-align: center;
 }
 
 .LoginForm__background {
   background-image: url('https://images.unsplash.com/photo-1526289375762-27075d038ebd?ixlib=rb-0.3.5&s=26d1255767d8e79458ad28fd1c49811c&auto=format&fit=crop&w=2100&q=80');
-  padding-top: 17em;
+  padding-top: 14%;
   background-size: 100%;
   text-align: center;
+}
+
+.CreateProjectForm__Layout {
+  padding-top: 7%;
+  text-align: center;
+}
+
+.CreateIssueForm__Layout {
+  padding-top: 5%;
+  text-align: center;
+}
+
+.react-datepicker__time-list {
+  padding: 0;
+  text-align: center;
+}
+
+.react-tags__suggestions {
+  list-style-type: none;
+}
+
+.react-tags__selected-tag {
+  background-color: #2986CE;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  margin-bottom: 1em;
+}
+
+#CreateIssueForm__Textarea {
+  margin-bottom: 1em;
+}
+
+#CreateProjectForm__Textarea {
+  margin-bottom: 1em;
 }

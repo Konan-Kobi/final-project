@@ -44,31 +44,29 @@ class CreateIssueProvider extends React.Component {
     }
   };
 
-  posting = async postIssue => {
-    for (let i = 0; i < postIssue.tags.length; i++) {
-      const issuePayload = {
-        title: postIssue.title,
-        body: postIssue.body,
-        projectId: 2,
-        created: this.state.created.getTime(),
-        projectStart: postIssue.projectStart.getTime(),
-        deadline: postIssue.deadline.getTime(),
-        // progress가 0은 todo, 1은 doing, 2는 done
-        progress: 0,
-        label: postIssue.label[0].name,
-        userId: postIssue.tags[i].id,
-      }; // 지금 2라고 해놓은 것은 테스트임!! 반드시 id 인자로 받게되면 projectId의 값 바꿔줘야한다
-      await pmAPI.post(`issues`, issuePayload);
-    }
-  };
-
   // 작성완료라는 버튼을 누르면 Json-server로 전송하는 함수
-  handleWriteClick = async () => {
+  handleWriteClick = async postIssue => {
     this.setState({
       loading: true,
     });
     try {
-      this.posting();
+      for (let i = 0; i < postIssue.tags.length; i++) {
+        const issuePayload = {
+          title: postIssue.title,
+          body: postIssue.body,
+          projectId: 2,
+          created: Math.round(this.state.created.getTime() / 1000),
+          projectStart: Math.round(
+            new Date(postIssue.projectStart).getTime() / 1000
+          ),
+          deadline: Math.round(new Date(postIssue.deadline).getTime() / 1000),
+          // progress가 0은 todo, 1은 doing, 2는 done
+          progress: 0,
+          label: postIssue.label[0].name,
+          userId: postIssue.tags[i].id,
+        }; // 지금 2라고 해놓은 것은 테스트임!! 반드시 id 인자로 받게되면 projectId의 값 바꿔줘야한다
+        await pmAPI.post(`issues`, issuePayload);
+      }
     } finally {
       this.setState({
         loading: false,

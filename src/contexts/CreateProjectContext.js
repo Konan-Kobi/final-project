@@ -37,33 +37,30 @@ class CreateProjectProvider extends React.Component {
     }
   };
 
-  posting = async postProject => {
-    const payload = {
-      title: postProject.title,
-      body: postProject.body,
-    };
-    await pmAPI.post(`projects`, payload);
-    const resPro = await pmAPI.get('projects');
-    for (let i = 0; i < postProject.tags.length; i++) {
-      const projectpayload = {
-        userId: postProject.tags[i].id,
-        projectId: resPro.data[resPro.data.length - 1].id,
-      };
-      await pmAPI.post(`projectMembers`, projectpayload);
-    }
-  };
-
-  handleWriteClick = async () => {
+  handleWriteClick = async postProject => {
     this.setState({
       loading: true,
     });
     try {
-      await this.posting();
+      const payload = {
+        title: postProject.title,
+        body: postProject.body,
+      };
+      await pmAPI.post(`projects`, payload);
+      const resPro = await pmAPI.get('projects');
+      for (let i = 0; i < postProject.tags.length; i++) {
+        const projectpayload = {
+          userId: postProject.tags[i].id,
+          projectId: resPro.data[resPro.data.length - 1].id,
+        };
+        await pmAPI.post(`projectMembers`, projectpayload);
+      }
     } finally {
       this.setState({
         loading: false,
       });
     }
+    alert('프로젝트가 정상적으로 등록되었습니다.');
   };
 
   render() {
