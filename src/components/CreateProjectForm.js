@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactTags from 'react-tag-autocomplete';
+import { Grid, Segment } from 'semantic-ui-react';
+import './../css/create-project.css';
 
 export default class CreateProjectForm extends React.Component {
   state = {
@@ -51,45 +53,50 @@ export default class CreateProjectForm extends React.Component {
   render() {
     const { suggestions } = this.props;
     return (
-      <React.Fragment>
-        <h1>프로젝트 생성하는 페이지</h1>
-        <form>
-          <div>
-            프로젝트 이름 :
-            <input
-              type="text"
-              placeholder="제목을 입력해주세요"
-              size="100"
-              ref={this.titleRef}
-              required
-            />
-          </div>
-          <div>
-            담당자 선택 :
-            <ReactTags
-              placeholder="담당자를 추가해주세요"
-              tags={this.state.tags}
-              minQueryLength={1}
-              suggestions={suggestions}
-              handleInputChange={this.handleInputChange.bind(this)}
-              handleDelete={this.handleDelete.bind(this)}
-              handleAddition={this.handleAddition.bind(this)}
-              autofocus={false}
-            />
-          </div>
-          <div>
-            내용 or 목표 :
-            <textarea
-              cols="100"
-              rows="10"
-              placeholder="내용을 입력해주세요"
-              ref={this.bodyRef}
-              required
-            />
-          </div>
-          <button onClick={this.handleClick}>작성하기</button>
-        </form>
-      </React.Fragment>
+      <Grid columns="equal">
+        <Grid.Column />
+        <Grid.Column width={8}>
+          <h1>프로젝트 생성하는 페이지</h1>
+          <form>
+            <div>
+              프로젝트 이름 :
+              <input
+                type="text"
+                placeholder="제목을 입력해주세요"
+                size="100"
+                ref={this.titleRef}
+                required
+              />
+            </div>
+            <div>
+              담당자 선택 :
+              <ReactTags
+                className="tagging"
+                placeholder="담당자를 추가해주세요"
+                tags={this.state.tags}
+                minQueryLength={1}
+                suggestions={suggestions}
+                handleInputChange={this.handleInputChange.bind(this)}
+                handleDelete={this.handleDelete.bind(this)}
+                handleAddition={this.handleAddition.bind(this)}
+                autofocus={false}
+              />
+            </div>
+            <div>
+              내용 or 목표 :
+              <textarea
+                cols="100"
+                rows="10"
+                placeholder="내용을 입력해주세요"
+                ref={this.bodyRef}
+                required
+              />
+            </div>
+            <button onClick={this.handleClick}>작성하기</button>
+          </form>
+        </Grid.Column>
+        <Grid.Column />
+      </Grid>
     );
   }
 }

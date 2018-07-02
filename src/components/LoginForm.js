@@ -14,6 +14,7 @@ export default class LoginForm extends React.Component {
 
   componentWillMount() {
     const bodyStyle = document.body.style;
+    bodyStyle.paddingTop = '17em';
     bodyStyle.backgroundImage =
       "url('https://images.unsplash.com/photo-1526289375762-27075d038ebd?ixlib=rb-0.3.5&s=26d1255767d8e79458ad28fd1c49811c&auto=format&fit=crop&w=2100&q=80')";
     bodyStyle.backgroundSize = '100%';
@@ -30,14 +31,6 @@ export default class LoginForm extends React.Component {
     } = this.props;
     return (
       <Grid columns="equal">
-        <Grid.Row />
-        <Grid.Row />
-        <Grid.Row />
-        <Grid.Row />
-        <Grid.Row />
-        <Grid.Row />
-        <Grid.Row />
-        <Grid.Row />
         <Grid.Column />
         <Grid.Column width={5}>
           <span className="copyright">협업이 즐거워지는 Project++</span>
