@@ -18,6 +18,19 @@ class CreateIssueProvider extends React.Component {
   // 처음 화면이 렌더될 때 필요한 정보들을 가져오기 위한 것들
   async componentDidMount() {
     // fixture Get
+    this.setState({
+      loading: true,
+    });
+    try {
+      this.fetchInitial();
+    } finally {
+      this.setState({
+        loading: false,
+      });
+    }
+  }
+
+  fetchInitial = async () => {
     const res = await pmAPI.get(`projects/2/projectMembers?_expand=user`);
     const resdata = {
       id: res.data.map(item => item.id),
@@ -29,10 +42,9 @@ class CreateIssueProvider extends React.Component {
         name: resdata.name[i],
       });
     }
-  }
+  };
 
-  // 작성완료라는 버튼을 누르면 Json-server로 전송하는 함수
-  handleWriteClick = async postIssue => {
+  posting = async postIssue => {
     for (let i = 0; i < postIssue.tags.length; i++) {
       const issuePayload = {
         title: postIssue.title,
@@ -48,7 +60,21 @@ class CreateIssueProvider extends React.Component {
       }; // 지금 2라고 해놓은 것은 테스트임!! 반드시 id 인자로 받게되면 projectId의 값 바꿔줘야한다
       await pmAPI.post(`issues`, issuePayload);
     }
-    alert('이슈가 성공적으로 등록되었습니다.');
+  };
+
+  // 작성완료라는 버튼을 누르면 Json-server로 전송하는 함수
+  handleWriteClick = async () => {
+    this.setState({
+      loading: true,
+    });
+    try {
+      this.posting();
+    } finally {
+      this.setState({
+        loading: false,
+      });
+    }
+    alert('이슈가 정상적으로 등록되었습니다.');
   };
 
   render() {

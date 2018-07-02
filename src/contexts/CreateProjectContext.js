@@ -11,6 +11,19 @@ class CreateProjectProvider extends React.Component {
   };
 
   async componentDidMount() {
+    this.setState({
+      loading: true,
+    });
+    try {
+      await this.fetchInitial();
+    } finally {
+      this.setState({
+        loading: false,
+      });
+    }
+  }
+
+  fetchInitial = async () => {
     const res = await pmAPI.get('users');
     const resdata = {
       id: res.data.map(item => item.id),
@@ -22,9 +35,9 @@ class CreateProjectProvider extends React.Component {
         name: resdata.name[i],
       });
     }
-  }
+  };
 
-  handleWriteClick = async postProject => {
+  posting = async postProject => {
     const payload = {
       title: postProject.title,
       body: postProject.body,
@@ -37,6 +50,19 @@ class CreateProjectProvider extends React.Component {
         projectId: resPro.data[resPro.data.length - 1].id,
       };
       await pmAPI.post(`projectMembers`, projectpayload);
+    }
+  };
+
+  handleWriteClick = async () => {
+    this.setState({
+      loading: true,
+    });
+    try {
+      await this.posting();
+    } finally {
+      this.setState({
+        loading: false,
+      });
     }
   };
 

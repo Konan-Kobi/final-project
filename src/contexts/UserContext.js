@@ -1,5 +1,6 @@
 import React from 'react';
 import pmAPI from '../pmAPI';
+import { Redirect } from 'react-router';
 
 const { Provider, Consumer } = React.createContext();
 
@@ -68,6 +69,7 @@ class UserProvider extends React.Component {
       localStorage.setItem('token', res.data.token);
       this.fetchMe();
       alert(`${username}님 환영합니다.`);
+      window.location.replace('/');
     } finally {
       this.setState({
         loading: false,

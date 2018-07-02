@@ -1,5 +1,4 @@
 import React from 'react';
-// import "./../css/login.css";
 import { Helmet } from 'react-helmet';
 import { Grid, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
@@ -13,12 +12,11 @@ export default class LoginForm extends React.Component {
   };
 
   componentWillMount() {
-    const bodyStyle = document.body.style;
-    bodyStyle.paddingTop = '17em';
-    bodyStyle.backgroundImage =
-      "url('https://images.unsplash.com/photo-1526289375762-27075d038ebd?ixlib=rb-0.3.5&s=26d1255767d8e79458ad28fd1c49811c&auto=format&fit=crop&w=2100&q=80')";
-    bodyStyle.backgroundSize = '100%';
-    bodyStyle.textAlign = 'center';
+    document.body.classList.add('LoginForm__background');
+  }
+
+  componentWillUnmount() {
+    document.body.classList.remove('LoginForm__background');
   }
 
   render() {

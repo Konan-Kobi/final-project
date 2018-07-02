@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactTags from 'react-tag-autocomplete';
 import { Grid, Segment } from 'semantic-ui-react';
-import './../css/create-project.css';
 
 export default class CreateProjectForm extends React.Component {
   state = {

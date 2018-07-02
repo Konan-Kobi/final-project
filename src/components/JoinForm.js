@@ -1,16 +1,14 @@
 import React from 'react';
-import './../css/join.css';
 import { Grid, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 export default class JoinForm extends React.Component {
   componentWillMount() {
-    const bodyStyle = document.body.style;
-    bodyStyle.backgroundImage =
-      "url('https://images.unsplash.com/photo-1496389395181-e5fdd5c0315e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=49bd31ab070ce144fe11d9df225d1d4c&auto=format&fit=crop&w=2092&q=80')";
-    bodyStyle.paddingTop = '17em';
-    bodyStyle.backgroundSize = '100%';
-    bodyStyle.textAlign = 'center';
+    document.body.classList.add('JoinForm__background');
+  }
+
+  componentWillUnmount() {
+    document.body.classList.remove('JoinForm__background');
   }
 
   usernameRef = React.createRef();

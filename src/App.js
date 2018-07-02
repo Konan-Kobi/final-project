@@ -7,25 +7,29 @@ import { UserProvider, UserConsumer } from './contexts/UserContext';
 import DetailProjectPage from './pages/DetailProjectPage';
 import './App.css';
 // import LoginPage from "./pages/LoginPage";
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import CreateProjectPage from './pages/CreateProjectPage';
 import CreateIssuePage from './pages/CreateIssuePage';
 
-import { Container, Dimmer, Loader } from 'semantic-ui-react';
+import { Dimmer, Loader } from 'semantic-ui-react';
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <UserProvider>
-          <UserConsumer>
-            {({ loading }) =>
-              loading ? (
-                <Dimmer active inverted>
-                  <Loader size="large">Loading</Loader>
-                </Dimmer>
-              ) : (
-                <Container style={{ padding: '5em 0em' }}>
+          <Switch>
+            <Route path="/join" component={JoinPage} />
+            <Route path="/login" component={LoginPage} />
+          </Switch>
+          {localStorage.getItem('token') ? (
+            <UserConsumer>
+              {({ loading }) =>
+                loading ? (
+                  <Dimmer active inverted>
+                    <Loader size="large">Loading</Loader>
+                  </Dimmer>
+                ) : (
                   <Switch>
                     <Route
                       path="/create-project"
@@ -44,10 +48,12 @@ class App extends Component {
                       component={DetailProjectPage}
                     />
                   </Switch>
-                </Container>
-              )
-            }
-          </UserConsumer>
+                )
+              }
+            </UserConsumer>
+          ) : (
+            <Redirect to="/login" />
+          )}
         </UserProvider>
       </BrowserRouter>
     );

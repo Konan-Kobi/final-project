@@ -3,3 +3,28 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon');
+.title {
+  padding: 1rem;
+}
+
+.copyright {
+  color: white;
+  font-size: 3em;
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+.JoinForm__background {
+  background-image: url('https://images.unsplash.com/photo-1496389395181-e5fdd5c0315e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=49bd31ab070ce144fe11d9df225d1d4c&auto=format&fit=crop&w=2092&q=80');
+  padding-top: 17em;
+  background-size: 100%;
+  text-align: center;
+}
+
+.LoginForm__background {
+  background-image: url('https://images.unsplash.com/photo-1526289375762-27075d038ebd?ixlib=rb-0.3.5&s=26d1255767d8e79458ad28fd1c49811c&auto=format&fit=crop&w=2100&q=80');
+  padding-top: 17em;
+  background-size: 100%;
+  text-align: center;
+}
