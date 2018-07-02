@@ -4,7 +4,7 @@ const { Provider, Consumer } = React.createContext();
 class ProjectProvider extends React.Component {
   state = {
     projects: [],
-    loading: true,
+    loading: false,
     userId: null,
     issues: [],
     issueByProject: [],

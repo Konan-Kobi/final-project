@@ -1,28 +1,12 @@
 import React from 'react';
-import pmAPI from '../pmAPI';
 import ReactTags from 'react-tag-autocomplete';
+import { Grid, Segment } from 'semantic-ui-react';
 
 export default class CreateProjectForm extends React.Component {
   state = {
-    // value: "",
     busy: false,
     tags: [],
-    suggestions: [],
   };
-
-  async componentDidMount() {
-    const res = await pmAPI.get('users');
-    const resdata = {
-      id: res.data.map(item => item.id),
-      name: res.data.map(item => item.username),
-    };
-    for (let i = 0; i < resdata.name.length; i++) {
-      this.state.suggestions.push({
-        id: resdata.id[i],
-        name: resdata.name[i],
-      });
-    }
-  }
 
   titleRef = React.createRef();
   bodyRef = React.createRef();
@@ -44,6 +28,8 @@ export default class CreateProjectForm extends React.Component {
   }
 
   handleInputChange(input) {
+    const { suggestions } = this.props;
+    console.log(suggestions);
     if (!this.state.busy) {
       this.setState({ busy: true });
       return fetch(`query=${input}`).then(result => {
@@ -52,64 +38,64 @@ export default class CreateProjectForm extends React.Component {
     }
   }
 
-  handleWriteClick = async e => {
-    const payload = {
+  handleClick = async e => {
+    e.preventDefault();
+    const { handleWriteClick } = this.props;
+    const postProject = {
       title: this.titleRef.current.value,
       body: this.bodyRef.current.value,
+      tags: this.state.tags,
     };
-    e.preventDefault();
-    await pmAPI.post(`projects`, payload);
-    const resPro = await pmAPI.get('projects');
-    for (let i = 0; i < this.state.tags.length; i++) {
-      const projectpayload = {
-        userId: this.state.tags[i].id,
-        projectId: resPro.data[resPro.data.length - 1].id,
-      };
-      await pmAPI.post(`projectMembers`, projectpayload);
-    }
+    handleWriteClick(postProject);
   };
 
   render() {
+    const { suggestions } = this.props;
     return (
-      <React.Fragment>
-        <h1>프로젝트 생성하는 페이지</h1>
-        <form>
-          <div>
-            프로젝트 이름 :
-            <input
-              type="text"
-              placeholder="제목을 입력해주세요"
-              size="100"
-              ref={this.titleRef}
-              required
-            />
-          </div>
-          <div>
-            담당자 선택 :
-            <ReactTags
-              placeholder="담당자를 추가해주세요"
-              tags={this.state.tags}
-              minQueryLength={1}
-              suggestions={this.state.suggestions}
-              handleInputChange={this.handleInputChange.bind(this)}
-              handleDelete={this.handleDelete.bind(this)}
-              handleAddition={this.handleAddition.bind(this)}
-              autofocus={false}
-            />
-          </div>
-          <div>
-            내용 or 목표 :
-            <textarea
-              cols="100"
-              rows="10"
-              placeholder="내용을 입력해주세요"
-              ref={this.bodyRef}
-              required
-            />
-          </div>
-          <button onClick={this.handleWriteClick}>작성하기</button>
-        </form>
-      </React.Fragment>
+      <Grid columns="equal">
+        <Grid.Column />
+        <Grid.Column width={8}>
+          <h1>프로젝트 생성하는 페이지</h1>
+          <form>
+            <div>
+              프로젝트 이름 :
+              <input
+                type="text"
+                placeholder="제목을 입력해주세요"
+                size="100"
+                ref={this.titleRef}
+                required
+              />
+            </div>
+            <div>
+              담당자 선택 :
+              <ReactTags
+                className="tagging"
+                placeholder="담당자를 추가해주세요"
+                tags={this.state.tags}
+                minQueryLength={1}
+                suggestions={suggestions}
+                handleInputChange={this.handleInputChange.bind(this)}
+                handleDelete={this.handleDelete.bind(this)}
+                handleAddition={this.handleAddition.bind(this)}
+                autofocus={false}
+              />
+            </div>
+            <div>
+              내용 or 목표 :
+              <textarea
+                cols="100"
+                rows="10"
+                placeholder="내용을 입력해주세요"
+                ref={this.bodyRef}
+                required
+              />
+            </div>
+            <button onClick={this.handleClick}>작성하기</button>
+          </form>
+        </Grid.Column>
+        <Grid.Column />
+      </Grid>
     );
   }
 }

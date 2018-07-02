@@ -9,7 +9,6 @@ class IssueProvider extends React.Component {
   };
   state = {
     issue: {},
-
     loading: false,
     comments: [], // 해당 이슈의 코멘트
     username: '', // 이슈를 생성한 사용자의 useranme
