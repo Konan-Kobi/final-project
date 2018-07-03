@@ -4,6 +4,14 @@ import CommentList from '../components/CommentsList';
 import { UserConsumer } from '../contexts/UserContext';
 import CommentForm from '../components/CommentForm';
 export default class CommentContainer extends React.Component {
+  state = {
+    edit: false,
+  };
+  onEditComment = () => {
+    this.setState({
+      edit: !this.state.edit,
+    });
+  };
   render() {
     return (
       <IssueConsumer>
@@ -15,8 +23,11 @@ export default class CommentContainer extends React.Component {
                   comments={comments}
                   deleteComment={deleteComment}
                   userId={userId}
+                  onEditComment={this.onEditComment}
                 />
-                <CommentForm postComment={postComment} />
+                {this.state.edit ? null : (
+                  <CommentForm postComment={postComment} />
+                )}
               </div>
             )}
           </UserConsumer>

@@ -9,7 +9,7 @@ export default class CommentList extends React.Component {
     userId: null, // 현재 로그인 한 사용자의 id
   };
   render() {
-    const { comments, deleteComment, userId } = this.props;
+    const { comments, deleteComment, userId, onEditComment } = this.props;
     return (
       <Comment.Group>
         <Header as="h3" dividing>
@@ -30,6 +30,7 @@ export default class CommentList extends React.Component {
                 body={comment.body}
                 issueId={comment.issueId}
                 updated={comment.updated}
+                onEditComment={onEditComment}
                 deleteComment={e => {
                   deleteComment(comment.id);
                 }}

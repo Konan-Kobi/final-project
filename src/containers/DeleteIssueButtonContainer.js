@@ -17,8 +17,12 @@ export default class DeleteIssueButtonContainer extends React.Component {
                 <Button
                   size="mini"
                   onClick={async e => {
-                    await deleteIssue();
-                    window.history.back(-1);
+                    if (window.confirm('이슈를 정말 삭제하시겠습니까?')) {
+                      await deleteIssue();
+                      window.history.back(-1);
+                    } else {
+                      return;
+                    }
                   }}
                 >
                   삭제

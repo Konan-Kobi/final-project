@@ -1,73 +1,84 @@
 @import url('https://fonts.googleapis.com/css?family=Do+Hyeon');
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
 }
 
 .title {
-  padding: 1rem;
+    padding: 1rem;
 }
 
 .copyright {
-  color: white;
-  font-size: 3em;
-  font-family: 'Do Hyeon', sans-serif;
+    color: white;
+    font-size: 3em;
+    font-family: 'Do Hyeon', sans-serif;
 }
 
 .JoinForm__background {
-  background-image: url('https://images.unsplash.com/photo-1496389395181-e5fdd5c0315e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=49bd31ab070ce144fe11d9df225d1d4c&auto=format&fit=crop&w=2092&q=80');
-  padding-top: 14%;
-  background-size: 100%;
-  text-align: center;
+    background-image: url('https://images.unsplash.com/photo-1496389395181-e5fdd5c0315e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=49bd31ab070ce144fe11d9df225d1d4c&auto=format&fit=crop&w=2092&q=80');
+    padding-top: 14%;
+    background-size: 100%;
+    text-align: center;
 }
 
 .LoginForm__background {
-  background-image: url('https://images.unsplash.com/photo-1526289375762-27075d038ebd?ixlib=rb-0.3.5&s=26d1255767d8e79458ad28fd1c49811c&auto=format&fit=crop&w=2100&q=80');
-  padding-top: 14%;
-  background-size: 100%;
-  text-align: center;
+    background-image: url('https://images.unsplash.com/photo-1526289375762-27075d038ebd?ixlib=rb-0.3.5&s=26d1255767d8e79458ad28fd1c49811c&auto=format&fit=crop&w=2100&q=80');
+    padding-top: 14%;
+    background-size: 100%;
+    text-align: center;
 }
 
 .CreateProjectForm__Layout {
-  padding-top: 7%;
-  text-align: center;
+    padding-top: 7%;
+    text-align: center;
 }
 
 .CreateIssueForm__Layout {
-  padding-top: 1%;
-  text-align: center;
+    padding-top: 1%;
+    text-align: center;
 }
 
 .ui selection dropdown {
-  width: 80%
+    width: 80%;
 }
 
 .react-datepicker__time-list {
-  padding: 0;
-  text-align: center;
+    padding: 0;
+    text-align: center;
 }
 
 .react-tags__suggestions {
-  list-style-type: none;
+    list-style-type: none;
 }
 
 .react-tags__selected-tag {
-  background-color: #2986CE;
-  color: white;
-  font-weight: bold;
-  border-radius: 5px;
-  margin-bottom: 1em;
+    background-color: #2986ce;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-bottom: 1em;
 }
 
 #CreateIssueForm__Textarea {
-  margin-bottom: 1em;
+    margin-bottom: 1em;
 }
 
 #CreateProjectForm__Textarea {
-  margin-bottom: 1em;
+    margin-bottom: 1em;
+}
+
+#commentItem__form {
+    display: inline-block;
 }
 
 .react-datepicker__input-container {
-  width: 125%;
+    width: 125%;
 }
+
+/* .comment__form {
+    display: flex;
+    justify-content: flex-start;
+}
+
+*/
