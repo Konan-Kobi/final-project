@@ -35,8 +35,12 @@ body {
 }
 
 .CreateIssueForm__Layout {
-  padding-top: 5%;
+  padding-top: 1%;
   text-align: center;
+}
+
+.ui selection dropdown {
+  width: 80%
 }
 
 .react-datepicker__time-list {
@@ -62,4 +66,8 @@ body {
 
 #CreateProjectForm__Textarea {
   margin-bottom: 1em;
+}
+
+.react-datepicker__input-container {
+  width: 125%;
 }
