@@ -6,11 +6,16 @@ class CreateIssueProvider extends React.Component {
   state = {
     suggestions: [],
     labelSuggestions: [
-      { id: '에러수정필요', name: '에러수정필요' },
-      { id: '추가작업필요', name: '추가작업필요' },
-      { id: '협업요청', name: '협업요청' },
-      { id: '최적화작업필요', name: '최적화작업필요' },
-      { id: '긴급', name: '긴급' },
+      { key: 'bug', text: 'bug', value: 'bug' },
+      { key: 'design', text: 'design', value: 'design' },
+      { key: 'testing', text: 'testing', value: 'testing' },
+      { key: 'duplicate', text: 'duplicate', value: 'duplicate' },
+      { key: 'help wanted', text: 'help wanted', value: 'help wanted' },
+      { key: 'enhancement', text: 'enhancement', value: 'enhancement' },
+      { key: 'feature', text: 'feature', value: 'feature' },
+      { key: 'invalid', text: 'invalid', value: 'invalid' },
+      { key: 'question', text: 'question', value: 'question' },
+      { key: 'refactor', text: 'refactor', value: 'refactor' },
     ],
     created: new Date(),
   };
@@ -44,31 +49,29 @@ class CreateIssueProvider extends React.Component {
     }
   };
 
-  posting = async postIssue => {
-    for (let i = 0; i < postIssue.tags.length; i++) {
-      const issuePayload = {
-        title: postIssue.title,
-        body: postIssue.body,
-        projectId: 2,
-        created: this.state.created.getTime(),
-        projectStart: postIssue.projectStart.getTime(),
-        deadline: postIssue.deadline.getTime(),
-        // progress가 0은 todo, 1은 doing, 2는 done
-        progress: 0,
-        label: postIssue.label[0].name,
-        userId: postIssue.tags[i].id,
-      }; // 지금 2라고 해놓은 것은 테스트임!! 반드시 id 인자로 받게되면 projectId의 값 바꿔줘야한다
-      await pmAPI.post(`issues`, issuePayload);
-    }
-  };
-
   // 작성완료라는 버튼을 누르면 Json-server로 전송하는 함수
-  handleWriteClick = async () => {
+  handleWriteClick = async postIssue => {
     this.setState({
       loading: true,
     });
     try {
-      this.posting();
+      for (let i = 0; i < postIssue.tags.length; i++) {
+        const issuePayload = {
+          title: postIssue.title,
+          body: postIssue.body,
+          projectId: 2,
+          created: Math.round(this.state.created.getTime() / 1000),
+          projectStart: Math.round(
+            new Date(postIssue.projectStart).getTime() / 1000
+          ),
+          deadline: Math.round(new Date(postIssue.deadline).getTime() / 1000),
+          // progress가 0은 todo, 1은 doing, 2는 done
+          progress: 0,
+          label: postIssue.label,
+          userId: postIssue.tags[i].id,
+        }; // 지금 2라고 해놓은 것은 테스트임!! 반드시 id 인자로 받게되면 projectId의 값 바꿔줘야한다
+        await pmAPI.post(`issues`, issuePayload);
+      }
     } finally {
       this.setState({
         loading: false,
