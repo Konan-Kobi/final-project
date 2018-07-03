@@ -68,7 +68,7 @@ class CreateIssueProvider extends React.Component {
           // progress가 0은 todo, 1은 doing, 2는 done
           progress: 0,
           label: postIssue.label,
-          userId: postIssue.tags[i].id,
+          userId: postIssue.tags[i].id - 1,
         }; // 지금 2라고 해놓은 것은 테스트임!! 반드시 id 인자로 받게되면 projectId의 값 바꿔줘야한다
         await pmAPI.post(`issues`, issuePayload);
       }

@@ -71,3 +71,35 @@ body {
 .react-datepicker__input-container {
   width: 125%;
 }
+
+.sidebar__userImg {
+  margin-bottom: 20px;
+}
+
+.myPage__sidebar {
+  margin: 0;
+}
+
+#menuItem {
+  margin: 30px;
+  padding: 0 0 20px 0;
+  border-bottom: 2px white solid;
+}
+
+#menuItem__user {
+  margin: 30px;
+  border-bottom: 2px white solid;
+}
+
+.ui blue inverted top attached menu {
+  height: 50px;
+}
+
+#myPage__Menu {
+  background-color: rgba(0, 0, 255, 0.8);
+  height: 5em;
+}
+
+#myPage__sidebar {
+  background-color: rgba(0, 0, 255, 0.5);
+}
