@@ -2,6 +2,9 @@ import React from 'react';
 import DetailProjectItem from '../components/DetailProjectItem';
 import { Table } from 'semantic-ui-react';
 export default class DetailProjectList extends React.Component {
+  static defaultProps = {
+    issues: [], // 해당 프로젝트의 이슈들
+  };
   render() {
     const { issues } = this.props;
     return (

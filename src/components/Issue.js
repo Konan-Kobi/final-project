@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { Header } from 'semantic-ui-react';
-import timeConverter from '../DateAPI';
+import { timeConverter } from '../DateAPI';
 export default class Issue extends React.Component {
   static defaultProps = {
-    issues: {}, //  이슈의 상세 정보 (expand user)
-    loading: false, // 이슈 상세 정보 요청
+    issue: {}, // 해당 이슈의 정보들
+    loading: false, // 이슈 상세 정보 요청 상태
     username: '', // 이슈를 생성한 사용자의 username
   };
 

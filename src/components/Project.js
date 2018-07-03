@@ -1,6 +1,11 @@
 import React from 'react';
 import { Label, Header } from 'semantic-ui-react';
 export default class Project extends React.Component {
+  static defaultProps = {
+    projectMembers: [], // 해당 프로젝트의 프로젝트 멤버들의 리스트
+    projectTitle: '', // 해당 프로젝트의 title
+    projectBody: '', // 해당 프로젝트의 body
+  };
   render() {
     const colors = [
       'red',

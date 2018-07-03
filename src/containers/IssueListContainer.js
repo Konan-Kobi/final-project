@@ -12,11 +12,12 @@ export default class IssueListContainer extends React.Component {
             <Table celled selectable>
               <Table.Header>
                 <Table.Row>
-                  <Table.HeaderCell>label</Table.HeaderCell>
-                  <Table.HeaderCell>title</Table.HeaderCell>
-                  <Table.HeaderCell>progress</Table.HeaderCell>
-                  <Table.HeaderCell>start</Table.HeaderCell>
-                  <Table.HeaderCell>end</Table.HeaderCell>
+                  <Table.HeaderCell>라벨</Table.HeaderCell>
+                  <Table.HeaderCell>제목</Table.HeaderCell>
+                  <Table.HeaderCell>진행상황</Table.HeaderCell>
+                  <Table.HeaderCell>시작일</Table.HeaderCell>
+                  <Table.HeaderCell>마감일</Table.HeaderCell>
+                  <Table.HeaderCell>남은시간</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
               <IssueList issues={issues} projects={projects} />
