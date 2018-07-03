@@ -8,6 +8,8 @@ class UserProvider extends React.Component {
     loading: true,
     userId: null,
     username: null,
+    userDefaultImage:
+      'https://cdn.glitch.com/0f15b7fc-72a3-4ed2-a6f9-6a5e9b5f52cb%2Fgirl.png?1530295823731',
   };
   componentDidMount() {
     if (localStorage.getItem('token')) {
@@ -78,6 +80,8 @@ class UserProvider extends React.Component {
 
   logout = () => {
     localStorage.removeItem('token');
+    alert('로그아웃이 정상적으로 완료되었습니다.');
+    window.location.replace('/');
   };
 
   render() {
@@ -87,6 +91,7 @@ class UserProvider extends React.Component {
       logout: this.logout,
       // 이 부분 수정하였습니다.
       username: this.state.username,
+      userDefaultImage: this.state.userDefaultImage,
       userId: this.state.userId,
       loading: this.state.loading,
     };
