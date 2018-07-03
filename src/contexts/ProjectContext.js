@@ -59,11 +59,13 @@ class ProjectProvider extends React.Component {
     };
   };
   getImpendingIssues = issues => {
-    let filteredIssues = issues.filter(issue => !issue.progress === 'done');
+    let filteredIssues = issues.filter(issue => !issue.progress === 2);
     filteredIssues.sort((a, b) => a - b);
     this.setState({
       impendingIssues: filteredIssues,
     });
+    console.log(issues);
+    console.log(filteredIssues);
   };
 
   async componentDidMount() {

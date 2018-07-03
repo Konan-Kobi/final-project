@@ -47,7 +47,7 @@ function getRemainingHours(deadline) {
     } else {
       remainingHours = `마감시간이${Math.floor(
         remainingMinutes / 60
-      )}분 남았습니다.`;
+      )}시간 남았습니다.`;
     }
   }
   return remainingHours;

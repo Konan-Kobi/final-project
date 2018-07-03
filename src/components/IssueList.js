@@ -13,7 +13,7 @@ export default class IssueList extends React.Component {
       <Table.Body key={issue.id}>
         <IssueItem
           title={issue.title}
-          deadline={timeConverter(issue.deadline)}
+          deadline={issue.deadline}
           label={issue.label}
           progress={issue.progress}
           id={issue.id}

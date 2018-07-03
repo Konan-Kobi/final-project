@@ -14,7 +14,7 @@ export default class CommentForm extends React.Component {
     return (
       <Form>
         <Form.Field>
-          <input type="text" ref={this.commentBodyRef} />
+          <textarea rows="1" type="text" ref={this.commentBodyRef} />
         </Form.Field>
         <Button onClick={this.onPostComment}>댓글쓰기</Button>
       </Form>

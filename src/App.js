@@ -14,7 +14,7 @@ import CreateProjectPage from './pages/CreateProjectPage';
 import CreateIssuePage from './pages/CreateIssuePage';
 
 import { Dimmer, Loader } from 'semantic-ui-react';
-
+import EditIssuePage from './pages/EditIssuePage';
 class App extends Component {
   render() {
     return (
@@ -43,6 +43,10 @@ class App extends Component {
                     <Route path="/login" component={LoginPage} />
                     <Route exact path="/" component={MainPage} />
                     <Route exact path="/myPage" component={MyPage} />
+                    <Route
+                      path="/project/:projectId/issue/:issueId/edit"
+                      component={EditIssuePage}
+                    />
                     <Route
                       path="/project/:projectId/issue/:issueId"
                       component={IssuePage}

@@ -2,9 +2,10 @@ import React from 'react';
 import Issue from '../components/Issue';
 import DeleteIssueButtonContainer from '../containers/DeleteIssueButtonContainer';
 import { IssueConsumer } from '../contexts/IssueContext';
-import EditIssueButtonContainer from '../containers/EditIssueButtonContainer';
-import { Segment } from 'semantic-ui-react';
+import EditIsueButtonContainer from '../containers/EditIssueButtonContainer';
+import { Segment, Button } from 'semantic-ui-react';
 import EditIssueProgress from '../components/EditIssueProgress';
+import { Link } from 'react-router-dom';
 export default class IssueContainer extends React.Component {
   static defaultProps = {
     userId: null, // 로그인 한 사용자의 id
@@ -30,7 +31,9 @@ export default class IssueContainer extends React.Component {
                   patchProgress={patchProgress}
                   issue={issue}
                 />
-                <EditIssueButtonContainer />
+                <Link to={`/project/${projectId}/issue/${issue.id}/edit`}>
+                  <Button size="mini">수정</Button>
+                </Link>
                 <DeleteIssueButtonContainer
                   issueId={issue.id}
                   userId={this.props.userId}

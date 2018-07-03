@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Table } from 'semantic-ui-react';
 import { getRemainingHours } from '../DateAPI';
+import { timeConverter } from '../DateAPI';
 export default class IssueItem extends React.Component {
   static defaultProps = {
     title: '', // issue 의 제목
@@ -21,6 +22,7 @@ export default class IssueItem extends React.Component {
       projectId,
       projectStart,
     } = this.props;
+    console.log(deadline);
     return (
       <Table.Row>
         <Table.Cell>{label}</Table.Cell>
@@ -29,7 +31,7 @@ export default class IssueItem extends React.Component {
         </Table.Cell>
         <Table.Cell>{progress}</Table.Cell>
         <Table.Cell>{projectStart}</Table.Cell>
-        <Table.Cell>{deadline}</Table.Cell>
+        <Table.Cell>{timeConverter(deadline)}</Table.Cell>
         <Table.Cell>{getRemainingHours(deadline)}</Table.Cell>
       </Table.Row>
     );

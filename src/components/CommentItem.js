@@ -5,7 +5,9 @@ import { timeConverter } from '../DateAPI';
 export default class CommentItem extends React.Component {
   state = {
     show: false,
+    buttonClick: false,
   };
+
   static defaultProps = {
     deleteComment: () => {}, // 코멘트 삭제 버튼 클릭 시 호출되는 함수
     loggedUser: null, // 현재 로그인한 사용자의 id
@@ -23,6 +25,7 @@ export default class CommentItem extends React.Component {
       deleteComment,
       id,
       updated,
+      onEditComment,
     } = this.props;
     return (
       <IssueConsumer>
@@ -41,24 +44,20 @@ export default class CommentItem extends React.Component {
               {this.state.show ? (
                 // 나중에 분리할 것
                 // <EditCommentModalContainer id={id} />
-                <Form>
-                  <Form.Field>
-                    <label>댓글 수정</label>
-                    <input
-                      type="text"
-                      ref={this.commentBodyRef}
-                      defaultValue={body}
-                      autoFocus={true}
-                    />
-                  </Form.Field>
-                </Form>
-              ) : (
-                <Comment.Text>{body}</Comment.Text>
-              )}
-              <React.Fragment>
-                {userId === loggedUser ? (
-                  <React.Fragment>
-                    {this.state.show ? (
+                <React.Fragment>
+                  <Form>
+                    <div>
+                      <Form.Field>
+                        <textarea
+                          rows="1"
+                          style={{ width: '500px' }}
+                          type="text"
+                          ref={this.commentBodyRef}
+                          defaultValue={body}
+                          autoFocus={true}
+                        />
+                      </Form.Field>
+
                       <Button
                         size="mini"
                         onClick={async e => {
@@ -70,25 +69,34 @@ export default class CommentItem extends React.Component {
                           this.setState({
                             show: false,
                           });
+                          onEditComment();
                         }}
                       >
                         수정 완료
                       </Button>
-                    ) : (
-                      <Comment.Actions>
-                        <a
-                          onClick={e =>
-                            this.setState({
-                              show: true,
-                            })
-                          }
-                        >
-                          수정
-                        </a>
+                    </div>
+                  </Form>
+                </React.Fragment>
+              ) : (
+                <Comment.Text>{body}</Comment.Text>
+              )}
+              <React.Fragment>
+                {userId === loggedUser && !this.state.show ? (
+                  <React.Fragment>
+                    <Comment.Actions>
+                      <a
+                        onClick={e => {
+                          onEditComment();
+                          this.setState({
+                            show: true,
+                          });
+                        }}
+                      >
+                        수정
+                      </a>
 
-                        <a onClick={deleteComment}>삭제</a>
-                      </Comment.Actions>
-                    )}
+                      <a onClick={deleteComment}>삭제</a>
+                    </Comment.Actions>
                   </React.Fragment>
                 ) : null}
               </React.Fragment>

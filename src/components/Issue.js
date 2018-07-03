@@ -16,13 +16,15 @@ export default class Issue extends React.Component {
 
     return (
       <React.Fragment>
-        <Header as="h1">{title}</Header>
+        <Header as="h2">{title}</Header>
 
-        <p>{`${username} /이슈생성일${timeConverter(
+        <p
+          style={{ color: 'rgba(0, 0, 0, 0.4)' }}
+        >{`${username} /이슈생성일${timeConverter(
           projectStart
         )}/ 마감일${timeConverter(deadline)}`}</p>
 
-        <Header as="h2">{body}</Header>
+        <Header as="h4">{body}</Header>
       </React.Fragment>
     );
   }
