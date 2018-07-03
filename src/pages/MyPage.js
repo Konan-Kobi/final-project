@@ -36,8 +36,7 @@ export default class MyPage extends React.Component {
                           <ProjectListContainer />
                         </Grid.Column>
                         <Grid.Column>
-                          <h1>나의 이슈 리스트gg</h1>
-
+                          <h1>나의 이슈 리스트</h1>
                           <IssueListContainer />
                         </Grid.Column>
                       </Grid.Row>
