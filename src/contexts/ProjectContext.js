@@ -58,6 +58,14 @@ class ProjectProvider extends React.Component {
       countIssue: [todoCount, doingCount, doneCount, issueCount],
     };
   };
+  getImpendingIssues = issues => {
+    let filteredIssues = issues.filter(issue => !issue.progress === 'done');
+    filteredIssues.sort((a, b) => a - b);
+    this.setState({
+      impendingIssues: filteredIssues,
+    });
+  };
+
   async componentDidMount() {
     this.setState({
       loading: true,
@@ -73,8 +81,8 @@ class ProjectProvider extends React.Component {
         `/issues?userId=${userId}&_expand=project&_expand=user`
       );
       const sortedIssue = this.sortedIssue(issueRes);
-      console.log(sortedIssue.issueByProject);
-
+      this.getImpendingIssues(issueRes.data);
+      console.log(this.state.impendingIssues);
       this.setState({
         loading: true,
         projects: res.data,
