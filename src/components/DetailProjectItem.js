@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Table } from 'semantic-ui-react';
+import { Table, Label } from 'semantic-ui-react';
 import { timeConverter, getRemainingHours } from '../DateAPI';
 
-import convertProgress from '../progressAPI';
+import { getLabelColor, convertProgress } from '../issueAPI';
 export default class DetailProjectItem extends React.Component {
   static defaultProps = {
     username: '', // 해당 이슈의 username
@@ -26,9 +26,15 @@ export default class DetailProjectItem extends React.Component {
       projectStart,
     } = this.props;
     return (
-      <Table.Row>
+      <Table.Row
+        error={!(getRemainingHours(deadline).indexOf('-') || progress === 2)}
+      >
         <Table.Cell>{username}</Table.Cell>
-        <Table.Cell>{label}</Table.Cell>
+        <Table.Cell>
+          <Label size={'mini'} color={getLabelColor(label)}>
+            {label}
+          </Label>
+        </Table.Cell>
         <Table.Cell>
           <Link to={`/project/${projectId}/issue/${id}`}>{title}</Link>
         </Table.Cell>
