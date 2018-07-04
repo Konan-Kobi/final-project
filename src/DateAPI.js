@@ -31,21 +31,22 @@ function getRemainingHours(deadline) {
   const currentTime = Math.round(new Date().getTime() / 1000.0);
   let remainingHours;
   const remainingMinutes = (deadline - currentTime) / 60;
-  console.log(remainingHours)
   if (remainingMinutes < 0) {
     const overTime = Math.abs(remainingMinutes);
     if (overTime < 60) {
-      remainingHours = `마감시간이${Math.floor(overTime)}분 지났습니다.`;
+      remainingHours = `마감시간이 ${Math.floor(overTime)}분 지났습니다.`;
     } else {
-      remainingHours = `마감시간이${Math.floor(overTime / 60)}시간 지났습니다.`;
+      remainingHours = `마감시간이 ${Math.floor(
+        overTime / 60
+      )}시간 지났습니다.`;
     }
   } else {
     if (remainingMinutes < 60) {
-      remainingHours = `마감시간이${Math.floor(
+      remainingHours = `마감시간이 ${Math.floor(
         remainingMinutes
       )}분 남았습니다.`;
     } else {
-      remainingHours = `마감시간이${Math.floor(
+      remainingHours = `마감시간이 ${Math.floor(
         remainingMinutes / 60
       )}시간 남았습니다.`;
     }

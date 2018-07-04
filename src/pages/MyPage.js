@@ -5,7 +5,6 @@ import { ProjectProvider, ProjectConsumer } from '../contexts/ProjectContext';
 import IssueListContainer from '../containers/IssueListContainer';
 import {
   Icon,
-  Dropdown,
   Image,
   Menu,
   Sidebar,
@@ -17,7 +16,7 @@ import {
 } from 'semantic-ui-react';
 import IssueChart from '../components/IssueChart';
 export default class MyPage extends React.Component {
-  state = { visible: false };
+  state = { visible: true };
 
   handleButtonClick = () =>
     this.setState({
@@ -44,13 +43,12 @@ export default class MyPage extends React.Component {
                 ) : (
                   <React.Fragment>
                     <Menu attached="top" id="myPage__Menu" inverted>
-                      <Dropdown
+                      <Menu.Item
                         id="myPage__sidebarButton"
-                        item
-                        icon="bars large"
-                        simple
                         onClick={this.handleButtonClick}
-                      />
+                      >
+                        <Icon name="bars" size="large" />
+                      </Menu.Item>
                       <Menu.Menu position="right">
                         <Menu.Item as="a">
                           <Icon name="laptop" />

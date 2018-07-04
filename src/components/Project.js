@@ -1,5 +1,5 @@
 import React from 'react';
-import { Label, Header } from 'semantic-ui-react';
+import { Label, Header, Divider } from 'semantic-ui-react';
 export default class Project extends React.Component {
   static defaultProps = {
     projectMembers: [], // 해당 프로젝트의 프로젝트 멤버들의 리스트
@@ -26,14 +26,18 @@ export default class Project extends React.Component {
     return (
       <React.Fragment>
         <Header as="h1">{projectTitle}</Header>
-        <Header as="h2">{projectBody}</Header>
+        <Divider section />
+        <Header as="h4">{projectBody}</Header>
+        <Divider section />
         <Header as="h3">Project Members</Header>
-        {projectMembers.map((member, index) => (
-          <Label key={member.id} color={colors[index]} image>
-            <img src="https://cdn.glitch.com/0f15b7fc-72a3-4ed2-a6f9-6a5e9b5f52cb%2Fgirl.png?1530295823731" />
-            {member.user.username}
-          </Label>
-        ))}
+        <div>
+          {projectMembers.map((member, index) => (
+            <Label key={member.id} color={colors[index]} image>
+              <img src="https://cdn.glitch.com/0f15b7fc-72a3-4ed2-a6f9-6a5e9b5f52cb%2Fgirl.png?1530295823731" />
+              {member.user.username}
+            </Label>
+          ))}
+        </div>
       </React.Fragment>
     );
   }

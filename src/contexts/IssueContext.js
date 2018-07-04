@@ -60,12 +60,11 @@ class IssueProvider extends React.Component {
     this.fetchComment();
   };
   postComment = async body => {
-    console.log(this.props.userId);
     const payload = {
       body: body,
       userId: this.props.userId,
       issueId: this.props.issueId,
-      created: '',
+      created: Math.round(new Date().getTime() / 1000.0),
     };
     await pmAPI.post(`/comments`, payload);
     this.fetchComment();

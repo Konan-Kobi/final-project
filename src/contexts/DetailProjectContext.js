@@ -33,11 +33,9 @@ class DetailProjectProvider extends React.Component {
   };
   fetchProjectMember = async () => {
     const { projectId } = this.props;
-    console.log(projectId);
     const res = await pmAPI.get(
       `/projectMembers?projectId=${projectId}&_expand=user&_expand=project`
     );
-    console.log(res.data);
     this.setState({
       projectMembers: res.data,
       projectTitle: res.data[0].project.title,

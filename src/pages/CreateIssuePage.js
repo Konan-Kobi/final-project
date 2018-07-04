@@ -4,8 +4,9 @@ import { CreateIssueProvider } from '../contexts/CreateIssueContext';
 
 export default class CreateProjectPage extends React.Component {
   render() {
+    const { projectId } = this.props.match.params;
     return (
-      <CreateIssueProvider>
+      <CreateIssueProvider projectId={projectId}>
         <CreateIssueContainer />
       </CreateIssueProvider>
     );
