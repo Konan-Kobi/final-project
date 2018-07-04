@@ -24,10 +24,10 @@ class ProjectProvider extends React.Component {
       let done = 0;
       let doing = 0;
       let todo = 0;
-      if (item.progress === 'done') {
+      if (item.progress === '2') {
         done++;
         doneCount++;
-      } else if (item.progress === 'doing') {
+      } else if (item.progress === '1') {
         doing++;
         doingCount++;
       } else {
@@ -36,9 +36,9 @@ class ProjectProvider extends React.Component {
       }
       if (obj) {
         obj.issues = obj.issues + 1;
-        if (item.progress === 'done') {
+        if (item.progress === '2') {
           obj.done = obj.done + 1;
-        } else if (item.progress === 'doing') {
+        } else if (item.progress === '1') {
           obj.doing = obj.doing + 1;
         } else {
           obj.todo = obj.todo + 1;
@@ -59,7 +59,7 @@ class ProjectProvider extends React.Component {
     };
   };
   getImpendingIssues = issues => {
-    let filteredIssues = issues.filter(issue => !issue.progress === 2);
+    let filteredIssues = issues.filter(issue => !issue.progress === '2');
     filteredIssues.sort((a, b) => a - b);
     this.setState({
       impendingIssues: filteredIssues,

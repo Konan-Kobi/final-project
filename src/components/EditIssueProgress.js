@@ -16,9 +16,9 @@ export default class EditIssueProgress extends React.Component {
       this.state.value === null ? this.props.issue.progress : this.state.value;
     return (
       <select value={value} onChange={this.handleChange}>
-        <option value="todo">todo</option>
-        <option value="doing">doing</option>
-        <option value="done">done</option>
+        <option value={0}>todo</option>
+        <option value={1}>doing</option>
+        <option value={2}>done</option>
       </select>
     );
   }

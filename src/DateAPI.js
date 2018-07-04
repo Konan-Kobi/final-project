@@ -31,7 +31,7 @@ function getRemainingHours(deadline) {
   const currentTime = Math.round(new Date().getTime() / 1000.0);
   let remainingHours;
   const remainingMinutes = (deadline - currentTime) / 60;
-  console.log(remainingHours)
+  console.log(remainingHours);
   if (remainingMinutes < 0) {
     const overTime = Math.abs(remainingMinutes);
     if (overTime < 60) {

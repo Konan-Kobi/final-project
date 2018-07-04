@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Table } from 'semantic-ui-react';
 import { timeConverter, getRemainingHours } from '../DateAPI';
+
+import convertProgress from '../progressAPI';
 export default class DetailProjectItem extends React.Component {
   static defaultProps = {
     username: '', // 해당 이슈의 username
@@ -30,7 +32,7 @@ export default class DetailProjectItem extends React.Component {
         <Table.Cell>
           <Link to={`/project/${projectId}/issue/${id}`}>{title}</Link>
         </Table.Cell>
-        <Table.Cell>{progress}</Table.Cell>
+        <Table.Cell>{convertProgress(progress)}</Table.Cell>
         <Table.Cell>{timeConverter(projectStart)}</Table.Cell>
         <Table.Cell>{timeConverter(deadline)}</Table.Cell>
         <Table.Cell>{getRemainingHours(deadline)}</Table.Cell>
