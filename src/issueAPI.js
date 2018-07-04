@@ -31,7 +31,7 @@ function getLabelColor(label) {
     case 'refactor':
       return 'teal';
     default:
-      return 'white';
+      return 'grey';
   }
 }
 

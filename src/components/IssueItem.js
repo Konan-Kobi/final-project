@@ -28,8 +28,8 @@ export default class IssueItem extends React.Component {
       <Table.Row
         error={!(getRemainingHours(deadline).indexOf('-') || progress === '2')}
       >
-        <Table.Cell rowColor>
-          <Label size={'minu'} color={getLabelColor(label)}>
+        <Table.Cell>
+          <Label size={'mini'} color={getLabelColor(label)}>
             {label}
           </Label>
         </Table.Cell>
