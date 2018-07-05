@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Table } from 'semantic-ui-react';
+import { Table, Label } from 'semantic-ui-react';
 import { getRemainingHours } from '../DateAPI';
 import { timeConverter } from '../DateAPI';
+import { convertProgress, getLabelColor } from '../issueAPI';
 export default class IssueItem extends React.Component {
   static defaultProps = {
     title: '', // issue 의 제목
@@ -22,14 +23,20 @@ export default class IssueItem extends React.Component {
       projectId,
       projectStart,
     } = this.props;
-    console.log(deadline);
+
     return (
-      <Table.Row>
-        <Table.Cell>{label}</Table.Cell>
+      <Table.Row
+        error={!(getRemainingHours(deadline).indexOf('-') || progress === '2')}
+      >
+        <Table.Cell>
+          <Label size={'mini'} color={getLabelColor(label)}>
+            {label}
+          </Label>
+        </Table.Cell>
         <Table.Cell>
           <Link to={`/project/${projectId}/issue/${id}`}>{title}</Link>
         </Table.Cell>
-        <Table.Cell>{progress}</Table.Cell>
+        <Table.Cell>{convertProgress(progress)}</Table.Cell>
         <Table.Cell>{projectStart}</Table.Cell>
         <Table.Cell>{timeConverter(deadline)}</Table.Cell>
         <Table.Cell>{getRemainingHours(deadline)}</Table.Cell>

@@ -239,19 +239,19 @@ const HomepageLayout = () => (
         <Grid.Row>
           <Grid.Column width={8}>
             <Header as="h3" style={{ fontSize: '2em' }}>
-              We Help Companies and Companions
+              이제 즐겁게 일하세요.
             </Header>
             <p style={{ fontSize: '1.33em' }}>
-              We can give your company superpowers to do things that they never
-              thought possible. Let us delight your customers and empower your
-              needs... through pure data analytics.
+              업무를 분담하고, 시시 각각 변하는 업무를 팀원들과 공유할 수
+              있습니다. 팀원들이 공통된 목표를 향해 나아가는 과정을 보는 것은
+              정말 즐거운 일입니다.
             </p>
             <Header as="h3" style={{ fontSize: '2em' }}>
-              We Make Bananas That Can Dance
+              업무의 생산성을 높여보세요.
             </Header>
             <p style={{ fontSize: '1.33em' }}>
-              Yes that's right, you thought it was the stuff of dreams, but even
-              bananas can be bioengineered.
+              자신이 맡은 업무의 모든 사항을 한 눈에 볼 수 있습니다. 우선적인
+              일에 집중해보세요!
             </p>
           </Grid.Column>
           <Grid.Column floated="right" width={6}>
@@ -259,7 +259,7 @@ const HomepageLayout = () => (
               bordered
               rounded
               size="large"
-              src="/images/wireframe/white-image.png"
+              src="https://cdn.glitch.com/0f15b7fc-72a3-4ed2-a6f9-6a5e9b5f52cb%2Fstefan-stefancik-257625-unsplash.jpg?1530703672549"
             />
           </Grid.Column>
         </Grid.Row>
@@ -276,35 +276,34 @@ const HomepageLayout = () => (
         <Grid.Row textAlign="center">
           <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
             <Header as="h3" style={{ fontSize: '2em' }}>
-              "What a Company"
+              우리는 당신의 업무 달성률을 한 눈에 보여줍니다.
             </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              That is what they all say about us
-            </p>
+            <p style={{ fontSize: '1.33em' }} />
           </Grid.Column>
           <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
             <Header as="h3" style={{ fontSize: '2em' }}>
-              "I shouldn't have gone with their competitor."
+              "프로젝트 관리를 위한 최적화된 도구를 제공합니다."
             </Header>
             <p style={{ fontSize: '1.33em' }}>
-              <Image avatar src="/images/avatar/large/nan.jpg" />
-              <b>Nan</b> Chief Fun Officer Acme Toys
+              <Image
+                avatar
+                src="https://cdn.glitch.com/0f15b7fc-72a3-4ed2-a6f9-6a5e9b5f52cb%2Fgirl.png?1530295823731"
+              />
+              <b>CEO</b> 프로젝트를 쉽고 편리하게 관리하는 놀라운 경험을 하시게
+              될 거예요.
             </p>
           </Grid.Column>
         </Grid.Row>
       </Grid>
     </Segment>
-
     <Segment style={{ padding: '8em 0em' }} vertical>
       <Container text>
         <Header as="h3" style={{ fontSize: '2em' }}>
-          Breaking The Grid, Grabs Your Attention
+          프로젝트 관리를 위한 모든 기능을 한 곳에
         </Header>
         <p style={{ fontSize: '1.33em' }}>
-          Instead of focusing on content creation and hard work, we have learned
-          how to master the art of doing nothing by providing massive amounts of
-          whitespace and generic content that can seem massive, monolithic and
-          worth your attention.
+          프로젝트 관리를 위해 꼭 필요한 기능들을 모두 project++에서 만나보세요.
+          더 놀라운 점은 누구나 쉽고 편하게 무료로 사용할 수 있답니다.
         </p>
         <Button as="a" size="large">
           Read More
@@ -320,15 +319,14 @@ const HomepageLayout = () => (
         </Divider>
 
         <Header as="h3" style={{ fontSize: '2em' }}>
-          Did We Tell You About Our Bananas?
+          태스크 관리, project++로 멋지게 실현하세요.
         </Header>
         <p style={{ fontSize: '1.33em' }}>
-          Yes I know you probably disregarded the earlier boasts as non-sequitur
-          filler content, but it's really true. It took years of gene splicing
-          and combinatory DNA research, but our bananas can really dance.
+          project++은 당신의 팀이 프로젝트를 정리하고, 업무를 공유하고, 멋진
+          결과를 달성하기 위한 완벽한 솔루션입니다.
         </p>
         <Button as="a" size="large">
-          I'm Still Quite Interested
+          지금 바로 시작해보세요!
         </Button>
       </Container>
     </Segment>
