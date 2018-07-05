@@ -7,11 +7,17 @@ function timeConverter(UNIX_timestamp) {
   var month = months[a.getMonth()];
   var date = a.getDate();
   var hour = a.getHours();
-  var min = a.getMinutes();
+  let min = a.getMinutes();
+  console.log(min);
+  if (min === 0) {
+    min = `0${min}`;
+  }
+
   var sec = a.getSeconds();
+  let shortTime = `${year}/${month}/${date}`;
   var time = `${year}/${month}/${date}/${hour}:${min}`;
   // date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
-  return time;
+  return [time, shortTime];
 }
 
 function getRemainingHours(deadline) {

@@ -18,7 +18,7 @@ export default class IssueList extends React.Component {
           progress={issue.progress}
           id={issue.id}
           projectId={issue.projectId}
-          projectStart={timeConverter(issue.projectStart)}
+          projectStart={timeConverter(issue.projectStart)[1]}
         />
       </Table.Body>
     ));

@@ -10,7 +10,8 @@ export default class ProjectItem extends React.Component {
   render() {
     const { title, issueByProject, id } = this.props;
     let issueCount = [];
-    let issue = issueByProject.find(o => o.projectId === id);
+    let issue = issueByProject.find(o => o.projectId == id);
+    console.log(id, issueByProject, issue);
     if (issue) {
       issueCount = [issue.todo, issue.doing, issue.done];
     } else {
@@ -32,9 +33,9 @@ export default class ProjectItem extends React.Component {
               <Grid.Column>
                 <Icon name="tasks" />
               </Grid.Column>
-              <Grid.Column>{`Todo${issueCount[0]}`}</Grid.Column>
-              <Grid.Column>{`Doing${issueCount[1]}`}</Grid.Column>
-              <Grid.Column>{`Done${issueCount[2]}`}</Grid.Column>
+              <Grid.Column>{`Todo ${issueCount[0]}`}</Grid.Column>
+              <Grid.Column>{`Doing ${issueCount[1]}`}</Grid.Column>
+              <Grid.Column>{`Done ${issueCount[2]}`}</Grid.Column>
             </Grid>
           </Grid.Row>
         </Grid.Row>
