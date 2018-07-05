@@ -17,19 +17,23 @@ import {
 } from 'semantic-ui-react';
 
 export default class IssuePage extends React.Component {
-  state = { visible: false };
-
-  handleButtonClick = () =>
-    this.setState({
-      visible: !this.state.visible,
-    });
+  state = {
+    visible: false,
+    files: [],
+    animation: 'overlay',
+    direction: 'left',
+  };
 
   handleSidebarHide = () =>
     this.setState({
       visible: false,
     });
+
+  handleAnimationChange = animation => () =>
+    this.setState({ animation, visible: !this.state.visible });
+
   render() {
-    const { visible } = this.state;
+    const { animation, direction, visible } = this.state;
     const { issueId, projectId } = this.props.match.params;
     return (
       <UserConsumer>
@@ -47,10 +51,17 @@ export default class IssuePage extends React.Component {
                   </Dimmer>
                 ) : (
                   <React.Fragment>
-                    <Menu attached="top" id="myPage__Menu" inverted>
+                    <Menu
+                      secondary
+                      attached="top"
+                      id="myPage__Menu"
+                      inverted
+                      style={{ marginBottom: 0 }}
+                    >
                       <Menu.Item
                         id="myPage__sidebarButton"
-                        onClick={this.handleButtonClick}
+                        onClick={this.handleAnimationChange('overlay')}
+                        onChange={this.handleDimmedChange}
                       >
                         <Icon name="bars" size="large" />
                       </Menu.Item>
@@ -67,14 +78,18 @@ export default class IssuePage extends React.Component {
                         </Menu.Item>
                       </Menu.Menu>
                     </Menu>
-
-                    <Sidebar.Pushable as={Segment} className="myPage__sidebar">
+                    <Sidebar.Pushable
+                      as={Segment}
+                      className="myPage__sidebar"
+                      style={{ marginTop: 0 }}
+                    >
                       <Sidebar
                         id="myPage__sidebar"
                         as={Menu}
+                        animation={animation}
+                        direction={direction}
                         inverted
                         onHide={this.handleSidebarHide}
-                        animation="overlay"
                         icon="labeled"
                         vertical
                         visible={visible}
@@ -113,12 +128,10 @@ export default class IssuePage extends React.Component {
                       </Sidebar>
                       <Sidebar.Pusher>
                         <Segment basic>
-                          <Card fluid color="blue">
-                            <Container style={{ padding: '5em 0em 28em 0em' }}>
-                              <IssueContainer projectId={projectId} />
-                              <CommentContainer />
-                            </Container>
-                          </Card>
+                          <Container style={{ padding: '7em 0em 28em 0em' }}>
+                            <IssueContainer projectId={projectId} />
+                            <CommentContainer />
+                          </Container>
                         </Segment>
                       </Sidebar.Pusher>
                     </Sidebar.Pushable>

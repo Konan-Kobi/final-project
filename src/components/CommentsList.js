@@ -9,7 +9,13 @@ export default class CommentList extends React.Component {
     userId: null, // 현재 로그인 한 사용자의 id
   };
   render() {
-    const { comments, deleteComment, userId, onEditComment } = this.props;
+    const {
+      comments,
+      deleteComment,
+      userId,
+      onEditComment,
+      userImg,
+    } = this.props;
     return (
       <Comment.Group>
         <Header as="h3" dividing>

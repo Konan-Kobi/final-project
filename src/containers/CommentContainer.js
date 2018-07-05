@@ -17,13 +17,14 @@ export default class CommentContainer extends React.Component {
       <IssueConsumer>
         {({ comments, deleteComment, postComment }) => (
           <UserConsumer>
-            {({ userId }) => (
+            {({ userId, userImg }) => (
               <div>
                 <CommentList
                   comments={comments}
                   deleteComment={deleteComment}
                   userId={userId}
                   onEditComment={this.onEditComment}
+                  userImg={userImg}
                 />
                 {this.state.edit ? null : (
                   <CommentForm postComment={postComment} />

@@ -1,5 +1,6 @@
 import React from 'react';
 import pmAPI from '../pmAPI';
+import { Redirect } from 'react-router-dom';
 
 const { Provider, Consumer } = React.createContext();
 
@@ -11,6 +12,7 @@ class UserProvider extends React.Component {
     userImg: null,
     userDefaultImage:
       'https://cdn.glitch.com/0f15b7fc-72a3-4ed2-a6f9-6a5e9b5f52cb%2Fgirl.png?1530295823731',
+    redirect: false,
   };
   componentDidMount() {
     if (localStorage.getItem('token')) {
@@ -47,11 +49,16 @@ class UserProvider extends React.Component {
       loading: true,
     });
     try {
-      await pmAPI.post('users/register', {
-        username: username,
-        password: password,
-        userImg: userImg,
-      });
+      await pmAPI
+        .post('users/register', {
+          username: username,
+          password: password,
+          userImg: userImg,
+        })
+        .then(
+          Response =>
+            Response.status === 200 ? window.location.replace('/login') : ''
+        );
       alert('회원가입을 축하드립니다.');
     } catch (e) {
       if (e.response) {
