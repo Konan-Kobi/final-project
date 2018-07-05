@@ -28,16 +28,14 @@ export default class ProjectItem extends React.Component {
           </div>
         </Grid.Row>
         <Grid.Row>
-          <Grid.Row>
-            <Grid columns="equal">
-              <Grid.Column>
-                <Icon name="tasks" />
-              </Grid.Column>
-              <Grid.Column>{`Todo ${issueCount[0]}`}</Grid.Column>
-              <Grid.Column>{`Doing ${issueCount[1]}`}</Grid.Column>
-              <Grid.Column>{`Done ${issueCount[2]}`}</Grid.Column>
-            </Grid>
-          </Grid.Row>
+          <Grid columns="equal">
+            <Grid.Column width={1}>
+              <Icon name="tasks" />
+            </Grid.Column>
+            <Grid.Column>{`Todo ${issueCount[0]}`}</Grid.Column>
+            <Grid.Column>{`Doing ${issueCount[1]}`}</Grid.Column>
+            <Grid.Column>{`Done ${issueCount[2]}`}</Grid.Column>
+          </Grid>
         </Grid.Row>
       </Grid>
     );

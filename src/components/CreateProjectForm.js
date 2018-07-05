@@ -30,15 +30,13 @@ export default class CreateProjectForm extends React.Component {
   titleRef = React.createRef();
   bodyRef = React.createRef();
 
-  handleButtonClick = () =>
-    this.setState({
-      visible: !this.state.visible,
-    });
-
   handleSidebarHide = () =>
     this.setState({
       visible: false,
     });
+
+  handleAnimationChange = animation => () =>
+    this.setState({ animation, visible: !this.state.visible });
 
   handleDelete(i) {
     const tags = this.state.tags.slice(0);
@@ -78,7 +76,7 @@ export default class CreateProjectForm extends React.Component {
 
   render() {
     const { suggestions } = this.props;
-    const { visible } = this.state;
+    const { animation, direction, visible } = this.state;
     return (
       <UserConsumer>
         {({ userId, logout, username, userDefaultImage, userImg }) => (
@@ -91,10 +89,17 @@ export default class CreateProjectForm extends React.Component {
                   </Dimmer>
                 ) : (
                   <React.Fragment>
-                    <Menu attached="top" id="myPage__Menu" inverted>
+                    <Menu
+                      secondary
+                      attached="top"
+                      id="myPage__Menu"
+                      inverted
+                      style={{ marginBottom: 0 }}
+                    >
                       <Menu.Item
                         id="myPage__sidebarButton"
-                        onClick={this.handleButtonClick}
+                        onClick={this.handleAnimationChange('overlay')}
+                        onChange={this.handleDimmedChange}
                       >
                         <Icon name="bars" size="large" />
                       </Menu.Item>
@@ -111,14 +116,18 @@ export default class CreateProjectForm extends React.Component {
                         </Menu.Item>
                       </Menu.Menu>
                     </Menu>
-
-                    <Sidebar.Pushable as={Segment} className="myPage__sidebar">
+                    <Sidebar.Pushable
+                      as={Segment}
+                      className="myPage__sidebar"
+                      style={{ marginTop: 0 }}
+                    >
                       <Sidebar
                         id="myPage__sidebar"
                         as={Menu}
+                        animation={animation}
+                        direction={direction}
                         inverted
                         onHide={this.handleSidebarHide}
-                        animation="overlay"
                         icon="labeled"
                         vertical
                         visible={visible}
@@ -147,90 +156,106 @@ export default class CreateProjectForm extends React.Component {
                         </Menu.Item>
                       </Sidebar>
                       <Sidebar.Pusher>
-                        <Segment basic>
-                          <Grid columns="equal">
-                            <Grid.Column />
-                            <Grid.Column width={8}>
-                              <Segment
-                                className="container"
-                                color="blue"
-                                textAlign="center"
-                              >
-                                <h2 className="ui white image header">
-                                  <div className="content header">
-                                    프로젝트 등록하기
-                                  </div>
-                                </h2>
-                              </Segment>
-                              <Segment
-                                className="container"
-                                color="blue"
-                                textAlign="left"
-                              >
-                                <Form>
-                                  <Form.Field>
-                                    <h5 className="ui white image header">
-                                      <div className="content">
-                                        프로젝트 제목
-                                      </div>
-                                    </h5>
-                                    <input
-                                      type="text"
-                                      placeholder="제목을 입력해주세요"
-                                      ref={this.titleRef}
-                                      required
-                                    />
-                                  </Form.Field>
-                                  <Form.Field>
-                                    <h5 className="ui white image header">
-                                      <div className="content">
-                                        프로젝트 담당자 설정
-                                      </div>
-                                    </h5>
-                                    <ReactTags
-                                      placeholder="담당자를 추가해주세요"
-                                      autoresize={false}
-                                      tags={this.state.tags}
-                                      minQueryLength={1}
-                                      suggestions={suggestions}
-                                      handleInputChange={this.handleInputChange.bind(
-                                        this
-                                      )}
-                                      handleDelete={this.handleDelete.bind(
-                                        this
-                                      )}
-                                      handleAddition={this.handleAddition.bind(
-                                        this
-                                      )}
-                                      autofocus={false}
-                                    />
-                                  </Form.Field>
-
-                                  <Form.Field>
-                                    <h5 className="ui white image header">
-                                      <div className="content">
-                                        프로젝트 내용
-                                      </div>
-                                    </h5>
-                                    <textarea
-                                      id="CreateProjectForm__Textarea"
-                                      rows="21"
-                                      placeholder="내용을 입력해주세요"
-                                      ref={this.bodyRef}
-                                      required
-                                    />
-                                  </Form.Field>
-                                  <button
-                                    className="ui fluid large blue submit button"
-                                    onClick={this.handleClick}
+                        <Segment
+                          basic
+                          // style={{
+                          //   backgroundImage:
+                          //     'url(https://images.unsplash.com/photo-1463527882365-18201e85a091?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=403d33ecb44a23573f57841b07077434&auto=format&fit=crop&w=2238&q=80)',
+                          // }}
+                        >
+                          <React.Fragment
+                            style={{ mixBlendMode: 'saturation' }}
+                          >
+                            <Container
+                              style={{
+                                padding: '2em 0em 8.5em 0em',
+                              }}
+                            >
+                              <Grid columns="equal">
+                                <Grid.Column />
+                                <Grid.Column width={8}>
+                                  <Segment
+                                    className="container"
+                                    color="blue"
+                                    textAlign="center"
                                   >
-                                    작성하기
-                                  </button>
-                                </Form>
-                              </Segment>
-                            </Grid.Column>
-                            <Grid.Column />
-                          </Grid>
+                                    <h2 className="ui white image header">
+                                      <div className="content header">
+                                        프로젝트 등록하기
+                                      </div>
+                                    </h2>
+                                  </Segment>
+                                  <Segment
+                                    className="container"
+                                    color="blue"
+                                    textAlign="left"
+                                  >
+                                    <Form>
+                                      <Form.Field>
+                                        <h5 className="ui white image header">
+                                          <div className="content">
+                                            프로젝트 제목
+                                          </div>
+                                        </h5>
+                                        <input
+                                          type="text"
+                                          placeholder="제목을 입력해주세요"
+                                          ref={this.titleRef}
+                                          required
+                                        />
+                                      </Form.Field>
+                                      <Form.Field>
+                                        <h5 className="ui white image header">
+                                          <div className="content">
+                                            프로젝트 담당자 설정
+                                          </div>
+                                        </h5>
+                                        <ReactTags
+                                          placeholder="담당자를 추가해주세요"
+                                          autoresize={false}
+                                          tags={this.state.tags}
+                                          minQueryLength={1}
+                                          suggestions={suggestions}
+                                          handleInputChange={this.handleInputChange.bind(
+                                            this
+                                          )}
+                                          handleDelete={this.handleDelete.bind(
+                                            this
+                                          )}
+                                          handleAddition={this.handleAddition.bind(
+                                            this
+                                          )}
+                                          autofocus={false}
+                                        />
+                                      </Form.Field>
+
+                                      <Form.Field>
+                                        <h5 className="ui white image header">
+                                          <div className="content">
+                                            프로젝트 내용
+                                          </div>
+                                        </h5>
+                                        <textarea
+                                          id="CreateProjectForm__Textarea"
+                                          rows="21"
+                                          placeholder="내용을 입력해주세요"
+                                          ref={this.bodyRef}
+                                          required
+                                        />
+                                      </Form.Field>
+                                      <button
+                                        className="ui fluid large blue submit button"
+                                        onClick={this.handleClick}
+                                      >
+                                        작성하기
+                                      </button>
+                                    </Form>
+                                  </Segment>
+                                </Grid.Column>
+                                <Grid.Column />
+                              </Grid>
+                            </Container>
+                          </React.Fragment>
                         </Segment>
                       </Sidebar.Pusher>
                     </Sidebar.Pushable>

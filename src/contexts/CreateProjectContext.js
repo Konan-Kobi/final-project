@@ -61,6 +61,7 @@ class CreateProjectProvider extends React.Component {
       });
     }
     alert('프로젝트가 정상적으로 등록되었습니다.');
+    window.history.back(-1);
   };
 
   render() {
