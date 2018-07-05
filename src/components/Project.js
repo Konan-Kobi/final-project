@@ -33,7 +33,7 @@ export default class Project extends React.Component {
         <div>
           {projectMembers.map((member, index) => (
             <Label key={member.id} color={colors[index]} image>
-              <img src="https://cdn.glitch.com/0f15b7fc-72a3-4ed2-a6f9-6a5e9b5f52cb%2Fgirl.png?1530295823731" />
+              <img src={member.user.userImg[0].base64} />
               {member.user.username}
             </Label>
           ))}

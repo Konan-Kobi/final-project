@@ -8,7 +8,7 @@ export default class IssueListContainer extends React.Component {
       <ProjectConsumer>
         {/* countIssue: 현재 사용자의 총 이슈와 완료 이슈 0/0 */}
         {({ issues, countIssue, projects }) => (
-          <React.Fragment>
+          <div className="issue__container">
             <Table celled selectable>
               <Table.Header>
                 <Table.Row>
@@ -20,9 +20,10 @@ export default class IssueListContainer extends React.Component {
                   <Table.HeaderCell>남은시간</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
+
               <IssueList issues={issues} projects={projects} />
             </Table>
-          </React.Fragment>
+          </div>
         )}
       </ProjectConsumer>
     );

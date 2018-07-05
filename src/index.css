@@ -99,13 +99,15 @@ body {
 }
 
 #myPage__Menu {
-    background-color: rgba(0, 0, 255, 0.8);
+    /* background-color: rgba(0, 0, 255, 0.8); */
+    background-color: #0073aa;
     height: 5em;
     /* color: black */
 }
 
 #myPage__sidebar {
-    background-color: rgba(0, 0, 255, 0.5);
+    /* background-color: rgba(0, 0, 255, 0.5); */
+    background-color: #e9ecef;
 }
 
 .DetailProject__IssueList {
@@ -115,4 +117,18 @@ body {
 #DetailProject__GridColumn {
     border: 0px solid white;
     box-shadow: none;
+}
+
+.issue__container {
+    min-height: 300px;
+    max-height: 300px;
+    overflow: scroll;
+}
+
+.issue__text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100px;
+    height: 20px;
 }

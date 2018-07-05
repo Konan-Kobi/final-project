@@ -34,11 +34,13 @@ export default class IssueItem extends React.Component {
           </Label>
         </Table.Cell>
         <Table.Cell>
-          <Link to={`/project/${projectId}/issue/${id}`}>{title}</Link>
+          <Link to={`/project/${projectId}/issue/${id}`}>
+            <div className="issue__text">{title}</div>
+          </Link>
         </Table.Cell>
         <Table.Cell>{convertProgress(progress)}</Table.Cell>
         <Table.Cell>{projectStart}</Table.Cell>
-        <Table.Cell>{timeConverter(deadline)}</Table.Cell>
+        <Table.Cell>{timeConverter(deadline)[0]}</Table.Cell>
         <Table.Cell>{getRemainingHours(deadline)}</Table.Cell>
       </Table.Row>
     );

@@ -76,21 +76,12 @@ export default class MyPage extends React.Component {
                         width="thin"
                       >
                         <Menu.Item as="a" id="menuItem__user">
-                          {userImg ? (
-                            <Image
-                              className="sidebar__userImg"
-                              src={userImg}
-                              size="small"
-                              circular
-                            />
-                          ) : (
-                            <Image
-                              className="sidebar__userImg"
-                              src={userDefaultImage}
-                              size="small"
-                              circular
-                            />
-                          )}
+                          <Image
+                            className="sidebar__userImg"
+                            src={userImg}
+                            size="small"
+                            circular
+                          />
                           {username}
                         </Menu.Item>
                         <Menu.Item as="a" href="/create-project" id="menuItem">
@@ -116,6 +107,7 @@ export default class MyPage extends React.Component {
                                     <IssueChart countIssue={countIssue} />
                                   </Segment>
                                 </Grid.Column>
+
                                 <Grid.Column>
                                   <Segment>
                                     <ImpendingIssueContainer />
