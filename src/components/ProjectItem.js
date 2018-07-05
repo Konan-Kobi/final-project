@@ -23,7 +23,9 @@ export default class ProjectItem extends React.Component {
         <Grid.Row>
           <div className="title">
             <Header as="h2">
-              <Link to={`project/${id}`}>{title}</Link>
+              <Link to={`project/${id}`}>
+                <div className="project__text">{title}</div>
+              </Link>
             </Header>
           </div>
         </Grid.Row>

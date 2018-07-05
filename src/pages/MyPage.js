@@ -4,6 +4,7 @@ import { UserConsumer } from '../contexts/UserContext';
 import { ProjectProvider, ProjectConsumer } from '../contexts/ProjectContext';
 import IssueListContainer from '../containers/IssueListContainer';
 import ImpendingIssueContainer from '../containers/ImpendingIssueContainer';
+
 import {
   Icon,
   Image,
@@ -131,13 +132,15 @@ export default class MyPage extends React.Component {
                                 </Grid.Column>
                               </Grid.Row>
                               <Grid.Row>
-                                <Grid.Column>
+                                <Grid.Column width={6}>
                                   <h1>나의 프로젝트 리스트</h1>
                                   <ProjectListContainer />
                                 </Grid.Column>
-                                <Grid.Column>
+                                <Grid.Column width={10}>
                                   <h1>나의 이슈 리스트</h1>
-                                  <IssueListContainer />
+                                  <Segment>
+                                    <IssueListContainer />
+                                  </Segment>
                                 </Grid.Column>
                               </Grid.Row>
                             </Grid>
