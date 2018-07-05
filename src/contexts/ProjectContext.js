@@ -9,6 +9,7 @@ class ProjectProvider extends React.Component {
     issues: [],
     issueByProject: [],
     countIssue: [],
+    impendingIssue: [],
   };
   // 프로젝트 별로 현재 접속한 사용자의 이슈 개수와 완료된 이슈 개수 구하기 + doing done 구하기
   sortedIssue = issues => {
@@ -24,10 +25,10 @@ class ProjectProvider extends React.Component {
       let done = 0;
       let doing = 0;
       let todo = 0;
-      if (item.progress === 'done') {
+      if (item.progress === '2') {
         done++;
         doneCount++;
-      } else if (item.progress === 'doing') {
+      } else if (item.progress === '1') {
         doing++;
         doingCount++;
       } else {
@@ -36,9 +37,9 @@ class ProjectProvider extends React.Component {
       }
       if (obj) {
         obj.issues = obj.issues + 1;
-        if (item.progress === 'done') {
+        if (item.progress === '2') {
           obj.done = obj.done + 1;
-        } else if (item.progress === 'doing') {
+        } else if (item.progress === '1') {
           obj.doing = obj.doing + 1;
         } else {
           obj.todo = obj.todo + 1;
@@ -58,11 +59,17 @@ class ProjectProvider extends React.Component {
       countIssue: [todoCount, doingCount, doneCount, issueCount],
     };
   };
+  // 진행상황이 done이 아닌 이슈 중 데드라인이 임박한 순서대로 정렬한 이슈들의 배열
+  compare = (a, b) => {
+    if (a.deadline < b.deadline) return -1;
+    if (a.deadline > b.deadline) return 1;
+    return 0;
+  };
   getImpendingIssues = issues => {
-    let filteredIssues = issues.filter(issue => !issue.progress === 2);
-    filteredIssues.sort((a, b) => a - b);
+    let filteredIssues = issues.filter(issue => issue.progress !== '2');
+    filteredIssues = filteredIssues.sort(this.compare);
     this.setState({
-      impendingIssues: filteredIssues,
+      impendingIssue: filteredIssues,
     });
   };
 

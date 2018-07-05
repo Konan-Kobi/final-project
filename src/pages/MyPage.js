@@ -3,7 +3,7 @@ import ProjectListContainer from '../containers/ProjectListContainer';
 import { UserConsumer } from '../contexts/UserContext';
 import { ProjectProvider, ProjectConsumer } from '../contexts/ProjectContext';
 import IssueListContainer from '../containers/IssueListContainer';
-
+import ImpendingIssueContainer from '../containers/ImpendingIssueContainer';
 import {
   Icon,
   Image,
@@ -117,7 +117,9 @@ export default class MyPage extends React.Component {
                                   </Segment>
                                 </Grid.Column>
                                 <Grid.Column>
-                                  <Segment>기한임박이슈</Segment>
+                                  <Segment>
+                                    <ImpendingIssueContainer />
+                                  </Segment>
                                 </Grid.Column>
                               </Grid.Row>
                               <Grid.Row>

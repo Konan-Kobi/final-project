@@ -73,7 +73,7 @@ class CreateIssueProvider extends React.Component {
           ),
           deadline: Math.round(new Date(postIssue.deadline).getTime() / 1000),
           // progress가 0은 todo, 1은 doing, 2는 done
-          progress: 0,
+          progress: '0',
           label: postIssue.label,
           userId: postIssue.tags[i].id,
         };
