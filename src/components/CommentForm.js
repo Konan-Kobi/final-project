@@ -22,13 +22,13 @@ export default class CommentForm extends React.Component {
           <Grid.Column />
           <Grid.Column textAlign={'right'}>
             <Button
-              inverted
-              color="blue"
+              content="댓글쓰기"
+              primary
+              labelPosition="left"
+              icon={'edit'}
               size="large"
               onClick={this.onPostComment}
-            >
-              댓글쓰기
-            </Button>
+            />
           </Grid.Column>
         </Grid>
       </Form>

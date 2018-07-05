@@ -58,13 +58,6 @@ export default class CreateIssueForm extends React.Component {
     this.setState({ tags });
   }
 
-  // // 태그 삭제 - 라벨
-  // handleLabelDelete(i) {
-  //   const label = this.state.label.slice(0);
-  //   label.splice(i, 1);
-  //   this.setState({ label });
-  // }
-
   // 태그 추가
   handleAddition(tag) {
     if (this.state.tags.indexOf(tag) === -1) {
@@ -76,26 +69,6 @@ export default class CreateIssueForm extends React.Component {
     }
   }
 
-  // // 태그 추가 - 라벨
-  // handleLabelAddition(tag) {
-  //   // 라벨은 일단 정한게 하나밖에 설정못하도록 했으니까 조건을 걸어주고
-  //   if (this.state.label < 1) {
-  //     // 입력된 값을 label의 배열의 값과 비교해서 중복된게 없으면 추가
-  //     if (this.state.label.indexOf(tag) === -1) {
-  //       const label = [].concat(this.state.label, tag);
-  //       this.setState({ label });
-  //     } else {
-  //       // 중복된 값이 있으면 경고창
-  //       alert('중복으로 태깅하셨습니다.');
-  //       return;
-  //     }
-  //   } else {
-  //     // 라벨을 두개달려고 할 경우 경고창
-  //     alert('라벨은 하나만 선택하실수 있습니다.');
-  //     return;
-  //   }
-  // }
-
   // input에 입력한 값과와 일치하는 글자만 출력되게 하는 함수
   handleInputChange(input) {
     if (!this.state.busy) {
@@ -105,28 +78,6 @@ export default class CreateIssueForm extends React.Component {
       });
     }
   }
-
-  // // input에 입력한 값과와 일치하는 글자만 출력되게 하는 함수 - 라벨
-  // handleLabelInputChange(input) {
-  //   if (!this.state.busy) {
-  //     this.setState({ busy: true });
-  //     return fetch(`query=${input}`).then(result => {
-  //       this.setState({ busy: false });
-  //     });
-  //   }
-  // }
-
-  // // DatePicker에 입력된 값을 state에 저장해주는 함수 - created
-  // onChangeCreated = date =>
-  //   this.setState({
-  //     projectStart: date,
-  //   });
-
-  // // DatePicker에 입력된 값을 state에 저장해주는 함수 - deadline
-  // onChangeDeadline = date =>
-  //   this.setState({
-  //     deadline: date,
-  //   });
 
   handleStartChange = date => {
     this.setState({ projectStart: date });
