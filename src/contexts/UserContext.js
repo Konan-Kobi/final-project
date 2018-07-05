@@ -49,16 +49,24 @@ class UserProvider extends React.Component {
       loading: true,
     });
     try {
-      await pmAPI
-        .post('users/register', {
+      if (userImg === []) {
+        await pmAPI.post('users/register', {
           username: username,
           password: password,
           userImg: userImg,
-        })
-        .then(
-          Response =>
-            Response.status === 200 ? window.location.replace('/login') : ''
-        );
+        });
+      } else {
+        await pmAPI.post('users/register', {
+          username: username,
+          password: password,
+          userImg: [
+            {
+              base64:
+                'https://cdn.glitch.com/0f15b7fc-72a3-4ed2-a6f9-6a5e9b5f52cb%2Fgirl.png?1530295823731',
+            },
+          ],
+        });
+      }
       alert('회원가입을 축하드립니다.');
     } catch (e) {
       if (e.response) {

@@ -10,7 +10,8 @@ export default class ProjectItem extends React.Component {
   render() {
     const { title, issueByProject, id } = this.props;
     let issueCount = [];
-    let issue = issueByProject.find(o => o.projectId === id);
+    let issue = issueByProject.find(o => o.projectId == id);
+    console.log(id, issueByProject, issue);
     if (issue) {
       issueCount = [issue.todo, issue.doing, issue.done];
     } else {

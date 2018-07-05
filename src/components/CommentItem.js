@@ -26,19 +26,20 @@ export default class CommentItem extends React.Component {
       id,
       updated,
       onEditComment,
+      userImg,
     } = this.props;
     return (
       <IssueConsumer>
         {({ patchComment, fetchComment }) => (
           <Comment>
-            <Comment.Avatar src="https://cdn.glitch.com/0f15b7fc-72a3-4ed2-a6f9-6a5e9b5f52cb%2Fgirl.png?1530295823731" />
+            <Comment.Avatar src={userImg} />
             <Comment.Content>
               <Comment.Author>{username}</Comment.Author>
               <Comment.Metadata>
                 {updated ? (
-                  <div>{timeConverter(updated)}</div>
+                  <div>{timeConverter(updated)[0]}</div>
                 ) : (
-                  <div>{timeConverter(created)}</div>
+                  <div>{timeConverter(created)[0]}</div>
                 )}
               </Comment.Metadata>
               {this.state.show ? (

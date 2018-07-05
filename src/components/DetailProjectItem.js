@@ -39,8 +39,8 @@ export default class DetailProjectItem extends React.Component {
           <Link to={`/project/${projectId}/issue/${id}`}>{title}</Link>
         </Table.Cell>
         <Table.Cell>{convertProgress(progress)}</Table.Cell>
-        <Table.Cell>{timeConverter(projectStart)}</Table.Cell>
-        <Table.Cell>{timeConverter(deadline)}</Table.Cell>
+        <Table.Cell>{timeConverter(projectStart)[1]}</Table.Cell>
+        <Table.Cell>{timeConverter(deadline)[0]}</Table.Cell>
         <Table.Cell>{getRemainingHours(deadline)}</Table.Cell>
       </Table.Row>
     );

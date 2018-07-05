@@ -9,13 +9,9 @@ export default class CommentList extends React.Component {
     userId: null, // 현재 로그인 한 사용자의 id
   };
   render() {
-    const {
-      comments,
-      deleteComment,
-      userId,
-      onEditComment,
-      userImg,
-    } = this.props;
+    const { comments, deleteComment, userId, onEditComment } = this.props;
+
+    console.log(comments);
     return (
       <Comment.Group>
         <Header as="h3" dividing>
@@ -32,6 +28,7 @@ export default class CommentList extends React.Component {
                 userId={comment.user.id}
                 loggedUser={userId}
                 username={comment.user.username}
+                userImg={comment.user.userImg[0].base64}
                 created={comment.created}
                 body={comment.body}
                 issueId={comment.issueId}
