@@ -19,7 +19,14 @@ export default class ImpendingIssueContainer extends React.Component {
               </Table.Header>
               <Table.Body>
                 {impendingIssue.map(issue => (
-                  <Table.Row>
+                  <Table.Row
+                    error={
+                      !(
+                        getRemainingHours(issue.deadline).indexOf('-') ||
+                        issue.progress === '2'
+                      )
+                    }
+                  >
                     <Table.Cell>
                       <Link
                         to={`/project/${issue.id}/issue/${issue.projectId}`}
