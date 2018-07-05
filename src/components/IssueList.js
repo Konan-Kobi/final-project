@@ -1,16 +1,16 @@
 import React from 'react';
 import IssueItem from './IssueItem';
+import { Table } from 'semantic-ui-react';
+import { timeConverter } from '../DateAPI';
+
 export default class IssueList extends React.Component {
   static defaultProps = {
-    title: '', //issue의 title
-    deadline: '', // issue의 기한
-    label: '', // issue의 라벨
-    progress: '', // issue의 진척상황
+    issues: [], // 로그인 한 사용자의 이슈들
   };
   render() {
     const { issues } = this.props;
     return issues.map(issue => (
-      <tbody key={issue.id}>
+      <Table.Body key={issue.id}>
         <IssueItem
           title={issue.title}
           deadline={issue.deadline}
@@ -18,8 +18,9 @@ export default class IssueList extends React.Component {
           progress={issue.progress}
           id={issue.id}
           projectId={issue.projectId}
+          projectStart={timeConverter(issue.projectStart)[1]}
         />
-      </tbody>
+      </Table.Body>
     ));
   }
 }

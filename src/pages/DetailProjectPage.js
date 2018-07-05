@@ -1,22 +1,22 @@
 import React from 'react';
-import IssueContainer from '../containers/IssueContainer';
-import { IssueProvider, IssueConsumer } from '../contexts/IssueContext';
-import CommentContainer from '../containers/CommentContainer';
+import DetailProjectContainer from '../containers/DetailProjectContainer';
+import {
+  DetailProjectProvider,
+  DetailProjectConsumer,
+} from '../contexts/DetailProjectContext';
 import { UserConsumer } from '../contexts/UserContext';
 import {
   Dimmer,
   Loader,
   Container,
   Icon,
-  Card,
   Image,
   Menu,
   Sidebar,
   Segment,
   Grid,
 } from 'semantic-ui-react';
-
-export default class IssuePage extends React.Component {
+export default class DetailProjectPage extends React.Component {
   state = {
     visible: false,
     files: [],
@@ -34,16 +34,12 @@ export default class IssuePage extends React.Component {
 
   render() {
     const { animation, direction, visible } = this.state;
-    const { issueId, projectId } = this.props.match.params;
+    const { projectId } = this.props.match.params;
     return (
       <UserConsumer>
         {({ userId, logout, username, userDefaultImage, userImg }) => (
-          <IssueProvider
-            issueId={issueId}
-            projectId={projectId}
-            userId={userId}
-          >
-            <IssueConsumer>
+          <DetailProjectProvider projectId={projectId}>
+            <DetailProjectConsumer>
               {({ loading }) =>
                 loading ? (
                   <Dimmer active inverted>
@@ -119,9 +115,8 @@ export default class IssuePage extends React.Component {
                       </Sidebar>
                       <Sidebar.Pusher>
                         <Segment basic>
-                          <Container style={{ padding: '7em 0em 28em 0em' }}>
-                            <IssueContainer projectId={projectId} />
-                            <CommentContainer />
+                          <Container style={{ padding: '5em 0em 23em 0em' }}>
+                            <DetailProjectContainer projectId={projectId} />
                           </Container>
                         </Segment>
                       </Sidebar.Pusher>
@@ -129,8 +124,8 @@ export default class IssuePage extends React.Component {
                   </React.Fragment>
                 )
               }
-            </IssueConsumer>
-          </IssueProvider>
+            </DetailProjectConsumer>
+          </DetailProjectProvider>
         )}
       </UserConsumer>
     );

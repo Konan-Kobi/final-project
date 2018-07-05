@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Form, Button, Grid } from 'semantic-ui-react';
 export default class CommentForm extends React.Component {
   static defaultProps = {
     postComment: body => {}, // 코멘트 작성 버튼 클릭 시 호출되는 함수
@@ -12,13 +12,26 @@ export default class CommentForm extends React.Component {
   };
   render() {
     return (
-      <div>
-        <label>
-          댓글내용:
-          <input type="text" ref={this.commentBodyRef} />
-        </label>
-        <button onClick={this.onPostComment}>댓글쓰기</button>
-      </div>
+      <Form>
+        <Grid columns="equal">
+          <Grid.Column width={10}>
+            <Form.Field style={{ display: 'inline-block', width: '140%' }}>
+              <textarea rows="1" type="text" ref={this.commentBodyRef} />
+            </Form.Field>
+          </Grid.Column>
+          <Grid.Column />
+          <Grid.Column textAlign={'right'}>
+            <Button
+              inverted
+              color="blue"
+              size="large"
+              onClick={this.onPostComment}
+            >
+              댓글쓰기
+            </Button>
+          </Grid.Column>
+        </Grid>
+      </Form>
     );
   }
 }

@@ -1,51 +1,29 @@
 import React from 'react';
 
+import { Header } from 'semantic-ui-react';
+import { timeConverter } from '../DateAPI';
 export default class Issue extends React.Component {
   static defaultProps = {
-    issues: {}, //  이슈의 상세 정보 (expand user)
-    loading: false, // 이슈 상세 정보 요청
+    issue: {}, // 해당 이슈의 정보들
+    loading: false, // 이슈 상세 정보 요청 상태
+    username: '', // 이슈를 생성한 사용자의 username
   };
 
-  state = {
-    value: this.props.issue.progress,
-  };
-  componentWillReceiveProps(nextProps) {
-    if (
-      this.state.value !== nextProps.issue.progress &&
-      this.state.value === undefined
-    ) {
-      this.setState({
-        value: this.props.issue.progress,
-      });
-    }
-  }
-  handleChange = e => {
-    this.setState({
-      value: e.target.value,
-    });
-    this.props.patchProgress(e.target.value);
-  };
   render() {
-    const { loading } = this.props;
-    const { title, deadline, body, created } = this.props.issue;
-    // const username = this.props.issue.user.username
-    if (loading) {
-      return <div>...loading</div>;
-    } else {
-      return (
-        <React.Fragment>
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option value="todo">todo</option>
-            <option value="doing">doing</option>
-            <option value="done">done</option>
-          </select>
-          <div>title: {title}</div>
-          <div>created: {created}</div>
-          {/* <div>username: {user.username}</div> */}
-          <div>deadline: {deadline}</div>
-          <div>body: {body}</div>
-        </React.Fragment>
-      );
-    }
+    // 이슈 컨슈머 써주기
+    const { username } = this.props;
+    const { title, deadline, body, created, projectStart } = this.props.issue;
+
+    return (
+      <React.Fragment>
+        {/* <Header as="h2">{title}</Header> */}
+
+        <p style={{ color: 'rgba(0, 0, 0, 0.4)' }}>{`${username} /이슈생성일${
+          timeConverter(projectStart)[0]
+        }/ 마감일${timeConverter(deadline)[0]}`}</p>
+
+        <Header as="h4">{body}</Header>
+      </React.Fragment>
+    );
   }
 }

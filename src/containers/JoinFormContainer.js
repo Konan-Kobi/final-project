@@ -8,8 +8,8 @@ export default class JoinContainer extends React.Component {
       <UserConsumer>
         {({ join }) => (
           <JoinForm
-            onJoin={async (username, password) => {
-              await join(username, password);
+            onJoin={async (username, password, userImg) => {
+              await join(username, password, userImg);
             }}
           />
         )}

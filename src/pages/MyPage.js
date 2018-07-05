@@ -1,22 +1,22 @@
 import React from 'react';
-import IssueContainer from '../containers/IssueContainer';
-import { IssueProvider, IssueConsumer } from '../contexts/IssueContext';
-import CommentContainer from '../containers/CommentContainer';
+import ProjectListContainer from '../containers/ProjectListContainer';
 import { UserConsumer } from '../contexts/UserContext';
+import { ProjectProvider, ProjectConsumer } from '../contexts/ProjectContext';
+import IssueListContainer from '../containers/IssueListContainer';
+import ImpendingIssueContainer from '../containers/ImpendingIssueContainer';
 import {
-  Dimmer,
-  Loader,
-  Container,
   Icon,
-  Card,
   Image,
   Menu,
   Sidebar,
   Segment,
   Grid,
+  Loader,
+  Dimmer,
+  Container,
 } from 'semantic-ui-react';
-
-export default class IssuePage extends React.Component {
+import IssueChart from '../components/IssueChart';
+export default class MyPage extends React.Component {
   state = {
     visible: false,
     files: [],
@@ -34,17 +34,13 @@ export default class IssuePage extends React.Component {
 
   render() {
     const { animation, direction, visible } = this.state;
-    const { issueId, projectId } = this.props.match.params;
+
     return (
       <UserConsumer>
         {({ userId, logout, username, userDefaultImage, userImg }) => (
-          <IssueProvider
-            issueId={issueId}
-            projectId={projectId}
-            userId={userId}
-          >
-            <IssueConsumer>
-              {({ loading }) =>
+          <ProjectProvider userId={userId}>
+            <ProjectConsumer>
+              {({ loading, countIssue }) =>
                 loading ? (
                   <Dimmer active inverted>
                     <Loader size="large">Loading</Loader>
@@ -119,9 +115,32 @@ export default class IssuePage extends React.Component {
                       </Sidebar>
                       <Sidebar.Pusher>
                         <Segment basic>
-                          <Container style={{ padding: '7em 0em 28em 0em' }}>
-                            <IssueContainer projectId={projectId} />
-                            <CommentContainer />
+                          <Container style={{ padding: '7em 0em 26.5em 0em' }}>
+                            <Grid columns={2}>
+                              <Grid.Row>
+                                <Grid.Column>
+                                  <Segment>
+                                    <IssueChart countIssue={countIssue} />
+                                  </Segment>
+                                </Grid.Column>
+
+                                <Grid.Column>
+                                  <Segment>
+                                    <ImpendingIssueContainer />
+                                  </Segment>
+                                </Grid.Column>
+                              </Grid.Row>
+                              <Grid.Row>
+                                <Grid.Column>
+                                  <h1>나의 프로젝트 리스트</h1>
+                                  <ProjectListContainer />
+                                </Grid.Column>
+                                <Grid.Column>
+                                  <h1>나의 이슈 리스트</h1>
+                                  <IssueListContainer />
+                                </Grid.Column>
+                              </Grid.Row>
+                            </Grid>
                           </Container>
                         </Segment>
                       </Sidebar.Pusher>
@@ -129,8 +148,8 @@ export default class IssuePage extends React.Component {
                   </React.Fragment>
                 )
               }
-            </IssueConsumer>
-          </IssueProvider>
+            </ProjectConsumer>
+          </ProjectProvider>
         )}
       </UserConsumer>
     );
