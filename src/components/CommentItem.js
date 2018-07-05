@@ -1,6 +1,6 @@
 import React from 'react';
 import { IssueConsumer } from '../contexts/IssueContext';
-import { Comment, Button, Form } from 'semantic-ui-react';
+import { Comment, Button, Form, Grid } from 'semantic-ui-react';
 import { timeConverter } from '../DateAPI';
 export default class CommentItem extends React.Component {
   state = {
@@ -47,33 +47,41 @@ export default class CommentItem extends React.Component {
                 <React.Fragment>
                   <Form>
                     <div>
-                      <Form.Field>
-                        <textarea
-                          rows="1"
-                          style={{ width: '500px' }}
-                          type="text"
-                          ref={this.commentBodyRef}
-                          defaultValue={body}
-                          autoFocus={true}
-                        />
-                      </Form.Field>
-
-                      <Button
-                        size="mini"
-                        onClick={async e => {
-                          await patchComment(
-                            this.commentBodyRef.current.value,
-                            id
-                          );
-                          await fetchComment();
-                          this.setState({
-                            show: false,
-                          });
-                          onEditComment();
-                        }}
-                      >
-                        수정 완료
-                      </Button>
+                      <Grid columns="equal">
+                        <Grid.Column width={10}>
+                          <Form.Field style={{ display: 'inline-block' }}>
+                            <textarea
+                              rows="1"
+                              style={{ width: '450px' }}
+                              type="text"
+                              ref={this.commentBodyRef}
+                              defaultValue={body}
+                              autoFocus={true}
+                            />
+                          </Form.Field>
+                        </Grid.Column>
+                        <Grid.Column />
+                        <Grid.Column width={5} textAlign={'right'}>
+                          <Button
+                            inverted
+                            color="blue"
+                            size="large"
+                            onClick={async e => {
+                              await patchComment(
+                                this.commentBodyRef.current.value,
+                                id
+                              );
+                              await fetchComment();
+                              this.setState({
+                                show: false,
+                              });
+                              onEditComment();
+                            }}
+                          >
+                            수정 완료
+                          </Button>
+                        </Grid.Column>
+                      </Grid>
                     </div>
                   </Form>
                 </React.Fragment>

@@ -10,7 +10,6 @@ export default class IssueChart extends React.Component {
   };
   componentDidMount() {
     const { countIssue } = this.props;
-    console.log(countIssue);
     this.setState({
       Data: {
         labels: ['Todo', 'Doing', 'Done'],

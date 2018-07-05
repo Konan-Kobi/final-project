@@ -89,7 +89,6 @@ class ProjectProvider extends React.Component {
       );
       const sortedIssue = this.sortedIssue(issueRes);
       this.getImpendingIssues(issueRes.data);
-      console.log(this.state.impendingIssues);
       this.setState({
         loading: true,
         projects: res.data,
@@ -97,7 +96,6 @@ class ProjectProvider extends React.Component {
         issueByProject: sortedIssue.issueByProject,
         countIssue: sortedIssue.countIssue,
       });
-      console.log(this.state);
     } finally {
       this.setState({
         loading: false,

@@ -6,7 +6,6 @@ import IssueListContainer from '../containers/IssueListContainer';
 import ImpendingIssueContainer from '../containers/ImpendingIssueContainer';
 import {
   Icon,
-  Dropdown,
   Image,
   Menu,
   Sidebar,
@@ -18,7 +17,7 @@ import {
 } from 'semantic-ui-react';
 import IssueChart from '../components/IssueChart';
 export default class MyPage extends React.Component {
-  state = { visible: false };
+  state = { visible: true, files: [] };
 
   handleButtonClick = () =>
     this.setState({
@@ -34,7 +33,7 @@ export default class MyPage extends React.Component {
     const { visible } = this.state;
     return (
       <UserConsumer>
-        {({ userId, logout, username, userDefaultImage }) => (
+        {({ userId, logout, username, userDefaultImage, userImg }) => (
           <ProjectProvider userId={userId}>
             <ProjectConsumer>
               {({ loading, countIssue }) =>
@@ -45,13 +44,12 @@ export default class MyPage extends React.Component {
                 ) : (
                   <React.Fragment>
                     <Menu attached="top" id="myPage__Menu" inverted>
-                      <Dropdown
+                      <Menu.Item
                         id="myPage__sidebarButton"
-                        item
-                        icon="bars large"
-                        simple
                         onClick={this.handleButtonClick}
-                      />
+                      >
+                        <Icon name="bars" size="large" />
+                      </Menu.Item>
                       <Menu.Menu position="right">
                         <Menu.Item as="a">
                           <Icon name="laptop" />
@@ -65,7 +63,6 @@ export default class MyPage extends React.Component {
                         </Menu.Item>
                       </Menu.Menu>
                     </Menu>
-
                     <Sidebar.Pushable as={Segment} className="myPage__sidebar">
                       <Sidebar
                         id="myPage__sidebar"
@@ -79,12 +76,21 @@ export default class MyPage extends React.Component {
                         width="thin"
                       >
                         <Menu.Item as="a" id="menuItem__user">
-                          <Image
-                            className="sidebar__userImg"
-                            src={userDefaultImage}
-                            size="small"
-                            circular
-                          />
+                          {userImg ? (
+                            <Image
+                              className="sidebar__userImg"
+                              src={userImg}
+                              size="small"
+                              circular
+                            />
+                          ) : (
+                            <Image
+                              className="sidebar__userImg"
+                              src={userDefaultImage}
+                              size="small"
+                              circular
+                            />
+                          )}
                           {username}
                         </Menu.Item>
                         <Menu.Item as="a" href="/create-project" id="menuItem">
@@ -102,7 +108,7 @@ export default class MyPage extends React.Component {
                       </Sidebar>
                       <Sidebar.Pusher>
                         <Segment basic>
-                          <Container style={{ padding: '5em 0em' }}>
+                          <Container style={{ padding: '5em 0em 26.5em 0em' }}>
                             <Grid columns={2}>
                               <Grid.Row>
                                 <Grid.Column>

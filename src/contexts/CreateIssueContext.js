@@ -36,9 +36,12 @@ class CreateIssueProvider extends React.Component {
   }
 
   fetchInitial = async () => {
-    const res = await pmAPI.get(`projects/2/projectMembers?_expand=user`);
+    const { projectId } = this.props;
+    const res = await pmAPI.get(
+      `projects/${projectId}/projectMembers?_expand=user`
+    );
     const resdata = {
-      id: res.data.map(item => item.id),
+      id: res.data.map(item => item.user.id),
       name: res.data.map(item => item.user.username),
     };
     for (let i = 0; i < resdata.name.length; i++) {
@@ -47,6 +50,8 @@ class CreateIssueProvider extends React.Component {
         name: resdata.name[i],
       });
     }
+    console.log(res);
+    console.log(this.state);
   };
 
   // 작성완료라는 버튼을 누르면 Json-server로 전송하는 함수
@@ -55,11 +60,13 @@ class CreateIssueProvider extends React.Component {
       loading: true,
     });
     try {
+      console.log(postIssue);
+      const { projectId } = this.props;
       for (let i = 0; i < postIssue.tags.length; i++) {
         const issuePayload = {
           title: postIssue.title,
           body: postIssue.body,
-          projectId: 2,
+          projectId: projectId,
           created: Math.round(this.state.created.getTime() / 1000),
           projectStart: Math.round(
             new Date(postIssue.projectStart).getTime() / 1000
@@ -68,8 +75,9 @@ class CreateIssueProvider extends React.Component {
           // progress가 0은 todo, 1은 doing, 2는 done
           progress: '0',
           label: postIssue.label,
-          userId: postIssue.tags[i].id - 1,
-        }; // 지금 2라고 해놓은 것은 테스트임!! 반드시 id 인자로 받게되면 projectId의 값 바꿔줘야한다
+          userId: postIssue.tags[i].id,
+        };
+        console.log(issuePayload);
         await pmAPI.post(`issues`, issuePayload);
       }
     } finally {
@@ -78,6 +86,7 @@ class CreateIssueProvider extends React.Component {
       });
     }
     alert('이슈가 정상적으로 등록되었습니다.');
+    window.history.back(-1);
   };
 
   render() {

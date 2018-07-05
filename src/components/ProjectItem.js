@@ -34,7 +34,6 @@ export default class ProjectItem extends React.Component {
               </Grid.Column>
               <Grid.Column>{`Todo${issueCount[0]}`}</Grid.Column>
               <Grid.Column>{`Doing${issueCount[1]}`}</Grid.Column>
-
               <Grid.Column>{`Done${issueCount[2]}`}</Grid.Column>
             </Grid>
           </Grid.Row>

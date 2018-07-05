@@ -1,8 +1,13 @@
 import React from 'react';
 import { Grid, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import FileBase64 from 'react-file-base64';
 
 export default class JoinForm extends React.Component {
+  state = {
+    files: [],
+  };
+
   componentWillMount() {
     document.body.classList.add('JoinForm__background');
   }
@@ -17,8 +22,16 @@ export default class JoinForm extends React.Component {
   handleLoginClick = async e => {
     e.preventDefault();
     const { onJoin } = this.props;
-    onJoin(this.usernameRef.current.value, this.passwordRef.current.value);
+    onJoin(
+      this.usernameRef.current.value,
+      this.passwordRef.current.value,
+      this.state.files
+    );
   };
+
+  getFiles(files) {
+    this.setState({ files: files });
+  }
 
   render() {
     return (
@@ -53,6 +66,15 @@ export default class JoinForm extends React.Component {
                           ref={this.passwordRef}
                           placeholder="패스워드를 입력해주세요"
                           required
+                        />
+                      </div>
+                    </div>
+                    <div className="field">
+                      <div className="ui left icon input">
+                        <i className="picture icon" />
+                        <FileBase64
+                          multiple={true}
+                          onDone={this.getFiles.bind(this)}
                         />
                       </div>
                     </div>

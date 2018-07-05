@@ -20,12 +20,13 @@ class App extends Component {
     return (
       <BrowserRouter>
         <UserProvider>
-          <Switch>
-            <Route path="/join" component={JoinPage} />
-            <Route path="/login" component={LoginPage} />
-            <Route exact path="/" component={MainPage} />
-          </Switch>
-          {localStorage.getItem('token') ? (
+          {!localStorage.getItem('token') ? (
+            <Switch>
+              <Route path="/join" component={JoinPage} />
+              <Route path="/login" component={LoginPage} />
+              <Route exact path="/" component={MainPage} />
+            </Switch>
+          ) : localStorage.getItem('token') ? (
             <UserConsumer>
               {({ loading }) =>
                 loading ? (
@@ -38,11 +39,15 @@ class App extends Component {
                       path="/create-project"
                       component={CreateProjectPage}
                     />
-                    <Route path="/create-issue" component={CreateIssuePage} />
+                    <Route
+                      path="/create-issue/:projectId"
+                      component={CreateIssuePage}
+                    />
                     <Route path="/join" component={JoinPage} />
                     <Route path="/login" component={LoginPage} />
-                    <Route exact path="/" component={MainPage} />
-                    <Route exact path="/myPage" component={MyPage} />
+                    <Route path="/myPage" component={MyPage} />
+                    <Route exact path="/" component={MyPage} />
+
                     <Route
                       path="/project/:projectId/issue/:issueId/edit"
                       component={EditIssuePage}

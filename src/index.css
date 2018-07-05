@@ -30,12 +30,11 @@ body {
 }
 
 .CreateProjectForm__Layout {
-    padding-top: 7%;
     text-align: center;
+    height: 100vh;
 }
 
 .CreateIssueForm__Layout {
-    padding-top: 1%;
     text-align: center;
 }
 
@@ -102,15 +101,18 @@ body {
 #myPage__Menu {
     background-color: rgba(0, 0, 255, 0.8);
     height: 5em;
+    /* color: black */
 }
 
 #myPage__sidebar {
     background-color: rgba(0, 0, 255, 0.5);
 }
 
-/* .comment__form {
-    display: flex;
-    justify-content: flex-start;
+.DetailProject__IssueList {
+    margin-top: 20px;
 }
 
-*/
+#DetailProject__GridColumn {
+    border: 0px solid white;
+    box-shadow: none;
+}
