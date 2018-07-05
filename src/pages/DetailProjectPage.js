@@ -35,7 +35,7 @@ export default class DetailProjectPage extends React.Component {
     const { projectId } = this.props.match.params;
     return (
       <UserConsumer>
-        {({ userId, logout, username, userDefaultImage }) => (
+        {({ userId, logout, username, userDefaultImage, userImg }) => (
           <DetailProjectProvider projectId={projectId}>
             <DetailProjectConsumer>
               {({ loading }) =>
@@ -79,12 +79,21 @@ export default class DetailProjectPage extends React.Component {
                         width="thin"
                       >
                         <Menu.Item as="a" id="menuItem__user">
-                          <Image
-                            className="sidebar__userImg"
-                            src={userDefaultImage}
-                            size="small"
-                            circular
-                          />
+                          {userImg ? (
+                            <Image
+                              className="sidebar__userImg"
+                              src={userImg}
+                              size="small"
+                              circular
+                            />
+                          ) : (
+                            <Image
+                              className="sidebar__userImg"
+                              src={userDefaultImage}
+                              size="small"
+                              circular
+                            />
+                          )}
                           {username}
                         </Menu.Item>
                         <Menu.Item as="a" href="/create-project" id="menuItem">

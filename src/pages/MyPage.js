@@ -3,6 +3,7 @@ import ProjectListContainer from '../containers/ProjectListContainer';
 import { UserConsumer } from '../contexts/UserContext';
 import { ProjectProvider, ProjectConsumer } from '../contexts/ProjectContext';
 import IssueListContainer from '../containers/IssueListContainer';
+
 import {
   Icon,
   Image,
@@ -16,7 +17,7 @@ import {
 } from 'semantic-ui-react';
 import IssueChart from '../components/IssueChart';
 export default class MyPage extends React.Component {
-  state = { visible: true };
+  state = { visible: true, files: [] };
 
   handleButtonClick = () =>
     this.setState({
@@ -32,7 +33,7 @@ export default class MyPage extends React.Component {
     const { visible } = this.state;
     return (
       <UserConsumer>
-        {({ userId, logout, username, userDefaultImage }) => (
+        {({ userId, logout, username, userDefaultImage, userImg }) => (
           <ProjectProvider userId={userId}>
             <ProjectConsumer>
               {({ loading, countIssue }) =>
@@ -62,7 +63,6 @@ export default class MyPage extends React.Component {
                         </Menu.Item>
                       </Menu.Menu>
                     </Menu>
-
                     <Sidebar.Pushable as={Segment} className="myPage__sidebar">
                       <Sidebar
                         id="myPage__sidebar"
@@ -76,12 +76,21 @@ export default class MyPage extends React.Component {
                         width="thin"
                       >
                         <Menu.Item as="a" id="menuItem__user">
-                          <Image
-                            className="sidebar__userImg"
-                            src={userDefaultImage}
-                            size="small"
-                            circular
-                          />
+                          {userImg ? (
+                            <Image
+                              className="sidebar__userImg"
+                              src={userImg}
+                              size="small"
+                              circular
+                            />
+                          ) : (
+                            <Image
+                              className="sidebar__userImg"
+                              src={userDefaultImage}
+                              size="small"
+                              circular
+                            />
+                          )}
                           {username}
                         </Menu.Item>
                         <Menu.Item as="a" href="/create-project" id="menuItem">
@@ -99,7 +108,7 @@ export default class MyPage extends React.Component {
                       </Sidebar>
                       <Sidebar.Pusher>
                         <Segment basic>
-                          <Container style={{ padding: '5em 0em' }}>
+                          <Container style={{ padding: '5em 0em 26.5em 0em' }}>
                             <Grid columns={2}>
                               <Grid.Row>
                                 <Grid.Column>

@@ -26,7 +26,7 @@ export default class DetailProjectContainer extends React.Component {
                   <Grid.Column width={10} id="DetailProject__GridColumn" />
                   <Grid.Column textAlign={'right'}>
                     <Link to={`/create-issue/${projectId}`}>
-                      <Button inverted color="blue" id="DetailProject__Button">
+                      <Button color="grey" id="DetailProject__Button">
                         이슈 추가
                       </Button>
                     </Link>

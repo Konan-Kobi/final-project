@@ -33,7 +33,7 @@ export default class IssuePage extends React.Component {
     const { issueId, projectId } = this.props.match.params;
     return (
       <UserConsumer>
-        {({ userId, logout, username, userDefaultImage }) => (
+        {({ userId, logout, username, userDefaultImage, userImg }) => (
           <IssueProvider
             issueId={issueId}
             projectId={projectId}
@@ -81,12 +81,21 @@ export default class IssuePage extends React.Component {
                         width="thin"
                       >
                         <Menu.Item as="a" id="menuItem__user">
-                          <Image
-                            className="sidebar__userImg"
-                            src={userDefaultImage}
-                            size="small"
-                            circular
-                          />
+                          {userImg ? (
+                            <Image
+                              className="sidebar__userImg"
+                              src={userImg}
+                              size="small"
+                              circular
+                            />
+                          ) : (
+                            <Image
+                              className="sidebar__userImg"
+                              src={userDefaultImage}
+                              size="small"
+                              circular
+                            />
+                          )}
                           {username}
                         </Menu.Item>
                         <Menu.Item as="a" href="/create-project" id="menuItem">
@@ -105,7 +114,7 @@ export default class IssuePage extends React.Component {
                       <Sidebar.Pusher>
                         <Segment basic>
                           <Card fluid color="blue">
-                            <Container style={{ padding: '5em 0em 24em 0em' }}>
+                            <Container style={{ padding: '5em 0em 28em 0em' }}>
                               <IssueContainer projectId={projectId} />
                               <CommentContainer />
                             </Container>

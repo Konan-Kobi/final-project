@@ -81,7 +81,7 @@ export default class CreateProjectForm extends React.Component {
     const { visible } = this.state;
     return (
       <UserConsumer>
-        {({ userId, logout, username, userDefaultImage }) => (
+        {({ userId, logout, username, userDefaultImage, userImg }) => (
           <ProjectProvider userId={userId}>
             <ProjectConsumer>
               {({ loading, countIssue }) =>
@@ -92,12 +92,12 @@ export default class CreateProjectForm extends React.Component {
                 ) : (
                   <React.Fragment>
                     <Menu attached="top" id="myPage__Menu" inverted>
-                        <Menu.Item
-                          id="myPage__sidebarButton"
-                          onClick={this.handleButtonClick}
-                        >
-                          <Icon name="bars" size="large" />
-                        </Menu.Item>
+                      <Menu.Item
+                        id="myPage__sidebarButton"
+                        onClick={this.handleButtonClick}
+                      >
+                        <Icon name="bars" size="large" />
+                      </Menu.Item>
                       <Menu.Menu position="right">
                         <Menu.Item as="a">
                           <Icon name="laptop" />
@@ -125,12 +125,21 @@ export default class CreateProjectForm extends React.Component {
                         width="thin"
                       >
                         <Menu.Item as="a" id="menuItem__user">
-                          <Image
-                            className="sidebar__userImg"
-                            src={userDefaultImage}
-                            size="small"
-                            circular
-                          />
+                          {userImg ? (
+                            <Image
+                              className="sidebar__userImg"
+                              src={userImg}
+                              size="small"
+                              circular
+                            />
+                          ) : (
+                            <Image
+                              className="sidebar__userImg"
+                              src={userDefaultImage}
+                              size="small"
+                              circular
+                            />
+                          )}
                           {username}
                         </Menu.Item>
                         <Menu.Item as="a" href="/create-project" id="menuItem">
