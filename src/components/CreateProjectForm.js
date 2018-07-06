@@ -7,7 +7,6 @@ import {
   Grid,
   Segment,
   Icon,
-  Dropdown,
   Image,
   Menu,
   Sidebar,
@@ -126,7 +125,6 @@ export default class CreateProjectForm extends React.Component {
                         as={Menu}
                         animation={animation}
                         direction={direction}
-                        inverted
                         onHide={this.handleSidebarHide}
                         icon="labeled"
                         vertical
@@ -158,19 +156,13 @@ export default class CreateProjectForm extends React.Component {
                       <Sidebar.Pusher>
                         <Segment
                           basic
-                          // style={{
-                          //   backgroundImage:
-                          //     'url(https://images.unsplash.com/photo-1463527882365-18201e85a091?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=403d33ecb44a23573f57841b07077434&auto=format&fit=crop&w=2238&q=80)',
-                          // }}
+                          style={{
+                            backgroundImage:
+                              'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)',
+                          }}
                         >
-                          <React.Fragment
-                            style={{ mixBlendMode: 'saturation' }}
-                          >
-                            <Container
-                              style={{
-                                padding: '2em 0em 8.5em 0em',
-                              }}
-                            >
+                          <React.Fragment>
+                            <Container style={{ padding: '2em 0em 7.5em 0em' }}>
                               <Grid columns="equal">
                                 <Grid.Column />
                                 <Grid.Column width={8}>

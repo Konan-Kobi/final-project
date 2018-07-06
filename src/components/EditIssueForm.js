@@ -4,11 +4,13 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import { UserConsumer } from '../contexts/UserContext';
-import { ProjectProvider, ProjectConsumer } from '../contexts/ProjectContext';
+import {
+  EditIssueProvider,
+  EditIssueConsumer,
+} from '../contexts/EditIssueContext';
 
 import {
   Icon,
-  Input,
   Form,
   Select,
   Image,
@@ -22,20 +24,36 @@ import {
 
 export default class CreateIssueForm extends React.Component {
   state = {
+    loading: false,
     busy: false,
-    tags: [],
-    projectStart: moment(),
-    deadline: moment(),
     visible: false,
+    tags: [],
+    title: null,
+    body: null,
+    projectStart: null,
+    deadline: null,
+    label: null,
+    userTag: null,
   };
 
   componentWillMount() {
-    document.body.classList.add('CreateIssueForm__Layout');
+    document.body.classList.add('EditIssueForm__Layout');
   }
 
   componentWillUnmount() {
-    document.body.classList.remove('CreateIssueForm__Layout');
+    document.body.classList.remove('EditIssueForm__Layout');
   }
+
+  //   componentWillReceiveProps(){
+  //   this.setState({
+  //         title: null,
+  //     body: null,
+  //     projectStart: null,
+  //     deadline: null,
+  //     label: null,
+  //     userTag: null,
+  //   })
+  // }
 
   titleRef = React.createRef();
   bodyRef = React.createRef();
@@ -89,7 +107,7 @@ export default class CreateIssueForm extends React.Component {
 
   handleClick = async e => {
     e.preventDefault();
-    const postIssue = {
+    const postEditIssue = {
       title: this.titleRef.current.value,
       body: this.bodyRef.current.value,
       tags: this.state.tags,
@@ -97,19 +115,28 @@ export default class CreateIssueForm extends React.Component {
       projectStart: this.state.projectStart.format(),
       deadline: this.state.deadline.format(),
     };
-    console.log(postIssue);
+
     const { handleWriteClick } = this.props;
-    handleWriteClick(postIssue);
+    handleWriteClick(postEditIssue);
   };
 
   render() {
     const { visible } = this.state;
-    const { suggestions, labelSuggestions } = this.props;
+    const {
+      title,
+      body,
+      projectStart,
+      deadline,
+      label,
+      userTag,
+      labelSuggestions,
+    } = this.props;
+    console.log(this.props);
     return (
       <UserConsumer>
-        {({ userId, logout, username, userDefaultImage, userImg }) => (
-          <ProjectProvider userId={userId}>
-            <ProjectConsumer>
+        {({ userId, logout, username, userImg }) => (
+          <EditIssueProvider userId={userId}>
+            <EditIssueConsumer>
               {({ loading }) =>
                 loading ? (
                   <Dimmer active inverted>
@@ -117,7 +144,12 @@ export default class CreateIssueForm extends React.Component {
                   </Dimmer>
                 ) : (
                   <React.Fragment>
-                    <Menu attached="top" id="myPage__Menu" inverted>
+                    <Menu
+                      attached="top"
+                      id="myPage__Menu"
+                      inverted
+                      style={{ marginBottom: 0 }}
+                    >
                       <Menu.Item
                         id="myPage__sidebarButton"
                         onClick={this.handleButtonClick}
@@ -138,11 +170,14 @@ export default class CreateIssueForm extends React.Component {
                       </Menu.Menu>
                     </Menu>
 
-                    <Sidebar.Pushable as={Segment} className="myPage__sidebar">
+                    <Sidebar.Pushable
+                      as={Segment}
+                      className="myPage__sidebar"
+                      style={{ marginTop: 0 }}
+                    >
                       <Sidebar
                         id="myPage__sidebar"
                         as={Menu}
-                        inverted
                         onHide={this.handleSidebarHide}
                         animation="overlay"
                         icon="labeled"
@@ -151,21 +186,12 @@ export default class CreateIssueForm extends React.Component {
                         width="thin"
                       >
                         <Menu.Item as="a" id="menuItem__user">
-                          {userImg ? (
-                            <Image
-                              className="sidebar__userImg"
-                              src={userImg}
-                              size="small"
-                              circular
-                            />
-                          ) : (
-                            <Image
-                              className="sidebar__userImg"
-                              src={userDefaultImage}
-                              size="small"
-                              circular
-                            />
-                          )}
+                          <Image
+                            className="sidebar__userImg"
+                            src={userImg}
+                            size="small"
+                            circular
+                          />
                           {username}
                         </Menu.Item>
                         <Menu.Item as="a" href="/create-project" id="menuItem">
@@ -182,7 +208,13 @@ export default class CreateIssueForm extends React.Component {
                         </Menu.Item>
                       </Sidebar>
                       <Sidebar.Pusher>
-                        <Segment basic>
+                        <Segment
+                          basic
+                          style={{
+                            backgroundImage:
+                              'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)',
+                          }}
+                        >
                           <Grid columns="equal">
                             <Grid.Column />
                             <Grid.Column width={8}>
@@ -193,7 +225,7 @@ export default class CreateIssueForm extends React.Component {
                               >
                                 <h2 className="ui white image header">
                                   <div className="content header">
-                                    이슈 등록하기
+                                    이슈 수정하기
                                   </div>
                                 </h2>
                               </Segment>
@@ -208,7 +240,7 @@ export default class CreateIssueForm extends React.Component {
                                       <div className="content">이슈 시작일</div>
                                     </h5>
                                     <DatePicker
-                                      selected={this.state.projectStart}
+                                      selected={moment(projectStart)}
                                       onChange={this.handleStartChange}
                                       showTimeSelect
                                       dateFormat="LLL"
@@ -217,7 +249,7 @@ export default class CreateIssueForm extends React.Component {
                                       <div className="content">이슈 마감일</div>
                                     </h5>
                                     <DatePicker
-                                      selected={this.state.deadline}
+                                      selected={moment(deadline)}
                                       onChange={this.handleDeadChange}
                                       showTimeSelect
                                       dateFormat="LLL"
@@ -232,6 +264,7 @@ export default class CreateIssueForm extends React.Component {
                                     <Select
                                       placeholder="라벨을 선택해주세요"
                                       options={labelSuggestions}
+                                      value={label}
                                     />
                                   </Form.Field>
                                   <Form.Field>
@@ -242,6 +275,7 @@ export default class CreateIssueForm extends React.Component {
                                     </h5>
                                     <input
                                       type="text"
+                                      defaultValue={title}
                                       ref={this.titleRef}
                                       placeholder="제목을 입력해주세요"
                                       required
@@ -258,7 +292,7 @@ export default class CreateIssueForm extends React.Component {
                                       tags={this.state.tags}
                                       minQueryLength={1}
                                       autoresize={false}
-                                      suggestions={suggestions}
+                                      suggestions={userTag}
                                       handleInputChange={this.handleInputChange.bind(
                                         this
                                       )}
@@ -277,6 +311,7 @@ export default class CreateIssueForm extends React.Component {
                                     </h5>
                                     <textarea
                                       id="CreateIssueForm__Textarea"
+                                      value={body}
                                       cols="100"
                                       rows="10"
                                       placeholder="내용을 입력해주세요"
@@ -301,8 +336,8 @@ export default class CreateIssueForm extends React.Component {
                   </React.Fragment>
                 )
               }
-            </ProjectConsumer>
-          </ProjectProvider>
+            </EditIssueConsumer>
+          </EditIssueProvider>
         )}
       </UserConsumer>
     );
