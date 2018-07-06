@@ -7,24 +7,28 @@ export default class IssueListContainer extends React.Component {
     return (
       <ProjectConsumer>
         {/* countIssue: 현재 사용자의 총 이슈와 완료 이슈 0/0 */}
-        {({ issues, countIssue, projects }) => (
-          <div className="issue__container">
-            <Table celled selectable>
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell>라벨</Table.HeaderCell>
-                  <Table.HeaderCell>제목</Table.HeaderCell>
-                  <Table.HeaderCell>진행상황</Table.HeaderCell>
-                  <Table.HeaderCell>시작일</Table.HeaderCell>
-                  <Table.HeaderCell>마감일</Table.HeaderCell>
-                  <Table.HeaderCell>남은시간</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
+        {({ issues, countIssue, projects }) =>
+          countIssue[3] === 0 ? (
+            <div>등록 된 이슈가 없습니다.</div>
+          ) : (
+            <div className="issue__container">
+              <Table celled selectable>
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell>라벨</Table.HeaderCell>
+                    <Table.HeaderCell>제목</Table.HeaderCell>
+                    <Table.HeaderCell>진행상황</Table.HeaderCell>
+                    <Table.HeaderCell>시작일</Table.HeaderCell>
+                    <Table.HeaderCell>마감일</Table.HeaderCell>
+                    <Table.HeaderCell>남은시간</Table.HeaderCell>
+                  </Table.Row>
+                </Table.Header>
 
-              <IssueList issues={issues} projects={projects} />
-            </Table>
-          </div>
-        )}
+                <IssueList issues={issues} projects={projects} />
+              </Table>
+            </div>
+          )
+        }
       </ProjectConsumer>
     );
   }

@@ -24,7 +24,7 @@ export default class IssueContainer extends React.Component {
           loading,
           createUser,
         }) => (
-          <Segment>
+          <Segment style={{ height: '300px' }}>
             {userId === createUser ? (
               <Grid columns="equal">
                 <Grid.Column width={12} style={{ marginRight: '2.35em' }}>

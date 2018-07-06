@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Header } from 'semantic-ui-react';
+import { Header, Divider } from 'semantic-ui-react';
 import { timeConverter } from '../DateAPI';
 export default class Issue extends React.Component {
   static defaultProps = {
@@ -16,12 +16,20 @@ export default class Issue extends React.Component {
 
     return (
       <React.Fragment>
-        {/* <Header as="h2">{title}</Header> */}
-
-        <p style={{ color: 'rgba(0, 0, 0, 0.4)' }}>{`${username} /이슈생성일${
-          timeConverter(projectStart)[0]
-        }/ 마감일${timeConverter(deadline)[0]}`}</p>
-
+        <Divider Inverted />
+        <div>
+          <b>{`이슈 작성자 `}</b>
+          <span style={{ color: 'grey' }}>{`${username}`}</span>
+          <b>{` / 이슈 생성일 `}</b>
+          <span style={{ color: 'grey' }}>
+            {`${timeConverter(projectStart)[0]}`}
+          </span>
+          <b>{` / 마감일 `}</b>
+          <span style={{ color: 'grey' }}>{`${
+            timeConverter(deadline)[0]
+          }`}</span>
+        </div>
+        <Divider Inverted />
         <Header as="h4">{body}</Header>
       </React.Fragment>
     );

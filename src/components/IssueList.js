@@ -9,6 +9,7 @@ export default class IssueList extends React.Component {
   };
   render() {
     const { issues } = this.props;
+
     return issues.map(issue => (
       <Table.Body key={issue.id}>
         <IssueItem
