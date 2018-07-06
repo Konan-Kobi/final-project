@@ -37,7 +37,7 @@ function getRemainingHours(deadline) {
     } else if (remainingMinutes / 60 < 24) {
       remainingHours = `+${Math.floor(remainingMinutes / 60)}h`;
     } else {
-      remainingHours = `+${Math.floor(remainingHours / 60 / 24)}day`;
+      remainingHours = `+${Math.floor(remainingMinutes / 60 / 24)}day`;
     }
   }
   return remainingHours;
