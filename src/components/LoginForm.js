@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Grid, Segment } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 export default class LoginForm extends React.Component {
   static defualtProps = {
@@ -27,6 +27,7 @@ export default class LoginForm extends React.Component {
       onPasswordChange,
       login,
     } = this.props;
+
     return (
       <Grid columns="equal">
         <Grid.Column />
@@ -70,9 +71,9 @@ export default class LoginForm extends React.Component {
                     </div>
                     {/* e.preventDefault가 없어서 코드를 바꿨습니다.*/}
                     <button
-                      onClick={e => {
+                      onClick={async e => {
                         e.preventDefault();
-                        login(username, password);
+                        await login(username, password);
                       }}
                       className="ui fluid large blue submit button"
                     >
