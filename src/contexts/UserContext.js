@@ -25,16 +25,11 @@ class UserProvider extends React.Component {
     });
     try {
       const res = await pmAPI.get('/me');
-      if (res.data.userImg != null) {
+      if (res.data.userImg != []) {
         this.setState({
           userId: res.data.id,
           username: res.data.username,
-          userImg: res.data.userImg[0].base64,
-        });
-      } else {
-        this.setState({
-          userId: res.data.id,
-          username: res.data.username,
+          userImg: res.data.userImg.base64,
         });
       }
     } finally {
@@ -49,7 +44,7 @@ class UserProvider extends React.Component {
       loading: true,
     });
     try {
-      if (!userImg) {
+      if (!userImg[0].base64) {
         await pmAPI.post('users/register', {
           username: username,
           password: password,
