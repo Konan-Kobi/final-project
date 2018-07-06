@@ -279,9 +279,7 @@ const HomepageLayout = () => (
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          <Grid.Column textAlign="center">
-            <Button size="huge">Check Them Out</Button>
-          </Grid.Column>
+          <Grid.Column textAlign="center" />
         </Grid.Row>
       </Grid>
     </Segment>
@@ -302,7 +300,7 @@ const HomepageLayout = () => (
             <p style={{ fontSize: '1.33em' }}>
               <Image
                 avatar
-                src="https://cdn.glitch.com/0f15b7fc-72a3-4ed2-a6f9-6a5e9b5f52cb%2Fgirl.png?1530295823731"
+                src="https://pbs.twimg.com/profile_images/906557353549598720/oapgW_Fp_400x400.jpg"
               />
               <b>CEO</b> 프로젝트를 쉽고 편리하게 관리하는 놀라운 경험을 하시게
               될 거예요.
@@ -320,18 +318,13 @@ const HomepageLayout = () => (
           프로젝트 관리를 위해 꼭 필요한 기능들을 모두 project++에서 만나보세요.
           더 놀라운 점은 누구나 쉽고 편하게 무료로 사용할 수 있답니다.
         </p>
-        <Button as="a" size="large">
-          Read More
-        </Button>
 
         <Divider
           as="h4"
           className="header"
           horizontal
           style={{ margin: '3em 0em', textTransform: 'uppercase' }}
-        >
-          <a href="#">Case Studies</a>
-        </Divider>
+        />
 
         <Header as="h3" style={{ fontSize: '2em' }}>
           태스크 관리, project++로 멋지게 실현하세요.
@@ -340,9 +333,11 @@ const HomepageLayout = () => (
           project++은 당신의 팀이 프로젝트를 정리하고, 업무를 공유하고, 멋진
           결과를 달성하기 위한 완벽한 솔루션입니다.
         </p>
-        <Button as="a" size="large">
-          지금 바로 시작해보세요!
-        </Button>
+        <Link to="/join">
+          <Button as="a" size="large">
+            지금 바로 시작해보세요!
+          </Button>
+        </Link>
       </Container>
     </Segment>
 

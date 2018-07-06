@@ -132,7 +132,7 @@ body {
 .issue__container {
     min-height: 300px;
     max-height: 300px;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 .issue__text {
@@ -153,4 +153,10 @@ body {
 
 .create__project {
     padding: 1rem;
+}
+
+.projectList__container {
+    min-height: 300px;
+    max-height: 300px;
+    overflow-y: scroll;
 }

@@ -15,8 +15,8 @@ export default class ImpendingIssueContainer extends React.Component {
               <Table celled>
                 <Table.Header>
                   <Table.Row>
-                    <Table.HeaderCell>title</Table.HeaderCell>
-                    <Table.HeaderCell>마감기한</Table.HeaderCell>
+                    <Table.HeaderCell>제목</Table.HeaderCell>
+                    <Table.HeaderCell>마감일</Table.HeaderCell>
                     <Table.HeaderCell>남은시간</Table.HeaderCell>
                   </Table.Row>
                 </Table.Header>

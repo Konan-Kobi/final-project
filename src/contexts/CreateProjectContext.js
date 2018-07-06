@@ -8,6 +8,7 @@ class CreateProjectProvider extends React.Component {
     busy: false,
     tags: [],
     suggestions: [],
+    loading: false,
   };
 
   async componentDidMount() {

@@ -15,6 +15,7 @@ import {
   Loader,
   Dimmer,
   Container,
+  Header,
 } from 'semantic-ui-react';
 import IssueChart from '../components/IssueChart';
 export default class MyPage extends React.Component {
@@ -125,11 +126,13 @@ export default class MyPage extends React.Component {
                             <Grid columns={2}>
                               <Grid.Row>
                                 <Grid.Column>
+                                  <Header as="h1">나의 이슈 현황</Header>
                                   <Segment>
                                     <IssueChart countIssue={countIssue} />
                                   </Segment>
                                 </Grid.Column>
                                 <Grid.Column>
+                                  <Header as="h1">확인해 주세요!</Header>
                                   <Segment>
                                     <ImpendingIssueContainer />
                                   </Segment>

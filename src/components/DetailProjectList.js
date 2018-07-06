@@ -14,7 +14,7 @@ export default class DetailProjectList extends React.Component {
             <Table.HeaderCell>담당자</Table.HeaderCell>
             <Table.HeaderCell>라벨</Table.HeaderCell>
             <Table.HeaderCell>제목</Table.HeaderCell>
-            <Table.HeaderCell>진척상황</Table.HeaderCell>
+            <Table.HeaderCell>진행상황</Table.HeaderCell>
             <Table.HeaderCell>시작일</Table.HeaderCell>
             <Table.HeaderCell>마감일</Table.HeaderCell>
             <Table.HeaderCell>남은시간</Table.HeaderCell>
