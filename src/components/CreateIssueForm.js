@@ -8,7 +8,6 @@ import { ProjectProvider, ProjectConsumer } from '../contexts/ProjectContext';
 
 import {
   Icon,
-  Input,
   Form,
   Select,
   Image,

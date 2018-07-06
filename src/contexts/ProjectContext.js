@@ -13,7 +13,6 @@ class ProjectProvider extends React.Component {
   };
   // 프로젝트 별로 현재 접속한 사용자의 이슈 개수와 완료된 이슈 개수 구하기 + doing done 구하기
   sortedIssue = issues => {
-    console.log(issues);
     let issueByProject = [];
     // 현재 접속한 사용자의 모든 이슈 중 완료된 이슈 구하기
     let issueCount = 0;
@@ -54,7 +53,6 @@ class ProjectProvider extends React.Component {
           done: done,
         });
       }
-      console.log(issueByProject);
     });
     return {
       issueByProject: issueByProject,

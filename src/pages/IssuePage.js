@@ -8,12 +8,10 @@ import {
   Loader,
   Container,
   Icon,
-  Card,
   Image,
   Menu,
   Sidebar,
   Segment,
-  Grid,
 } from 'semantic-ui-react';
 
 export default class IssuePage extends React.Component {
@@ -88,7 +86,6 @@ export default class IssuePage extends React.Component {
                         as={Menu}
                         animation={animation}
                         direction={direction}
-                        inverted
                         onHide={this.handleSidebarHide}
                         icon="labeled"
                         vertical

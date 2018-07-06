@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Do+Hyeon');
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic');
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic|Nanum+Gothic+Coding');
+@import url('https://fonts.googleapis.com/css?family=Gothic+A1');
 * {
     /* font-family: 'Nanum Gothic', sans-serif; */
-    font-family: 'Nanum Gothic Coding', monospace;
+    /* font-family: 'Nanum Gothic Coding', monospace; */
+    /* font-family: 'Do Hyeon', sans-serif; */
+    font-family: 'Gothic A1', sans-serif;
 }
 
 body {
@@ -92,12 +95,13 @@ body {
 #menuItem {
     margin: 30px;
     padding: 0 0 20px 0;
-    border-bottom: 2px white solid;
+    border-bottom: 2px #0073aa solid;
 }
 
 #menuItem__user {
     margin: 30px;
-    border-bottom: 2px white solid;
+    border-bottom: 2px #0073aa solid;
+    padding: 0 0 20px 0;
 }
 
 .ui blue inverted top attached menu {

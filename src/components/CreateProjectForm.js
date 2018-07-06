@@ -7,7 +7,6 @@ import {
   Grid,
   Segment,
   Icon,
-  Dropdown,
   Image,
   Menu,
   Sidebar,

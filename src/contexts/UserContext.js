@@ -49,13 +49,7 @@ class UserProvider extends React.Component {
       loading: true,
     });
     try {
-      if (userImg === []) {
-        await pmAPI.post('users/register', {
-          username: username,
-          password: password,
-          userImg: userImg,
-        });
-      } else {
+      if (!userImg) {
         await pmAPI.post('users/register', {
           username: username,
           password: password,
@@ -65,6 +59,12 @@ class UserProvider extends React.Component {
                 'https://cdn.glitch.com/0f15b7fc-72a3-4ed2-a6f9-6a5e9b5f52cb%2Fgirl.png?1530295823731',
             },
           ],
+        });
+      } else {
+        await pmAPI.post('users/register', {
+          username: username,
+          password: password,
+          userImg: userImg,
         });
       }
       alert('회원가입을 축하드립니다.');

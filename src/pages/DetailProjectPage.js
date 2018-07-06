@@ -14,7 +14,6 @@ import {
   Menu,
   Sidebar,
   Segment,
-  Grid,
 } from 'semantic-ui-react';
 export default class DetailProjectPage extends React.Component {
   state = {

@@ -76,17 +76,12 @@ export default class MyPage extends React.Component {
                         </Menu.Item>
                       </Menu.Menu>
                     </Menu>
-                    <Sidebar.Pushable
-                      as={Segment}
-                      className="myPage__sidebar"
-                      style={{ marginTop: 0 }}
-                    >
+                    <Sidebar.Pushable as={Segment} style={{ marginTop: 0 }}>
                       <Sidebar
                         id="myPage__sidebar"
                         as={Menu}
                         animation={animation}
                         direction={direction}
-                        inverted
                         onHide={this.handleSidebarHide}
                         icon="labeled"
                         vertical
@@ -116,7 +111,17 @@ export default class MyPage extends React.Component {
                         </Menu.Item>
                       </Sidebar>
                       <Sidebar.Pusher>
-                        <Segment basic>
+                        <Segment
+                          basic
+                          style={{
+                            backgroundImage:
+                              'linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%)',
+                            // backgroundColor: '#DCD9D4',
+                            // backgroundImage:
+                            //   'linear-gradient(to bottom, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%), radial-gradient(at 50% 0%, rgba(255,255,255,0.10) 0%, rgba(0,0,0,0.50) 50%)',
+                            // backgroundBlendMode: 'soft-light,screen',
+                          }}
+                        >
                           <Container style={{ padding: '7em 0em 26.5em 0em' }}>
                             <Grid columns={2}>
                               <Grid.Row>
@@ -126,7 +131,6 @@ export default class MyPage extends React.Component {
                                     <IssueChart countIssue={countIssue} />
                                   </Segment>
                                 </Grid.Column>
-
                                 <Grid.Column>
                                   <Header as="h1">확인해 주세요!</Header>
                                   <Segment>
@@ -137,7 +141,9 @@ export default class MyPage extends React.Component {
                               <Grid.Row>
                                 <Grid.Column width={6}>
                                   <h1>나의 프로젝트 리스트</h1>
-                                  <ProjectListContainer />
+                                  <Segment>
+                                    <ProjectListContainer />
+                                  </Segment>
                                 </Grid.Column>
                                 <Grid.Column width={10}>
                                   <h1>나의 이슈 리스트</h1>

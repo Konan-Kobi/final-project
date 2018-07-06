@@ -50,8 +50,6 @@ class CreateIssueProvider extends React.Component {
         name: resdata.name[i],
       });
     }
-    console.log(res);
-    console.log(this.state);
   };
 
   // 작성완료라는 버튼을 누르면 Json-server로 전송하는 함수
