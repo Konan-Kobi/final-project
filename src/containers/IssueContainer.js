@@ -2,8 +2,10 @@ import React from 'react';
 import Issue from '../components/Issue';
 import DeleteIssueButtonContainer from '../containers/DeleteIssueButtonContainer';
 import { IssueConsumer } from '../contexts/IssueContext';
-import { UserConsumer } from '../contexts/UserContext';
-import EditIssueButtonContainer from '../containers/EditIssueButtonContainer';
+import EditIsueButtonContainer from '../containers/EditIssueButtonContainer';
+import { Segment, Button, Grid, Header } from 'semantic-ui-react';
+import EditIssueProgress from '../components/EditIssueProgress';
+import { Link } from 'react-router-dom';
 export default class IssueContainer extends React.Component {
   static defaultProps = {
     userId: null, // 로그인 한 사용자의 id
@@ -12,28 +14,53 @@ export default class IssueContainer extends React.Component {
   render() {
     return (
       <IssueConsumer>
-        {({ issue, patchProgress, projects, projectId }) => (
-          <UserConsumer>
-            {({ userId }) => (
-              <React.Fragment>
-                {userId === issue.userId ? (
-                  <React.Fragment>
+        {({
+          issue,
+          patchProgress,
+          projects,
+          projectId,
+          username,
+          userId,
+          loading,
+          createUser,
+        }) => (
+          <Segment style={{ height: '300px' }}>
+            {userId === createUser ? (
+              <Grid columns="equal">
+                <Grid.Column width={12} style={{ marginRight: '2.35em' }}>
+                  <Header as="h2">{issue.title}</Header>
+                </Grid.Column>
+                <React.Fragment style={{ width: '150px' }}>
+                  <Grid.Column floated="right">
+                    <EditIssueProgress
+                      patchProgress={patchProgress}
+                      issue={issue}
+                    />
+                  </Grid.Column>
+                  {/* <Grid.Column floated="right">
+                    <Link to={`/project/${projectId}/issue/${issue.id}/edit`}>
+                      <Button size="mini">수정</Button>
+                    </Link>
+                  </Grid.Column> */}
+                  <Grid.Column>
                     <DeleteIssueButtonContainer
                       issueId={issue.id}
                       userId={this.props.userId}
                       projectId={this.props.projectId}
                     />
-                    <EditIssueButtonContainer />
-                  </React.Fragment>
-                ) : null}
-                <Issue
-                  issue={issue}
-                  patchProgress={patchProgress}
-                  projects={projects}
-                />
-              </React.Fragment>
-            )}
-          </UserConsumer>
+                  </Grid.Column>
+                </React.Fragment>
+              </Grid>
+            ) : null}
+            <Issue
+              issue={issue}
+              patchProgress={patchProgress}
+              projects={projects}
+              username={username}
+              userId={userId}
+              createUser={createUser}
+            />
+          </Segment>
         )}
       </IssueConsumer>
     );

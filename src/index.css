@@ -1,5 +1,162 @@
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon');
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic');
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic|Nanum+Gothic+Coding');
+@import url('https://fonts.googleapis.com/css?family=Gothic+A1');
+* {
+    /* font-family: 'Nanum Gothic', sans-serif; */
+    /* font-family: 'Nanum Gothic Coding', monospace; */
+    /* font-family: 'Do Hyeon', sans-serif; */
+    font-family: 'Gothic A1', sans-serif;
+}
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+.title {
+    padding: 1rem;
+}
+
+.copyright {
+    color: white;
+    font-size: 3em;
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+.JoinForm__background {
+    background-image: url('https://images.unsplash.com/photo-1496389395181-e5fdd5c0315e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=49bd31ab070ce144fe11d9df225d1d4c&auto=format&fit=crop&w=2092&q=80');
+    padding-top: 14%;
+    background-size: 100%;
+    text-align: center;
+}
+
+.LoginForm__background {
+    background-image: url('https://images.unsplash.com/photo-1526289375762-27075d038ebd?ixlib=rb-0.3.5&s=26d1255767d8e79458ad28fd1c49811c&auto=format&fit=crop&w=2100&q=80');
+    padding-top: 14%;
+    background-size: 100%;
+    text-align: center;
+}
+
+.CreateProjectForm__Layout {
+    text-align: center;
+}
+
+.CreateIssueForm__Layout {
+    text-align: center;
+}
+
+.ui selection dropdown {
+    width: 80%;
+}
+
+.react-datepicker__time-list {
+    padding: 0;
+    text-align: center;
+}
+
+.react-tags__suggestions {
+    list-style-type: none;
+}
+
+.react-tags__selected-tag {
+    background-color: #2986ce;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    margin-bottom: 1em;
+}
+
+#CreateIssueForm__Textarea {
+    margin-bottom: 1em;
+}
+
+#CreateProjectForm__Textarea {
+    margin-bottom: 1em;
+}
+
+#commentItem__form {
+    display: inline-block;
+}
+
+.react-datepicker__input-container {
+    width: 125%;
+}
+
+.sidebar__userImg {
+    margin-bottom: 20px;
+}
+
+.myPage__sidebar {
+    margin: 0;
+}
+
+#menuItem {
+    margin: 30px;
+    padding: 0 0 20px 0;
+    border-bottom: 2px #0073aa solid;
+}
+
+#menuItem__user {
+    margin: 30px;
+    border-bottom: 2px #0073aa solid;
+    padding: 0 0 20px 0;
+}
+
+.ui blue inverted top attached menu {
+    height: 50px;
+}
+
+#myPage__Menu {
+    /* background-color: rgba(0, 0, 255, 0.8); */
+    background-color: #0073aa;
+    height: 5em;
+    /* color: black */
+}
+
+#myPage__sidebar {
+    /* background-color: rgba(0, 0, 255, 0.5); */
+    background-color: #e9ecef;
+}
+
+.DetailProject__IssueList {
+    margin-top: 20px;
+}
+
+#DetailProject__GridColumn {
+    border: 0px solid white;
+    box-shadow: none;
+}
+
+.issue__container {
+    min-height: 300px;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.issue__text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 80px;
+    height: 20px;
+}
+
+.project__text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 250px;
+    height: 30px;
+}
+
+.create__project {
+    padding: 1rem;
+}
+
+.projectList__container {
+    min-height: 300px;
+    max-height: 300px;
+    overflow-y: scroll;
 }
