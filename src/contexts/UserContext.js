@@ -68,7 +68,7 @@ class UserProvider extends React.Component {
         });
       }
       alert('회원가입을 축하드립니다.');
-      window.location.replace('/');
+      window.location.replace('/login');
     } catch (e) {
       if (e.response) {
         if (e.response.status >= 500) {
@@ -96,7 +96,7 @@ class UserProvider extends React.Component {
       localStorage.setItem('token', res.data.token);
       this.fetchMe();
       alert(`${username}님 환영합니다.`);
-      window.location.replace('/');
+      window.location.replace('/myPage');
     } finally {
       this.setState({
         loading: false,
