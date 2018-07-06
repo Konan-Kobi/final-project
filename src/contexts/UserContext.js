@@ -40,6 +40,7 @@ class UserProvider extends React.Component {
   };
 
   join = async (username, password, userImg) => {
+    console.log(userImg);
     this.setState({
       loading: true,
     });

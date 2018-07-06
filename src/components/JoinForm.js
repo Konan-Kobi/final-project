@@ -28,9 +28,9 @@ export default class JoinForm extends React.Component {
       this.passwordRef.current.value,
       this.state.files
     );
-    this.setState({
-      redirect: true,
-    });
+    // this.setState({
+    //   redirect: true,
+    // });
   };
 
   getFiles(files) {
