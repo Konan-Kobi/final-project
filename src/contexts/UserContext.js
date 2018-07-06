@@ -53,18 +53,18 @@ class UserProvider extends React.Component {
         await pmAPI.post('users/register', {
           username: username,
           password: password,
-          userImg: userImg,
-        });
-      } else {
-        await pmAPI.post('users/register', {
-          username: username,
-          password: password,
           userImg: [
             {
               base64:
                 'https://cdn.glitch.com/0f15b7fc-72a3-4ed2-a6f9-6a5e9b5f52cb%2Fgirl.png?1530295823731',
             },
           ],
+        });
+      } else {
+        await pmAPI.post('users/register', {
+          username: username,
+          password: password,
+          userImg: userImg,
         });
       }
       alert('회원가입을 축하드립니다.');
