@@ -18,11 +18,15 @@ export default class ProjectListContainer extends React.Component {
               </Link>
             </Segment>
           ) : (
-            <ProjectList
-              projects={projects}
-              issues={issues}
-              issueByProject={issueByProject}
-            />
+            <Segment>
+              <div className="projectList__container">
+                <ProjectList
+                  projects={projects}
+                  issues={issues}
+                  issueByProject={issueByProject}
+                />
+              </div>
+            </Segment>
           )
         }
       </ProjectConsumer>

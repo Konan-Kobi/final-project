@@ -37,11 +37,11 @@ export default class IssueContainer extends React.Component {
                       issue={issue}
                     />
                   </Grid.Column>
-                  <Grid.Column floated="right">
+                  {/* <Grid.Column floated="right">
                     <Link to={`/project/${projectId}/issue/${issue.id}/edit`}>
                       <Button size="mini">수정</Button>
                     </Link>
-                  </Grid.Column>
+                  </Grid.Column> */}
                   <Grid.Column>
                     <DeleteIssueButtonContainer
                       issueId={issue.id}
