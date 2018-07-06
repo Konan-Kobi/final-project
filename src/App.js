@@ -46,7 +46,7 @@ class App extends Component {
                     <Route path="/join" component={JoinPage} />
                     <Route path="/login" component={LoginPage} />
                     <Route path="/myPage" component={MyPage} />
-                    <Route exact path="/" component={MyPage} />
+                    <Route exact path="/" component={MainPage} />
 
                     <Route
                       path="/project/:projectId/issue/:issueId/edit"

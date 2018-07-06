@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Button,
   Container,
@@ -98,7 +99,13 @@ class DesktopContainer extends Component {
           <Segment
             inverted
             textAlign="center"
-            style={{ minHeight: 700, padding: '1em 0em' }}
+            style={{
+              minHeight: 700,
+              padding: '1em 0em',
+              backgroundImage:
+                'url(https://images.unsplash.com/photo-1523265642686-c2b105eb146e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=12a50ff039f20e3f388af8ef554d3655&auto=format&fit=crop&w=2728&q=80)',
+              backgroundSize: '100%',
+            }}
             vertical
           >
             <Menu
@@ -113,20 +120,25 @@ class DesktopContainer extends Component {
                   Home
                 </Menu.Item>
                 <Menu.Item position="right">
-                  <Button as="a" inverted={!fixed} onClick>
-                    Log in
-                  </Button>
-                  <Button
-                    as="a"
-                    inverted={!fixed}
-                    primary={fixed}
-                    style={{ marginLeft: '0.5em' }}
-                  >
-                    Sign Up
-                  </Button>
+                  <Link to="/login">
+                    <Button as="a" inverted={!fixed}>
+                      Log in
+                    </Button>
+                  </Link>
+                  <Link to="/join">
+                    <Button
+                      as="a"
+                      inverted={!fixed}
+                      primary={fixed}
+                      style={{ marginLeft: '0.5em' }}
+                    >
+                      Sign Up
+                    </Button>
+                  </Link>
                 </Menu.Item>
               </Container>
             </Menu>
+
             <HomepageHeading />
           </Segment>
         </Visibility>
@@ -185,7 +197,13 @@ class MobileContainer extends Component {
             <Segment
               inverted
               textAlign="center"
-              style={{ minHeight: 350, padding: '1em 0em' }}
+              style={{
+                minHeight: 350,
+                padding: '1em 0em',
+                backgroundImage:
+                  'url(https://images.unsplash.com/photo-1525422847952-7f91db09a364?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ce6622924dae3b9be067e1778a6b8707&auto=format&fit=crop&w=1665&q=80)',
+                backgroundSize: '100%',
+              }}
               vertical
             >
               <Container>
