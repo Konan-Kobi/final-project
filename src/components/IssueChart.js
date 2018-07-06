@@ -31,7 +31,9 @@ export default class IssueChart extends React.Component {
     });
   }
   render() {
-    return (
+    return this.props.countIssue[3] === 0 ? (
+      <div>등록 된 이슈가 없습니다.</div>
+    ) : (
       <Pie data={this.state.Data} options={{ maintainAspectRatio: false }} />
     );
   }
